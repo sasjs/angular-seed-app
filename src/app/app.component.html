@@ -1,0 +1,35 @@
+<header class="header-6">
+  <div class="branding">
+      <img src="./assets/logo-white.png">
+  </div>
+  <div class="header-nav">
+      <a routerLinkActive="active" routerLink="/homepage" class="nav-link nav-text">Homepage</a>
+      <a routerLinkActive="active" routerLink="/data" class="nav-link nav-text">Data</a>
+  </div>
+  <div class="header-actions">
+    <clr-dropdown [clrCloseMenuOnItemClick]="false">
+      <button clrDropdownTrigger aria-label="user">
+        {{username.length > 0 ? username : 'Not logged in'}}
+        <clr-icon shape="user"></clr-icon>
+      </button>
+      <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+        <clr-toggle-wrapper clrDropdownItem>
+          <input type="checkbox" clrToggle name="debug" [(ngModel)]="sasjsConfig.debug" (change)="debugChanged()"/>
+          <label>Debug</label>
+        </clr-toggle-wrapper>
+
+        <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+
+        <div (click)="requestModal = true" clrDropdownItem>Requests</div>
+        
+        <div (click)="logout()" clrDropdownItem>Log out</div>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </div>
+</header>
+
+<router-outlet></router-outlet>
+
+<app-login-modal *ngIf="!isLoggedIn"></app-login-modal>
+
+<app-requests-modal [(opened)]="requestModal"></app-requests-modal>
