@@ -48,7 +48,7 @@ export class SasService {
             resolve(res);
           },
           (err: any) => {
-            if (err) this.stateService.setIsLoggedIn(false);
+            // if (err) this.stateService.setIsLoggedIn(false);
             reject(err);
           }
         );
