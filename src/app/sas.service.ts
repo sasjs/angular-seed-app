@@ -12,14 +12,14 @@ export class SasService {
   constructor(private stateService: StateService) {
     this._sasService = new SASjs({
       serverUrl: '',
-      appLoc: '/Public/app',
+      appLoc: '/Public/app/angular',
       serverType: 'SASVIYA',
       debug: true
     });
   }
 
   public fetchStartupData() {
-    this.request('common/appInit', null).then((response: any) => {
+    this.request('common/appinit', null).then((response: any) => {
       console.log(response);
       this.stateService.setStartupData(response.areas);
     });
