@@ -2,43 +2,24 @@
 
 This seed app provides a wrapper for `@sasjs/adapter`, a lightning fast adapter for talking to both SAS 9 and Viya.
 
+## Frontend Web
+
+Clone the repo, `cd` into it, and `npm install`.  Then update the following in `sas.service.ts`:
+
+* `appLoc` - the location in the metadata or viya folder tree where the backend services will be located.
+* `serverType` - either SAS9 or SASVIYA.
+* `serverUrl` - only relevant if not serving from the SAS domain (`!SASCONFIG/LevX/Web/WebServer/htdocs` in SAS9 or `/var/www/html` on SAS Viya)
+
+If you are running locally you will either need to whitelist `localhost` on the server, or enable CORS as described [here](https://sasjs.io/frontend/cors)
+
 ## Backend Services
 
-For building anything other than a seed app, we recommend the `@sasjs/cli` tool for project configuration.
-
-## Demo Services
-
-Creating services in Viya can be done entirely in SAS Studio in three easy steps:
-
-### Step 1 - load macros and obtain app token. Admin Task.
-
-NOTE - YOU WILL NEED TO BE AN ADMIN TO RUN THIS BIT! As you are creating a new app token.
-If you don't have internet access, you'll need to go to that link and copy / paste / run the macros manually.
+Creating services in SAS 9 or Viya can be done entirely in SAS Studio using the code below.
 
 ```
-    filename mc url "https://raw.githubusercontent.com/macropeople/macrocore/master/mc_all.sas";
-    %inc mc;
-    %let client=new%sysfunc(ranuni(0),hex16.);
-    %let secret=MySecret;
-    %mv_getapptoken(client_id=&client,client_secret=&secret)
-```
-
-The log will contain a URL. Open this URL, click "open id" and paste the Authorization Code into the macro in step 2 below.
-
-### Step 2 - obtain access token
-
-The following code is used to obtain the access token:
-
-```
-    %mv_getrefreshtoken(client_id=&client,client_secret=&secret,code=wKDZYTEPK6)
-    %mv_getaccesstoken(client_id=&client,client_secret=&secret)
-```
-
-### Step 3 - build some services!
-
-Services can be created programmagically using the code below.
-
-```
+%let appLoc=/Public/app/angular;  /* Metadata or Viya root folder */
+filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+%inc mc;  /* download and compile macro core library */
 filename ft15f001 temp;
 parmcards4;
     proc sql;
@@ -47,7 +28,7 @@ parmcards4;
     %webout(OBJ,areas)
     %webout(CLOSE)
 ;;;;
-%mv_createwebservice(path=/Public/myapp/common, name=appInit, code=ft15f001,replace=YES)
+%mp_createwebservice(path=&appLoc/common, name=appinit)
 parmcards4;
     %webout(FETCH)
     proc sql;
@@ -57,25 +38,11 @@ parmcards4;
     %webout(OBJ,springs)
     %webout(CLOSE)
 ;;;;
-%mv_createwebservice(path=/Public/myapp/common, name=getData, code=ft15f001,replace=YES)
+%mp_createwebservice(path=&appLoc/common, name=getdata)
 ```
 
-## Frontend Web
+For building anything other than a seed app, we recommend the `@sasjs/cli` tool for project configuration.
 
-If you are running locally you will either need to whitelist `localhost` on the server, or enable CORS using one of the following commands:
 
-|  OS   | Browser |                                    Launch Command                                     |
-| :---: | :-----: | :-----------------------------------------------------------------------------------: |
-|  Mac  | Chrome  | `open -n -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/chrome` |
-| Linux | Chrome  |         `google-chrome --disable-web-security --user-data-dir="/tmp/chrome"`          |
 
-## Seedapp info
 
-This project was generated with Angular CLI version 9.0.3.
-
-### Code Style
-
-This project uses Prettier to format code.
-Please install the 'Prettier - Code formatter' extension for VS Code.
-
-Files you are editing will automatically be formatted on save.
