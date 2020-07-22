@@ -10,7 +10,7 @@ Clone the repo, `cd` into it, and `npm install`.  Then update the following in `
 * `serverType` - either SAS9 or SASVIYA.
 * `serverUrl` - only relevant if not serving from the SAS domain (`!SASCONFIG/LevX/Web/WebServer/htdocs` in SAS9 or `/var/www/html` on SAS Viya)
 
-If you are running locally you will either need to whitelist `localhost` on the server, or enable CORS as described [here](https://sasjs.io/frontend/cors)
+If you are running locally you will either need to whitelist `localhost` on the server, or enable CORS as described [here](https://sasjs.io/cors)
 
 ## Backend Services
 
