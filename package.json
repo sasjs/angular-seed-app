@@ -29,7 +29,7 @@
     "@clr/icons": "3.1.2",
     "@clr/ui": "3.1.2",
     "@sasjs/adapter": "^1.0.3",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@webcomponents/webcomponentsjs": "^2.4.4",
     "moment": "^2.24.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
