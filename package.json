@@ -11,7 +11,7 @@
     "build-watch": "ng build --watch",
     "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: ${npm_config_account} && npm run ${npm_config_serverType} --account=${npm_config_account} && echo 'App is synced!'\" dist",
     "sas9": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@sas.domain.com:/opt/sas/sas9/config/Lev1/Web/WebServer/htdocs/${npm_config_account}/ngseed",
-    "viya": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@sas.analytium.co.uk:/var/www/html/${npm_config_account}/ngseed"
+    "viya": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@sas.domain.com:/var/www/html/${npm_config_account}/ngseed"
   },
   "private": true,
   "dependencies": {
