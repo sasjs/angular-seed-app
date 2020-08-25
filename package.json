@@ -33,7 +33,7 @@
     "@webcomponents/webcomponentsjs": "^2.4.4",
     "moment": "^2.27.0",
     "rxjs": "~6.6.2",
-    "tslib": "^1.10.0",
+    "tslib": "^1.13.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
