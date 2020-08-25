@@ -25,13 +25,11 @@ export class SasService {
     });
   }
 
-  public request(url: string, data: any, params?: any) {
-    if (!params) params = null;
-
+  public request(url: string, data: any, config?: any) {
     return new Promise((resolve, reject) => {
       this._sasService
-        .request(url, data, params, (loginRequired: boolean) => {
-          if (loginRequired) this.stateService.setIsLoggedIn(false);
+        .request(url, data, config, (loginRequired: boolean) => {
+          this.stateService.setIsLoggedIn(false);
         })
         .then(
           (res: any) => {
@@ -48,7 +46,6 @@ export class SasService {
             resolve(res);
           },
           (err: any) => {
-            // if (err) this.stateService.setIsLoggedIn(false);
             reject(err);
           }
         );
