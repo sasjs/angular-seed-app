@@ -11,7 +11,7 @@
       "name": "viya",
       "serverType": "SASVIYA",
       "serverUrl": "YOURSASVIYASERVER",
-      "appLoc": "/Public/app/react-seed-app",
+      "appLoc": "/Public/app/angular",
       "buildOutputFileName": "myviyadeploy.sas",
       "deployServicePack": true,
       "tgtDeployScripts": [
