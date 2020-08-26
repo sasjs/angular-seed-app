@@ -1,6 +1,6 @@
 <clr-modal [clrModalOpen]="true" clrModalSize="sm" [clrModalClosable]="false">
   <h3 class="modal-title">Sign In</h3>
-  <div style="min-height: 80px;" class="modal-body">
+  <div style="min-height: 80px;" class="modal-body" (keydown.enter)="signIn()">
     <input clrInput name="username" placeholder="User name" autocomplete="username" [(ngModel)]="userName" required />
     <input clrInput type="password" placeholder="Password" name="password" autocomplete="current-password" [(ngModel)]="password" required />
   </div>
