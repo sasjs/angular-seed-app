@@ -16,7 +16,7 @@ export class SasService {
       serverType: 'SASVIYA',
       debug: true,
       useComputeApi: true,
-      contextName: 'SharedCompute'
+      contextName: 'SAS Job Execution compute context'
     });
   }
 
@@ -46,7 +46,7 @@ export class SasService {
             }
               
             if (res.status === 404) {
-              reject({MESSAGE: res.body || 'SAS Responded with error'})
+              reject({MESSAGE: res.body || 'SAS responded with an error'})
             }
 
             resolve(res);

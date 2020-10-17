@@ -12,6 +12,8 @@ Clone the repo, `cd` into it, and `npm install`.  Then update the following in `
 * `useComputeApi` - can be `true` or `false`, it's a switch for SASjs adapter whether to use `Compute` approach while doing requests.
 * `contextName` - only relevant if `useComputeApi` is true. Provides a context name that will be used in adapter.
 
+More details in official @SASjs/adapter documentation: https://sasjs.io/sasjs-adapter/#configuration
+
 If you are running locally you will either need to whitelist `localhost` on the server, or enable CORS as described [here](https://sasjs.io/cors)
 
 ## Backend Services
