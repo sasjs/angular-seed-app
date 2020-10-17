@@ -14,7 +14,9 @@ export class SasService {
       serverUrl: '',
       appLoc: '/Public/app/angular',
       serverType: 'SASVIYA',
-      debug: true
+      debug: true,
+      useComputeApi: true,
+      contextName: 'SharedCompute'
     });
   }
 
@@ -41,6 +43,10 @@ export class SasService {
 
             if (this.stateService.username.getValue().length < 1 && res.MF_GETUSER) {
               this.stateService.username.next(res.MF_GETUSER);
+            }
+              
+            if (res.status === 404) {
+              reject({MESSAGE: res.body || 'SAS Responded with error'})
             }
 
             resolve(res);
