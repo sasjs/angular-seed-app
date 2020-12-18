@@ -1,0 +1,11 @@
+.spinner {
+  margin-top: 15px;
+}
+
+.areas-select-wrapper {
+  ::ng-deep {
+    clr-select-container {
+      margin-top: 0;
+    }
+  }
+}
