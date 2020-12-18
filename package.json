@@ -30,7 +30,7 @@
     "@clr/ui": "4.0.8",
     "@sasjs/adapter": "^1.19.4",
     "@sasjs/core": "^1.12.4",
-    "@webcomponents/webcomponentsjs": "^2.4.4",
+    "@webcomponents/webcomponentsjs": "^2.5.0",
     "moment": "^2.29.1",
     "rxjs": "~6.6.3",
     "tslib": "^1.14.1",
