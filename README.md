@@ -9,6 +9,10 @@ Clone the repo, `cd` into it, and `npm install`.  Then update the following in `
 * `appLoc` - the location in the metadata or viya folder tree where the backend services will be located.
 * `serverType` - either SAS9 or SASVIYA.
 * `serverUrl` - only relevant if not serving from the SAS domain (`!SASCONFIG/LevX/Web/WebServer/htdocs` in SAS9 or `/var/www/html` on SAS Viya)
+* `useComputeApi` - can be `true` or `false`, it's a switch for SASjs adapter whether to use `Compute` approach while doing requests.
+* `contextName` - only relevant if `useComputeApi` is true. Provides a context name that will be used in adapter.
+
+More details in official @SASjs/adapter documentation: https://sasjs.io/sasjs-adapter/#configuration
 
 If you are running locally you will either need to whitelist `localhost` on the server, or enable CORS as described [here](https://sasjs.io/cors)
 
