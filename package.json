@@ -1,6 +1,6 @@
 {
   "name": "@sasjs/angular-seed-app",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -28,8 +28,7 @@
     "@clr/core": "3.1.2",
     "@clr/icons": "4.0.8",
     "@clr/ui": "4.0.8",
-    "@sasjs/adapter": "^1.19.4",
-    "@sasjs/core": "^1.12.4",
+    "@sasjs/adapter": "^2.0.0",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "moment": "^2.29.1",
     "rxjs": "~6.6.3",
