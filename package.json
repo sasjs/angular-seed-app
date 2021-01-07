@@ -1,6 +1,6 @@
 {
   "name": "@sasjs/angular-seed-app",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,9 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-watch": "ng build --watch",
-    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: ${npm_config_account} && npm run ${npm_config_serverType} --account=${npm_config_account} && echo 'App is synced!'\" dist",
-    "sas9": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@sas.domain.com:/opt/sas/sas9/config/Lev1/Web/WebServer/htdocs/${npm_config_account}/ngseed",
-    "viya": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@sas.domain.com:/var/www/html/${npm_config_account}/ngseed"
+    "deploy": "rsync -avhe ssh ./dist/* --delete $SSH_ACCOUNT:$DEPLOY_PATH",
+    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: $SSH_ACCOUNT && npm run deploy && echo 'App is synced!'\" dist"
   },
   "private": true,
   "dependencies": {
@@ -28,8 +27,8 @@
     "@clr/core": "3.1.2",
     "@clr/icons": "4.0.8",
     "@clr/ui": "4.0.8",
-    "@sasjs/adapter": "^1.19.4",
-    "@sasjs/core": "^1.12.4",
+    "@sasjs/adapter": "^2.0.2",
+    "@sasjs/core": "^2.2.1",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "moment": "^2.29.1",
     "rxjs": "~6.6.3",
