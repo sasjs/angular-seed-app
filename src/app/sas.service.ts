@@ -4,7 +4,7 @@ import SASjs from '@sasjs/adapter';
 import { StateService } from './state.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SasService {
   private _sasService: any;
@@ -12,16 +12,16 @@ export class SasService {
   constructor(private stateService: StateService) {
     this._sasService = new SASjs({
       serverUrl: '',
-      appLoc: '/Public/app/angular',
+      appLoc: '/Public/app/angular-seed-app',
       serverType: 'SASVIYA',
       debug: true,
       useComputeApi: true,
-      contextName: 'SAS Job Execution compute context'
+      contextName: 'SAS Job Execution compute context',
     });
   }
 
   public fetchStartupData() {
-    this.request('common/appinit', null).then((response: any) => {
+    this.request('services/common/appinit', null).then((response: any) => {
       console.log(response);
       this.stateService.setStartupData(response.areas);
     });
@@ -44,9 +44,9 @@ export class SasService {
             if (this.stateService.username.getValue().length < 1 && res.MF_GETUSER) {
               this.stateService.username.next(res.MF_GETUSER);
             }
-              
+
             if (res.status === 404) {
-              reject({MESSAGE: res.body || 'SAS responded with an error'})
+              reject({ MESSAGE: res.body || 'SAS responded with an error' });
             }
 
             resolve(res);
