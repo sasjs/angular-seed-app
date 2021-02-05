@@ -28,7 +28,7 @@
     "@clr/icons": "4.0.8",
     "@clr/ui": "4.0.8",
     "@sasjs/adapter": "^2.0.2",
-    "@sasjs/core": "^2.2.1",
+    "@sasjs/core": "^2.9.3",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "moment": "^2.29.1",
     "rxjs": "~6.6.3",
