@@ -1,4 +1,5 @@
 {
+  "$schema": "https://cli.sasjs.io/sasjsconfig-schema.json",
   "macroFolders": ["macros"],
   "programFolders": [],
   "serviceConfig": {
@@ -25,14 +26,6 @@
       "serverUrl": "https://sas.analytium.co.uk",
       "serverType": "SASVIYA",
       "appLoc": "/Public/app/angular-seed-app",
-      "macroFolders": [],
-      "programFolders": [],
-      "authConfig": {
-        "access_token": "",
-        "refresh_token": "",
-        "client": "",
-        "secret": ""
-      },
       "buildConfig": {
         "buildOutputFileName": "myviyadeploy.sas",
         "initProgram": "",
