@@ -10,6 +10,8 @@ export class LoginModalComponent implements OnInit {
   userName = '';
   password = '';
 
+  loginLoading: boolean = false
+
   constructor(
     public sasService: SasService
     ) {}
@@ -19,11 +21,16 @@ export class LoginModalComponent implements OnInit {
   }
 
   signIn() {
+    this.loginLoading = true
+
     this.sasService.login(this.userName, this.password).then((success: any) => {
+      this.loginLoading = false
       if (success) {
       } else {
         alert("Wrong username or password, please try again.");
       }
+    }, (err: any) => {
+      this.loginLoading = false
     });
   }
 }

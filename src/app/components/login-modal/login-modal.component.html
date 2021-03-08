@@ -5,6 +5,6 @@
     <input clrInput type="password" placeholder="Password" name="password" autocomplete="current-password" [(ngModel)]="password" required />
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="signIn()">Sign In</button>
+      <button type="button" class="btn btn-primary" (click)="signIn()" [clrLoading]="loginLoading">Sign In</button>
   </div>
 </clr-modal>

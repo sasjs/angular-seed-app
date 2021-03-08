@@ -27,7 +27,7 @@ export class DataComponent implements OnInit {
     this.springsLoading = true;
     let data = { areas: [{ area: this.selectedArea }] };
 
-    this.sasService.request('services/common/getdata', data).then((res: any) => {
+    this.sasService.request('common/getdata', data).then((res: any) => {
       this.springs = res['springs'];
       this.springsLoading = false;
     });
