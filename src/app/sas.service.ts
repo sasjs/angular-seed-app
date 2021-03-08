@@ -21,13 +21,15 @@ export class SasService {
   }
 
   public fetchStartupData() {
-    this.request('services/common/appinit', null).then((response: any) => {
+    this.request('common/appinit', null).then((response: any) => {
       console.log(response);
       this.stateService.setStartupData(response.areas);
     });
   }
 
   public request(url: string, data: any, config?: any) {
+    url = 'services/' + url
+    
     return new Promise((resolve, reject) => {
       this._sasService
         .request(url, data, config, (loginRequired: boolean) => {
