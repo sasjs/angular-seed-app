@@ -13,6 +13,12 @@
     "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: $SSH_ACCOUNT && npm run deploy && echo 'App is synced!'\" dist"
   },
   "private": true,
+  "keywords": [
+    "sas",
+    "SASjs",
+    "viya",
+    "sasjs_seed_app"
+  ],
   "dependencies": {
     "@angular/animations": "~9.0.7",
     "@angular/cdk": "^9.2.4",
