@@ -1,0 +1,129 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.22
+    - 14.14.24
+    - 14.14.25
+    - 14.14.26
+    - 14.14.28
+    - 14.14.30
+    - 14.14.32
+    - 14.14.33
+    - 14.14.34
+    - 14.14.35
+    - 14.14.36
+    - 14.14.37
+    - 14.14.39
+    - 14.14.41
+    - 15.0.0
+  - dependency-name: "@sasjs/core"
+    versions:
+    - 2.12.2
+    - 2.12.3
+    - 2.13.0
+    - 2.13.1
+    - 2.13.2
+    - 2.14.0
+    - 2.16.0
+    - 2.16.1
+    - 2.17.0
+    - 2.17.2
+    - 2.17.3
+    - 2.18.0
+    - 2.8.0
+    - 2.9.2
+    - 2.9.3
+    - 2.9.4
+  - dependency-name: "@angular/cli"
+    versions:
+    - 11.1.2
+    - 11.1.3
+    - 11.1.4
+    - 11.2.0
+    - 11.2.1
+    - 11.2.10
+    - 11.2.2
+    - 11.2.3
+    - 11.2.4
+    - 11.2.5
+    - 11.2.6
+    - 11.2.7
+    - 11.2.8
+    - 11.2.9
+  - dependency-name: "@angular/language-service"
+    versions:
+    - 11.1.1
+    - 11.1.2
+    - 11.2.0
+    - 11.2.1
+    - 11.2.10
+    - 11.2.11
+    - 11.2.2
+    - 11.2.3
+    - 11.2.5
+    - 11.2.6
+    - 11.2.7
+    - 11.2.8
+    - 11.2.9
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+    - 4.0.2
+  - dependency-name: "@sasjs/adapter"
+    versions:
+    - 2.0.3
+    - 2.1.0
+    - 2.1.1
+    - 2.2.0
+    - 2.2.10
+    - 2.2.13
+    - 2.2.2
+    - 2.2.5
+    - 2.2.8
+    - 2.2.9
+  - dependency-name: "@types/jasmine"
+    versions:
+    - 3.6.3
+    - 3.6.4
+    - 3.6.6
+    - 3.6.7
+    - 3.6.8
+    - 3.6.9
+  - dependency-name: karma
+    versions:
+    - 6.0.3
+    - 6.0.4
+    - 6.1.0
+    - 6.1.2
+    - 6.2.0
+    - 6.3.0
+    - 6.3.1
+  - dependency-name: jasmine-core
+    versions:
+    - 3.7.0
+  - dependency-name: rxjs
+    versions:
+    - 6.6.6
+  - dependency-name: ini
+    versions:
+    - 1.3.8
+  - dependency-name: "@angular-devkit/build-angular"
+    versions:
+    - 0.901.13
+    - 0.901.14
+  - dependency-name: socket.io
+    versions:
+    - 2.4.1
+  - dependency-name: "@clr/ui"
+    versions:
+    - 4.0.9
+  - dependency-name: "@clr/icons"
+    versions:
+    - 4.0.9
