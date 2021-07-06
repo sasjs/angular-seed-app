@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "~9.0.7",
     "@angular/router": "~9.0.7",
     "@clr/angular": "^3.1.2",
-    "@clr/core": "3.1.2",
+    "@clr/core": "4.0.15",
     "@clr/icons": "5.0.3",
     "@clr/ui": "5.0.3",
     "@sasjs/adapter": "^2.8.11",
