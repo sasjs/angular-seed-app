@@ -11,8 +11,7 @@
     "e2e": "ng e2e",
     "build-watch": "ng build --watch",
     "deploy": "rsync -avhe ssh ./dist/* --delete $SSH_ACCOUNT:$DEPLOY_PATH",
-    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: $SSH_ACCOUNT && npm run deploy && echo 'App is synced!'\" dist",
-    "doit": "npm run build && SSH_ACCOUNT=kriaco@sas.analytium.co.uk DEPLOY_PATH=/var/www/html/kriaco/angular-deps npm run deploy"
+    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: $SSH_ACCOUNT && npm run deploy && echo 'App is synced!'\" dist"
   },
   "private": true,
   "keywords": [
@@ -32,7 +31,7 @@
     "@angular/platform-browser-dynamic": "~12.1.3",
     "@angular/router": "~12.1.3",
     "@clr/angular": "^4.0.16",
-    "@clr/core": "3.1.2",
+    "@clr/core": "^4.0.15",
     "@clr/icons": "5.0.3",
     "@clr/ui": "5.0.3",
     "@sasjs/adapter": "^2.9.4",
@@ -52,7 +51,7 @@
     "@types/jasminewd2": "~2.0.9",
     "@types/node": "^15.12.2",
     "codelyzer": "^6.0.0",
-    "jasmine-core": "~3.6.0",
+    "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.4",
     "karma-chrome-launcher": "~3.1.0",
@@ -62,7 +61,6 @@
     "prettier": "^2.3.1",
     "protractor": "~7.0.0",
     "ts-node": "~10.0.0",
-    "tslint": "~6.1.0",
     "typescript": "~4.3.5",
     "watch": "^0.13.0"
   }
