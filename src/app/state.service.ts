@@ -7,7 +7,7 @@ export interface AppState {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StateService {
   private isUserLoggedIn$ = new BehaviorSubject(true);
@@ -16,7 +16,7 @@ export class StateService {
   private startupData$ = new BehaviorSubject([]);
   public startupData = this.startupData$.asObservable();
 
-  public username = new BehaviorSubject("");
+  public username = new BehaviorSubject('');
 
   public setIsLoggedIn(value: boolean) {
     this.isUserLoggedIn$.next(value);

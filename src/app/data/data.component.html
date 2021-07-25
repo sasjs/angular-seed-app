@@ -1,43 +1,39 @@
 <div class="data-page">
-  <span *ngIf="areas.length < 1" class="spinner spinner-md">
-    Loading...
-  </span>
+  <span *ngIf="areas.length < 1" class="spinner spinner-md"> Loading... </span>
 
   <div *ngIf="areas.length > 0" class="areas-select-wrapper">
     <select clrSelect name="options" [(ngModel)]="selectedArea">
       <option *ngIf="selectedArea === undefined" [value]="undefined">Select from dropdown</option>
-      <option *ngFor="let area of areas" [value]="area['AREA']">{{area['AREA']}}</option>
+      <option *ngFor="let area of areas" [value]="area['AREA']">{{ area['AREA'] }}</option>
     </select>
 
     <button (click)="submitData()" class="btn btn-primary" [disabled]="!selectedArea">SUBMIT</button>
   </div>
 
-  <span *ngIf="springsLoading" class="spinner spinner-md">
-    Loading...
-  </span>
+  <span *ngIf="springsLoading" class="spinner spinner-md"> Loading... </span>
 
   <table *ngIf="springs.length > 0 && !springsLoading" class="table">
     <thead>
-        <tr>
-            <th>LATITUDE</th>
-            <th>LONGITUDE</th>
-            <th>NAME</th>
-            <th>AREA</th>
-            <th>TYPE</th>
-            <th>FARENHEIT</th>
-            <th>CELSIUS</th>
-        </tr>
+      <tr>
+        <th>LATITUDE</th>
+        <th>LONGITUDE</th>
+        <th>NAME</th>
+        <th>AREA</th>
+        <th>TYPE</th>
+        <th>FARENHEIT</th>
+        <th>CELSIUS</th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let spring of springs">
-            <td>{{spring.LATITUDE}}</td>
-            <td>{{spring.LONGITUDE}}</td>
-            <td>{{spring.NAME}}</td>
-            <td>{{spring.AREA}}</td>
-            <td>{{spring.TYPE}}</td>
-            <td>{{spring.FARENHEIT}}</td>
-            <td>{{spring.CELSIUS}}</td>
-        </tr>
+      <tr *ngFor="let spring of springs">
+        <td>{{ spring.LATITUDE }}</td>
+        <td>{{ spring.LONGITUDE }}</td>
+        <td>{{ spring.NAME }}</td>
+        <td>{{ spring.AREA }}</td>
+        <td>{{ spring.TYPE }}</td>
+        <td>{{ spring.FARENHEIT }}</td>
+        <td>{{ spring.CELSIUS }}</td>
+      </tr>
     </tbody>
   </table>
 </div>

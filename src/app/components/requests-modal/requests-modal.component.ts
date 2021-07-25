@@ -5,7 +5,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-requests-modal',
   templateUrl: './requests-modal.component.html',
-  styleUrls: ['./requests-modal.component.scss']
+  styleUrls: ['./requests-modal.component.scss'],
 })
 export class RequestsModalComponent implements OnInit {
   private _opened: boolean = false;
@@ -29,26 +29,20 @@ export class RequestsModalComponent implements OnInit {
   public sasjsRequests: any[] = [];
   public workTables: any;
 
-  constructor(private sasService: SasService) {
-    
-  }
+  constructor(private sasService: SasService) {}
 
   ngOnInit(): void {}
 
   public parseLogTimestamp(timestamp: any) {
-    return `${this.formatTimestamp(timestamp)} ${this.timestampFromNow(timestamp)}`
+    return `${this.formatTimestamp(timestamp)} ${this.timestampFromNow(timestamp)}`;
   }
 
   public formatTimestamp(timestamp: any) {
-    return moment(timestamp).format
-    ? moment(timestamp).format('dddd, MMMM Do YYYY, h:mm:ss a')
-    : timestamp;
+    return moment(timestamp).format ? moment(timestamp).format('dddd, MMMM Do YYYY, h:mm:ss a') : timestamp;
   }
 
   public timestampFromNow(timestamp: any) {
-    return moment(timestamp).format
-    ? ` (${moment(timestamp).fromNow()})`
-    : '';
+    return ` (${moment(timestamp).fromNow()})`;
   }
 
   public modalOpenChange(state: any) {
@@ -79,7 +73,7 @@ export class RequestsModalComponent implements OnInit {
     for (let line of allLines) {
       if (line.textContent.includes(linkingLine)) {
         logWrapper.scrollTop = line.offsetTop - logWrapper.offsetTop;
-        line.style.backgroundColor = "#61a2202b";
+        line.style.backgroundColor = '#61a2202b';
 
         setTimeout(() => {
           line.style = '';

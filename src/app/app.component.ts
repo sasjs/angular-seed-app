@@ -7,7 +7,7 @@ import { SASjsConfig } from '@sasjs/adapter';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   public isLoggedIn: boolean = true;
