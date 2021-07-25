@@ -14,15 +14,9 @@ import { RequestsModalComponent } from './components/requests-modal/requests-mod
 
 @NgModule({
   declarations: [AppComponent, LoginModalComponent, DataComponent, HomePageComponent, RequestsModalComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ClarityModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, FormsModule, ClarityModule],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [LoginModalComponent]
+  entryComponents: [LoginModalComponent],
 })
 export class AppModule {}

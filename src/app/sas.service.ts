@@ -28,8 +28,8 @@ export class SasService {
   }
 
   public request(url: string, data: any, config?: any) {
-    url = 'services/' + url
-    
+    url = 'services/' + url;
+
     return new Promise((resolve, reject) => {
       this._sasService
         .request(url, data, config, (loginRequired: boolean) => {

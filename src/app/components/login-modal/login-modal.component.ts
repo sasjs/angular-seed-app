@@ -4,33 +4,32 @@ import { SasService } from '../../sas.service';
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
-  styleUrls: ['./login-modal.component.scss']
+  styleUrls: ['./login-modal.component.scss'],
 })
 export class LoginModalComponent implements OnInit {
   userName = '';
   password = '';
 
-  loginLoading: boolean = false
+  loginLoading: boolean = false;
 
-  constructor(
-    public sasService: SasService
-    ) {}
+  constructor(public sasService: SasService) {}
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   signIn() {
-    this.loginLoading = true
+    this.loginLoading = true;
 
-    this.sasService.login(this.userName, this.password).then((success: any) => {
-      this.loginLoading = false
-      if (success) {
-      } else {
-        alert("Wrong username or password, please try again.");
+    this.sasService.login(this.userName, this.password).then(
+      (success: any) => {
+        this.loginLoading = false;
+        if (success) {
+        } else {
+          alert('Wrong username or password, please try again.');
+        }
+      },
+      (err: any) => {
+        this.loginLoading = false;
       }
-    }, (err: any) => {
-      this.loginLoading = false
-    });
+    );
   }
 }
