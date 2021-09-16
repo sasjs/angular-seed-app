@@ -66,7 +66,7 @@
       },
       "deployConfig": {
         "deployServicePack": true,
-        "deployScripts": ["sasjsbuild/myviyadeploy.sas"]
+        "deployScripts": ["sasjsbuild/mysas9deploy.sas"]
       },
       "serviceConfig": {
         "serviceFolders": [],
