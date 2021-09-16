@@ -20,6 +20,7 @@
     "streamWebFolder": "webv",
     "webSourcePath": "dist"
   },
+  "defaultTarget": "viya",
   "targets": [
     {
       "name": "viya",
