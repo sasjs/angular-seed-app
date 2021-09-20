@@ -11,9 +11,10 @@ import { DataComponent } from './data/data.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ClarityModule } from '@clr/angular';
 import { RequestsModalComponent } from './components/requests-modal/requests-modal.component';
+import { UploaderComponent } from './uploader/uploader.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginModalComponent, DataComponent, HomePageComponent, RequestsModalComponent],
+  declarations: [AppComponent, LoginModalComponent, DataComponent, HomePageComponent, RequestsModalComponent, UploaderComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, FormsModule, ClarityModule],
   providers: [],
   bootstrap: [AppComponent],
