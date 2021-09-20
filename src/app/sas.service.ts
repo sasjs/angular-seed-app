@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import SASjs from '@sasjs/adapter';
+import SASjs, { UploadFile } from '@sasjs/adapter';
 import { StateService } from './state.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SasService {
-  private _sasService: any;
+  private sasService: any;
 
   constructor(private stateService: StateService) {
-    this._sasService = new SASjs({
+    this.sasService = new SASjs({
       serverUrl: '',
       appLoc: '/Public/app/angular',
       serverType: 'SASVIYA',
@@ -31,7 +31,7 @@ export class SasService {
     url = 'services/' + url;
 
     return new Promise((resolve, reject) => {
-      this._sasService
+      this.sasService
         .request(url, data, config, (loginRequired: boolean) => {
           this.stateService.setIsLoggedIn(false);
         })
@@ -61,7 +61,7 @@ export class SasService {
   }
 
   public async login(username: string, password: string) {
-    return this._sasService
+    return this.sasService
       .logIn(username, password)
       .then(
         (res: { isLoggedIn: boolean; userName: string }) => {
@@ -86,22 +86,26 @@ export class SasService {
       });
   }
 
+  public uploadFile(sasService: string, files: UploadFile[], params?: any) {
+    return this.sasService.uploadFile(sasService, files, params)
+  }
+
   public logout() {
-    this._sasService.logOut().then(() => {
+    this.sasService.logOut().then(() => {
       this.stateService.setIsLoggedIn(false);
       this.stateService.username.next('');
     });
   }
 
   public getSasjsConfig() {
-    return this._sasService.getSasjsConfig();
+    return this.sasService.getSasjsConfig();
   }
 
   public getSasRequests() {
-    return this._sasService.getSasRequests();
+    return this.sasService.getSasRequests();
   }
 
   public setDebugState(state: boolean) {
-    this._sasService.setDebugState(state);
+    this.sasService.setDebugState(state);
   }
 }
