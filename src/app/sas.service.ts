@@ -12,7 +12,7 @@ export class SasService {
   constructor(private stateService: StateService) {
     this.sasService = new SASjs({
       serverUrl: '',
-      appLoc: '/Public/app/angular',
+      appLoc: '/Public/app/angular-seed-app',
       serverType: 'SASVIYA',
       debug: true,
       useComputeApi: true,
