@@ -1,9 +1,13 @@
 {
   "$schema": "https://cli.sasjs.io/sasjsconfig-schema.json",
-  "macroFolders": ["sasjs/macros"],
+  "macroFolders": [
+    "sasjs/macros"
+  ],
   "programFolders": [],
   "serviceConfig": {
-    "serviceFolders": ["sasjs/services/common"],
+    "serviceFolders": [
+      "sasjs/services/common"
+    ],
     "initProgram": "",
     "termProgram": "",
     "macroVars": {}
@@ -26,12 +30,17 @@
       "name": "viya",
       "serverUrl": "https://sas.analytium.co.uk",
       "serverType": "SASVIYA",
+      "allowInsecureRequests": false,
       "appLoc": "/Public/app/angular-seed-app",
+      "macroFolders": [],
+      "programFolders": [],
       "buildConfig": {
         "buildOutputFileName": "myviyadeploy.sas",
         "initProgram": "",
         "termProgram": "",
-        "macroVars": {}
+        "macroVars": {},
+        "buildResultsFolder": "sasjsresults",
+        "buildOutputFolder": "sasjsbuild"
       },
       "jobConfig": {
         "jobFolders": [],
@@ -49,12 +58,16 @@
         "assetPaths": [],
         "streamWeb": false,
         "streamWebFolder": "webv",
-        "webSourcePath": "dist"
+        "webSourcePath": "dist",
+        "streamServiceName": "clickme"
       },
       "deployConfig": {
         "deployServicePack": true,
-        "deployScripts": ["sasjsbuild/myviyadeploy.sas"]
-      }
+        "deployScripts": [
+          "sasjsbuild/myviyadeploy.sas"
+        ]
+      },
+      "contextName": "SAS Job Execution compute context"
     },
     {
       "name": "sas9",
@@ -66,7 +79,9 @@
       },
       "deployConfig": {
         "deployServicePack": true,
-        "deployScripts": ["sasjsbuild/mysas9deploy.sas"]
+        "deployScripts": [
+          "sasjsbuild/mysas9deploy.sas"
+        ]
       },
       "serviceConfig": {
         "serviceFolders": [],
