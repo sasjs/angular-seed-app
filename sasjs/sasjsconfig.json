@@ -49,7 +49,10 @@
         "macroVars": {}
       },
       "serviceConfig": {
-        "serviceFolders": [],
+        "serviceFolders": [
+          "sasjs/services/common",
+          "sasjs/services/files"
+        ],
         "initProgram": "",
         "termProgram": "",
         "macroVars": {}

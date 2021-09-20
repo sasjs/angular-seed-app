@@ -8,29 +8,62 @@ import { SasService } from '../sas.service';
   styleUrls: ['./uploader.component.scss']
 })
 export class UploaderComponent implements OnInit {
-  public selectedFile: File | null = null
-  public uploadUrl: string = 'services/loadfile'
+  public selectedFiles: any[] = []
+  public uploadUrl: string = 'services/files/upload'
+  public responseModalMessage: string | null = null
+  public uploadLoading: boolean = false
 
   constructor(
     private sasService: SasService
   ) { }
 
   ngOnInit(): void {
+    
+  }
+
+ submit() {
+    console.log('change')
+
+    if (this.selectedFiles.length < 1) return
+
+    this.uploadFiles()
+  }
+
+  onFileChange(event: any) {
+    this.selectedFiles = event.target.files
   }
 
   uploadFiles() {
+    this.uploadLoading = true
+    
     let filesToUpload: UploadFile[] = []
+
+    for (let file of this.selectedFiles) {
+      filesToUpload.push({
+        file: file,
+        fileName: file.name
+      })
+    }
 
     this.sasService
       .uploadFile(this.uploadUrl, filesToUpload)
       .then(
         (res: any) => {
           console.log('res', res)
-          alert(res)
+
+          this.responseModalMessage = res,
+          this.uploadLoading = false
         },
         (err: any) => {
           console.error(err)
+
+          this.responseModalMessage = err,
+          this.uploadLoading = false
         }
       )
+  }
+
+  typeof(item: any) {
+    return typeof item
   }
 }
