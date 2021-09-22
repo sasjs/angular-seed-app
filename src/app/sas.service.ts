@@ -10,14 +10,9 @@ export class SasService {
   private sasService: any;
 
   constructor(private stateService: StateService) {
-    this.sasService = new SASjs({
-      serverUrl: '',
-      appLoc: '/Public/app/angular-seed-app',
-      serverType: 'SASVIYA',
-      debug: true,
-      useComputeApi: true,
-      contextName: 'SAS Job Execution compute context',
-    });
+    let sasjsConfigInput = (window as any).sasjsConfigInput || {}
+
+    this.sasService = new SASjs(sasjsConfigInput);
   }
 
   public fetchStartupData() {

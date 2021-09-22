@@ -4,6 +4,15 @@
         <input (change)="onFileChange($event)" type="file" id="fileToUpload">
     </div>
 
+    <div class="clr-form-control">
+        <label for="example" class="clr-control-label">Upload path</label>
+        <div class="clr-control-container">
+          <div class="clr-input-wrapper">
+            <input [(ngModel)]="uploadPath" style="width: 230px;" type="text" id="example" placeholder="Enter path" class="clr-input" />
+          </div>
+        </div>
+    </div>
+
     <hr style="margin-top: 20px; width: 100%;"/>
     <button (click)="submit()" [clrLoading]="uploadLoading" class="btn btn-primary">upload</button>
 </div>
