@@ -10,6 +10,7 @@ import { SasService } from '../sas.service';
 export class UploaderComponent implements OnInit {
   public selectedFiles: any[] = []
   public uploadUrl: string = 'services/files/upload'
+  public uploadPath: string = ''
   public responseModalMessage: string | null = null
   public uploadLoading: boolean = false
 
@@ -44,9 +45,9 @@ export class UploaderComponent implements OnInit {
         fileName: file.name
       })
     }
-
+    console.log('this.uploadPath', this.uploadPath)
     this.sasService
-      .uploadFile(this.uploadUrl, filesToUpload)
+      .uploadFile(this.uploadUrl, filesToUpload, { path: this.uploadPath })
       .then(
         (res: any) => {
           console.log('res', res)

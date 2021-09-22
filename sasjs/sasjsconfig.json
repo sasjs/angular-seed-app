@@ -6,7 +6,8 @@
   "programFolders": [],
   "serviceConfig": {
     "serviceFolders": [
-      "sasjs/services/common"
+      "sasjs/services/common",
+      "sasjs/services/files"
     ],
     "initProgram": "",
     "termProgram": "",
@@ -42,21 +43,6 @@
         "buildResultsFolder": "sasjsresults",
         "buildOutputFolder": "sasjsbuild"
       },
-      "jobConfig": {
-        "jobFolders": [],
-        "initProgram": "",
-        "termProgram": "",
-        "macroVars": {}
-      },
-      "serviceConfig": {
-        "serviceFolders": [
-          "sasjs/services/common",
-          "sasjs/services/files"
-        ],
-        "initProgram": "",
-        "termProgram": "",
-        "macroVars": {}
-      },
       "streamConfig": {
         "assetPaths": [],
         "streamWeb": false,
@@ -74,38 +60,33 @@
     },
     {
       "name": "sas9",
+      "serverUrl": "https://sas.analytium.co.uk:8343",
       "serverType": "SAS9",
-      "serverUrl": "YOURSAS9SERVER",
+      "allowInsecureRequests": false,
       "appLoc": "/Public/app/angular-seed-app",
+      "macroFolders": [],
+      "programFolders": [],
       "buildConfig": {
-        "buildOutputFileName": "mysas9deploy.sas"
+        "buildOutputFileName": "mysas9deploy.sas",
+        "buildResultsFolder": "sasjsresults",
+        "buildOutputFolder": "sasjsbuild",
+        "initProgram": "",
+        "termProgram": "",
+        "macroVars": {}
+      },
+      "streamConfig": {
+        "assetPaths": [],
+        "streamWeb": true,
+        "streamWebFolder": "web9",
+        "webSourcePath": "dist",
+        "streamServiceName": "clickme"
       },
       "deployConfig": {
         "deployServicePack": true,
-        "deployScripts": [
-          "sasjsbuild/mysas9deploy.sas"
-        ]
-      },
-      "serviceConfig": {
-        "serviceFolders": [],
-        "initProgram": "",
-        "termProgram": "",
-        "macroVars": {}
-      },
-      "jobConfig": {
-        "jobFolders": [],
-        "initProgram": "",
-        "termProgram": "",
-        "macroVars": {}
+        "deployScripts": []
       },
       "serverName": "SASApp",
-      "repositoryName": "Foundation",
-      "streamConfig": {
-        "assetPaths": [],
-        "streamWeb": false,
-        "streamWebFolder": "web9",
-        "webSourcePath": "dist"
-      }
+      "repositoryName": "Foundation"
     }
   ]
 }
