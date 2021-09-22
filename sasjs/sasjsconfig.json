@@ -8,16 +8,7 @@
     "serviceFolders": [
       "sasjs/services/common",
       "sasjs/services/files"
-    ],
-    "initProgram": "",
-    "termProgram": "",
-    "macroVars": {}
-  },
-  "jobConfig": {
-    "jobFolders": [],
-    "initProgram": "",
-    "termProgram": "",
-    "macroVars": {}
+    ]
   },
   "streamConfig": {
     "assetPaths": [],
@@ -29,61 +20,21 @@
   "targets": [
     {
       "name": "viya",
-      "serverUrl": "https://sas.analytium.co.uk",
+      "serverUrl": "",
       "serverType": "SASVIYA",
-      "allowInsecureRequests": false,
       "appLoc": "/Public/app/angular-seed-app",
-      "macroFolders": [],
-      "programFolders": [],
-      "buildConfig": {
-        "buildOutputFileName": "myviyadeploy.sas",
-        "initProgram": "",
-        "termProgram": "",
-        "macroVars": {},
-        "buildResultsFolder": "sasjsresults",
-        "buildOutputFolder": "sasjsbuild"
-      },
-      "streamConfig": {
-        "assetPaths": [],
-        "streamWeb": false,
-        "streamWebFolder": "webv",
-        "webSourcePath": "dist",
-        "streamServiceName": "clickme"
-      },
       "deployConfig": {
-        "deployServicePack": true,
-        "deployScripts": [
-          "sasjsbuild/myviyadeploy.sas"
-        ]
+        "deployServicePack": true
       },
       "contextName": "SAS Job Execution compute context"
     },
     {
       "name": "sas9",
-      "serverUrl": "https://sas.analytium.co.uk:8343",
+      "serverUrl": "",
       "serverType": "SAS9",
-      "allowInsecureRequests": false,
       "appLoc": "/Public/app/angular-seed-app",
-      "macroFolders": [],
-      "programFolders": [],
-      "buildConfig": {
-        "buildOutputFileName": "mysas9deploy.sas",
-        "buildResultsFolder": "sasjsresults",
-        "buildOutputFolder": "sasjsbuild",
-        "initProgram": "",
-        "termProgram": "",
-        "macroVars": {}
-      },
-      "streamConfig": {
-        "assetPaths": [],
-        "streamWeb": true,
-        "streamWebFolder": "web9",
-        "webSourcePath": "dist",
-        "streamServiceName": "clickme"
-      },
       "deployConfig": {
-        "deployServicePack": true,
-        "deployScripts": []
+        "deployServicePack": true
       },
       "serverName": "SASApp",
       "repositoryName": "Foundation"
