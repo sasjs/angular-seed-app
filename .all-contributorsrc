@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "VladislavParhomchik",
+      "name": "Vladislav Parhomchik",
+      "avatar_url": "https://avatars.githubusercontent.com/u/83717836?v=4",
+      "profile": "https://github.com/VladislavParhomchik",
+      "contributions": [
+        "review",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "angular-seed-app",
+  "projectOwner": "sasjs",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
