@@ -10,11 +10,12 @@
           <div class="clr-input-wrapper">
             <input [(ngModel)]="uploadPath" style="width: 230px;" type="text" id="example" placeholder="Enter path" class="clr-input" />
           </div>
+          <span class="clr-subtext">Required</span>
         </div>
     </div>
 
     <hr style="margin-top: 20px; width: 100%;"/>
-    <button (click)="submit()" [clrLoading]="uploadLoading" class="btn btn-primary">upload</button>
+    <button (click)="submit()" [clrLoading]="uploadLoading" class="btn btn-primary" [disabled]="uploadPath.length < 1">upload</button>
 </div>
 
 <ng-container *ngIf="responseModalMessage !== null">
