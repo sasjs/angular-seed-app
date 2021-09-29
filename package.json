@@ -12,7 +12,8 @@
     "e2e": "ng e2e",
     "build-watch": "ng build --watch",
     "deploy": "rsync -avhe ssh ./dist/* --delete $SSH_ACCOUNT:$DEPLOY_PATH",
-    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: $SSH_ACCOUNT && npm run deploy && echo 'App is synced!'\" dist"
+    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: $SSH_ACCOUNT && npm run deploy && echo 'App is synced!'\" dist",
+    "contributors:add": "npx all-contributors add allanbowe code,test,review,video,doc && npx all-contributors add yuryshkoda code,test,projectManagement,video,doc && npx all-contributors add krishna-acondy code,test,review,infra,platform,maintenance,content && npx all-contributors add saadjutt01 code,test,review,mentoring,doc && npx all-contributors add sabhas code,test,review,ideas && npx all-contributors add medjedovicm code,test,review,infra && npx all-contributors add vladislavparhomchik test,review"
   },
   "private": true,
   "keywords": [
@@ -51,6 +52,7 @@
     "@types/jasmine": "^3.9.1",
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^16.9.1",
+    "all-contributors-cli": "^6.20.0",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.9.0",
     "jasmine-spec-reporter": "~5.0.0",
