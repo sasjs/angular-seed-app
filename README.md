@@ -10,7 +10,7 @@ This seed app provides a wrapper for `@sasjs/adapter`, a lightning fast adapter 
 
 ## Frontend Web
 
-Clone the repo, `cd` into it, and `npm install`. Then update the following in `sas.service.ts`:
+Clone the repo, `cd` into it, and `npm install`. Then update the following in `index.html`:
 
 - `appLoc` - the location in the metadata or viya folder tree where the backend services will be located.
 - `serverType` - either SAS9 or SASVIYA.
