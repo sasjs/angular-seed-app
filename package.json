@@ -36,7 +36,7 @@
     "@clr/core": "^4.0.15",
     "@clr/icons": "5.0.3",
     "@clr/ui": "5.0.3",
-    "@sasjs/adapter": "^2.11.4",
+    "@sasjs/adapter": "^3.0.1",
     "@sasjs/core": "^2.48.6",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "moment": "^2.29.1",
