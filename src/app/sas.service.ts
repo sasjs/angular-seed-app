@@ -10,7 +10,7 @@ export class SasService {
   private sasService: any;
 
   constructor(private stateService: StateService) {
-    let sasjsConfigInput = (window as any).sasjsConfigInput || {}
+    let sasjsConfigInput = (window as any).sasjsConfigInput || {};
 
     this.sasService = new SASjs(sasjsConfigInput);
   }
@@ -82,7 +82,7 @@ export class SasService {
   }
 
   public uploadFile(sasService: string, files: UploadFile[], params?: any) {
-    return this.sasService.uploadFile(sasService, files, params)
+    return this.sasService.uploadFile(sasService, files, params);
   }
 
   public logout() {

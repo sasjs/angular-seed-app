@@ -62,6 +62,14 @@
                     </clr-tree>
 
                     <div class="log-wrapper saslog" [innerHTML]="programLog.logFile"></div>
+                    <button
+                      *ngIf="programLog.logFile.length > 0"
+                      (click)="downloadLog(programLog.logFile)"
+                      type="button"
+                      class="btn btn-link"
+                    >
+                      Download
+                    </button>
                   </clr-tab-content>
                 </ng-template>
               </clr-tab>
@@ -71,6 +79,14 @@
                 <ng-template [(clrIfActive)]="sasSourceCodeActive">
                   <clr-tab-content>
                     <div class="log-wrapper">{{ programLog.sourceCode }}</div>
+                    <button
+                      *ngIf="programLog.sourceCode.length > 0"
+                      (click)="downloadSourceCode(programLog.sourceCode)"
+                      type="button"
+                      class="btn btn-link"
+                    >
+                      Download
+                    </button>
                   </clr-tab-content>
                 </ng-template>
               </clr-tab>
@@ -80,6 +96,14 @@
                 <ng-template [(clrIfActive)]="sasGeneratedCodeActive">
                   <clr-tab-content>
                     <div class="log-wrapper">{{ programLog.generatedCode }}</div>
+                    <button
+                      *ngIf="programLog.generatedCode.length > 0"
+                      (click)="downloadGeneratedCode(programLog.generatedCode)"
+                      type="button"
+                      class="btn btn-link"
+                    >
+                      Download
+                    </button>
                   </clr-tab-content>
                 </ng-template>
               </clr-tab>

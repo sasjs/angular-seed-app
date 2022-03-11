@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   { path: 'homepage', component: HomePageComponent },
   { path: 'data', component: DataComponent },
-  { path: 'uploader', component: UploaderComponent }
+  { path: 'uploader', component: UploaderComponent },
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SasService } from '../../sas.service';
 import * as moment from 'moment';
+import { HelperService } from 'src/app/helper.service';
 
 @Component({
   selector: 'app-requests-modal',
@@ -29,7 +30,7 @@ export class RequestsModalComponent implements OnInit {
   public sasjsRequests: any[] = [];
   public workTables: any;
 
-  constructor(private sasService: SasService) {}
+  constructor(private sasService: SasService, private helperService: HelperService) {}
 
   ngOnInit(): void {}
 
@@ -115,5 +116,20 @@ export class RequestsModalComponent implements OnInit {
     req.logFile = logLines.join('\n');
     req['logErrors'] = errorLines;
     req['logWarnings'] = warningLines;
+  }
+
+  downloadLog(logFile: string) {
+    const timestamp = new Date().valueOf();
+    this.helperService.downloadTextFile(`logFile-${timestamp}`, logFile);
+  }
+
+  downloadSourceCode(sourceCode: string) {
+    const timestamp = new Date().valueOf();
+    this.helperService.downloadTextFile(`sourceCode-${timestamp}`, sourceCode);
+  }
+
+  downloadGeneratedCode(generatedCode: string) {
+    const timestamp = new Date().valueOf();
+    this.helperService.downloadTextFile(`generatedCode-${timestamp}`, generatedCode);
   }
 }
