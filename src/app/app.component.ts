@@ -3,6 +3,7 @@ import { StateService } from './state.service';
 import { SasService } from './sas.service';
 
 import { SASjsConfig } from '@sasjs/adapter';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,11 @@ export class AppComponent implements OnInit {
   public sasjsConfig: SASjsConfig = new SASjsConfig();
   public username: string = '';
 
-  constructor(private stateService: StateService, private sasService: SasService) {
+  constructor(
+    private stateService: StateService,
+    private sasService: SasService,
+    private router: Router
+  ) {
     sasService.fetchStartupData();
   }
 
@@ -29,6 +34,10 @@ export class AppComponent implements OnInit {
     this.stateService.username.subscribe((username: string) => {
       this.username = username;
     });
+  }
+
+  public openDocs() {
+    window.location.replace(`${window.location.pathname}/docs`)
   }
 
   public debugChanged() {
