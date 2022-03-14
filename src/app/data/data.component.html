@@ -3,11 +3,21 @@
 
   <div *ngIf="areas.length > 0" class="areas-select-wrapper">
     <select clrSelect name="options" [(ngModel)]="selectedArea">
-      <option *ngIf="selectedArea === undefined" [value]="undefined">Select from dropdown</option>
-      <option *ngFor="let area of areas" [value]="area['AREA']">{{ area['AREA'] }}</option>
+      <option *ngIf="selectedArea === undefined" [value]="undefined">
+        Select from dropdown
+      </option>
+      <option *ngFor="let area of areas" [value]="area['AREA']">
+        {{ area['AREA'] }}
+      </option>
     </select>
 
-    <button (click)="submitData()" class="btn btn-primary" [disabled]="!selectedArea">SUBMIT</button>
+    <button
+      (click)="submitData()"
+      class="btn btn-primary"
+      [disabled]="!selectedArea"
+    >
+      SUBMIT
+    </button>
   </div>
 
   <span *ngIf="springsLoading" class="spinner spinner-md"> Loading... </span>
