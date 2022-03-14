@@ -47,12 +47,10 @@ export class UploaderComponent implements OnInit {
       .then(
         (res: any) => {
           console.log('res', res)
-
           ;(this.responseModalMessage = res), (this.uploadLoading = false)
         },
         (err: any) => {
           console.error(err)
-
           ;(this.responseModalMessage = err), (this.uploadLoading = false)
         }
       )
