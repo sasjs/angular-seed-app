@@ -14,17 +14,16 @@ import { RequestsModalComponent } from './components/requests-modal/requests-mod
 import { UploaderComponent } from './uploader/uploader.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginModalComponent,
-    DataComponent,
-    HomePageComponent,
-    RequestsModalComponent,
-    UploaderComponent,
-  ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, FormsModule, ClarityModule],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [LoginModalComponent],
+    declarations: [
+        AppComponent,
+        LoginModalComponent,
+        DataComponent,
+        HomePageComponent,
+        RequestsModalComponent,
+        UploaderComponent,
+    ],
+    imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, FormsModule, ClarityModule],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
