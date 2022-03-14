@@ -1,26 +1,26 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { RequestsModalComponent } from './requests-modal.component';
+import { RequestsModalComponent } from './requests-modal.component'
 
 describe('RequestsModalComponent', () => {
-  let component: RequestsModalComponent;
-  let fixture: ComponentFixture<RequestsModalComponent>;
+  let component: RequestsModalComponent
+  let fixture: ComponentFixture<RequestsModalComponent>
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [RequestsModalComponent],
-      }).compileComponents();
+        declarations: [RequestsModalComponent]
+      }).compileComponents()
     })
-  );
+  )
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RequestsModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(RequestsModalComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

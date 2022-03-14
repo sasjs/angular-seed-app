@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <p style="margin-top: 20px; text-align: center">Choose file to be uploaded to SAS</p>
+  <p style="margin-top: 20px; text-align: center">
+    Choose file to be uploaded to SAS
+  </p>
   <div class="uploader">
     <input (change)="onFileChange($event)" type="file" id="fileToUpload" />
   </div>
@@ -22,7 +24,12 @@
   </div>
 
   <hr style="margin-top: 20px; width: 100%" />
-  <button (click)="submit()" [clrLoading]="uploadLoading" class="btn btn-primary" [disabled]="uploadPath.length < 1">
+  <button
+    (click)="submit()"
+    [clrLoading]="uploadLoading"
+    class="btn btn-primary"
+    [disabled]="uploadPath.length < 1"
+  >
     upload
   </button>
 </div>
@@ -35,10 +42,22 @@
           <h3 class="modal-title">File upload response</h3>
         </div>
         <div class="modal-body">
-          <p>{{ typeof(responseModalMessage) === 'object' ? (responseModalMessage | json) : responseModalMessage }}</p>
+          <p>
+            {{
+              typeof(responseModalMessage) === 'object'
+                ? (responseModalMessage | json)
+                : responseModalMessage
+            }}
+          </p>
         </div>
         <div class="modal-footer">
-          <button (click)="responseModalMessage = null" class="btn btn-primary" type="button">Ok</button>
+          <button
+            (click)="responseModalMessage = null"
+            class="btn btn-primary"
+            type="button"
+          >
+            Ok
+          </button>
         </div>
       </div>
     </div>

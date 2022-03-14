@@ -12,20 +12,31 @@
     <p *ngIf="sasjsRequests.length < 1" class="no-reqs">No requests made</p>
 
     <clr-stack-view *ngIf="sasjsRequests.length > 0">
-      <clr-stack-block *ngFor="let programLog of sasjsRequests; let i = index" [id]="'request_' + i">
+      <clr-stack-block
+        *ngFor="let programLog of sasjsRequests; let i = index"
+        [id]="'request_' + i"
+      >
         <clr-stack-label>
           {{ programLog['appLoc'] }}
           <span style="margin-left: 10px">
             <span *ngIf="programLog.logWarnings?.length > 0">
-              <clr-icon style="margin-bottom: 5px; color: green" shape="exclamation-circle"></clr-icon>
+              <clr-icon
+                style="margin-bottom: 5px; color: green"
+                shape="exclamation-circle"
+              ></clr-icon>
             </span>
 
             <span *ngIf="programLog.logErrors?.length > 0">
-              <clr-icon style="margin-bottom: 5px; color: red" shape="exclamation-triangle"></clr-icon>
+              <clr-icon
+                style="margin-bottom: 5px; color: red"
+                shape="exclamation-triangle"
+              ></clr-icon>
             </span>
           </span>
         </clr-stack-label>
-        <clr-stack-content>{{ programLog['parsedTimestamp'] }}</clr-stack-content>
+        <clr-stack-content>{{
+          programLog['parsedTimestamp']
+        }}</clr-stack-content>
         <clr-stack-block class="content">
           <clr-stack-content>
             <clr-tabs>
@@ -35,7 +46,10 @@
                   <clr-tab-content>
                     <clr-tree>
                       <clr-tree-node *ngIf="programLog.logErrors">
-                        <clr-icon style="color: red" shape="exclamation-triangle"></clr-icon>
+                        <clr-icon
+                          style="color: red"
+                          shape="exclamation-triangle"
+                        ></clr-icon>
                         Errors ({{ programLog.logErrors.length }})
                         <clr-tree-node
                           (click)="goToLogLine(err, 'request_' + i, 'error')"
@@ -48,10 +62,15 @@
                       </clr-tree-node>
 
                       <clr-tree-node *ngIf="programLog.logWarnings">
-                        <clr-icon style="color: green" shape="exclamation-circle"></clr-icon>
+                        <clr-icon
+                          style="color: green"
+                          shape="exclamation-circle"
+                        ></clr-icon>
                         Warnings ({{ programLog.logWarnings.length }})
                         <clr-tree-node
-                          (click)="goToLogLine(warning, 'request_' + i, 'warning')"
+                          (click)="
+                            goToLogLine(warning, 'request_' + i, 'warning')
+                          "
                           *ngFor="let warning of programLog.logWarnings || []"
                         >
                           <button class="clr-treenode-link">
@@ -61,7 +80,10 @@
                       </clr-tree-node>
                     </clr-tree>
 
-                    <div class="log-wrapper saslog" [innerHTML]="programLog.logFile"></div>
+                    <div
+                      class="log-wrapper saslog"
+                      [innerHTML]="programLog.logFile"
+                    ></div>
                     <button
                       *ngIf="programLog.logFile.length > 0"
                       (click)="downloadLog(programLog.logFile)"
@@ -95,7 +117,9 @@
                 <button clrTabLink>SAS Generated Code</button>
                 <ng-template [(clrIfActive)]="sasGeneratedCodeActive">
                   <clr-tab-content>
-                    <div class="log-wrapper">{{ programLog.generatedCode }}</div>
+                    <div class="log-wrapper">
+                      {{ programLog.generatedCode }}
+                    </div>
                     <button
                       *ngIf="programLog.generatedCode.length > 0"
                       (click)="downloadGeneratedCode(programLog.generatedCode)"
@@ -109,7 +133,11 @@
               </clr-tab>
 
               <clr-tab *ngIf="programLog.SASWORK">
-                <clr-dropdown [clrCloseMenuOnItemClick]="true" class="work-tables-dropdown" clrTabLink>
+                <clr-dropdown
+                  [clrCloseMenuOnItemClick]="true"
+                  class="work-tables-dropdown"
+                  clrTabLink
+                >
                   <button clrDropdownTrigger>
                     SAS Work Tables
                     <clr-icon shape="caret down"></clr-icon>
@@ -118,7 +146,9 @@
                     <div
                       *ngFor="let table of programLog.SASWORK | keyvalue"
                       (click)="programLog['selectedTable'] = table.key"
-                      [class.selected]="programLog['selectedTable'] === table.key"
+                      [class.selected]="
+                        programLog['selectedTable'] === table.key
+                      "
                       class="dropdown-item"
                       clrDropdownItem
                     >
@@ -129,17 +159,28 @@
 
                 <ng-template [(clrIfActive)]="tablesActive">
                   <clr-tab-content>
-                    <p *ngIf="programLog['selectedTable']" style="margin-top: 10px">
-                      <strong>{{ programLog['selectedTable'] }} (first 10 rows) </strong>
+                    <p
+                      *ngIf="programLog['selectedTable']"
+                      style="margin-top: 10px"
+                    >
+                      <strong
+                        >{{ programLog['selectedTable'] }} (first 10 rows)
+                      </strong>
                     </p>
 
                     <div style="min-height: 50vh">
-                      <table *ngIf="programLog['selectedTable']" style="margin-top: 10px" class="table">
+                      <table
+                        *ngIf="programLog['selectedTable']"
+                        style="margin-top: 10px"
+                        class="table"
+                      >
                         <thead>
                           <tr>
                             <th
                               *ngFor="
-                                let column of programLog.SASWORK[programLog['selectedTable']].first10rows[0] | keyvalue
+                                let column of programLog.SASWORK[
+                                  programLog['selectedTable']
+                                ].first10rows[0] | keyvalue
                               "
                             >
                               {{ column.key }}
@@ -147,10 +188,18 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let row of programLog.SASWORK[programLog['selectedTable']].first10rows">
+                          <tr
+                            *ngFor="
+                              let row of programLog.SASWORK[
+                                programLog['selectedTable']
+                              ].first10rows
+                            "
+                          >
                             <td
                               *ngFor="
-                                let column of programLog.SASWORK[programLog['selectedTable']].first10rows[0] | keyvalue
+                                let column of programLog.SASWORK[
+                                  programLog['selectedTable']
+                                ].first10rows[0] | keyvalue
                               "
                             >
                               {{ row[column.key] }}

@@ -1,7 +1,14 @@
 <clr-modal [clrModalOpen]="true" clrModalSize="sm" [clrModalClosable]="false">
   <h3 class="modal-title">Sign In</h3>
   <div style="min-height: 80px" class="modal-body" (keydown.enter)="signIn()">
-    <input clrInput name="username" placeholder="User name" autocomplete="username" [(ngModel)]="userName" required />
+    <input
+      clrInput
+      name="username"
+      placeholder="User name"
+      autocomplete="username"
+      [(ngModel)]="userName"
+      required
+    />
     <input
       clrInput
       type="password"
@@ -13,6 +20,13 @@
     />
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="signIn()" [clrLoading]="loginLoading">Sign In</button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="signIn()"
+      [clrLoading]="loginLoading"
+    >
+      Sign In
+    </button>
   </div>
 </clr-modal>
