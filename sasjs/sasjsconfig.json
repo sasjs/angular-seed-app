@@ -38,6 +38,21 @@
       },
       "serverName": "SASApp",
       "repositoryName": "Foundation"
+    },
+    {
+      "name": "server",
+      "serverUrl": " ",
+      "serverType": "SASJS",
+      "appLoc": "/Public/app/angular-seed-app",
+      "deployConfig": {
+        "deployServicePack": true
+      },
+      "streamConfig": {
+        "streamLogo": "assets/angular-logo.png",
+        "streamWeb": true,
+        "streamWebFolder": "webv",
+        "webSourcePath": "dist"
+      }
     }
   ]
 }
