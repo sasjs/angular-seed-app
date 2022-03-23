@@ -41,7 +41,6 @@
     },
     {
       "name": "server",
-      "serverUrl": " ",
       "serverType": "SASJS",
       "appLoc": "/Public/app/angular-seed-app",
       "deployConfig": {
@@ -49,6 +48,7 @@
       },
       "streamConfig": {
         "streamLogo": "assets/angular-logo.png",
+        "streamServiceName": "Angular",
         "streamWeb": true,
         "streamWebFolder": "webv",
         "webSourcePath": "dist"
