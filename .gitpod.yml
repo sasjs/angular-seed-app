@@ -1,7 +1,7 @@
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - init: npm install -g npm && npm i -g @sasjs/cli
-  - command: npm i && npm run build
+  - init: npm install -g npm 
+  - command: npm i && npm run build && npm i -g @sasjs/cli
 
 image:
   file: .gitpod.dockerfile
