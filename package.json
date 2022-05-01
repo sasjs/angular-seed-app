@@ -39,7 +39,7 @@
     "@clr/ui": "5.0.3",
     "@sasjs/adapter": "^3.8.0",
     "@sasjs/cli": "^3.12.1",
-    "@sasjs/core": "^4.18.3",
+    "@sasjs/core": "^4.21.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "moment": "^2.29.1",
     "rxjs": "~6.6.7",
