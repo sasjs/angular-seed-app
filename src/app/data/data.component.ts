@@ -12,6 +12,7 @@ export class DataComponent implements OnInit {
   public selectedArea: any = null
   public springs: any[] = []
   public springsLoading: boolean = false
+  public noData: boolean = false
 
   public displayedColumns: string[] = [
     'LATITUDE',
@@ -41,6 +42,12 @@ export class DataComponent implements OnInit {
     this.sasService.request('common/getdata', data).then((res: any) => {
       this.springs = res['springs']
       this.springsLoading = false
+
+      if (!res || !res['springs'] || res['spring'].length < 1) {
+        this.noData = true
+      } else {
+        this.noData = false
+      }
     })
   }
 }
