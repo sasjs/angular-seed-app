@@ -24,7 +24,7 @@ If you are running locally you will either need to whitelist `localhost` on the 
 
 ## Backend Services
 
-Creating services in SAS 9 or Viya can be done entirely in SAS Studio using the code below.
+Creating services in SAS 9, Viya or SASjs Server can be done entirely in SAS Studio using the code below.
 
 ```
 %let appLoc=/Public/app/angular;  /* Metadata or Viya root folder */
