@@ -43,7 +43,7 @@ export class DataComponent implements OnInit {
       this.springs = res['springs']
       this.springsLoading = false
 
-      if (!res || !res['springs'] || res['spring'].length < 1) {
+      if (!res || !res['springs'] || res['spring']?.length < 1) {
         this.noData = true
       } else {
         this.noData = false

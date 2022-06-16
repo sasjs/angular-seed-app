@@ -20,12 +20,12 @@
   "targets": [
     {
       "name": "viya",
-      "serverUrl": "",
+      "serverUrl": "https://sas.analytium.co.uk",
       "serverType": "SASVIYA",
-      "appLoc": "/Public/app/angular-seed-app",
-      "deployConfig": {
-        "deployServicePack": true
+      "httpsAgentOptions": {
+        "allowInsecureRequests": false
       },
+      "appLoc": "/Public/app/angular-seed-app",
       "contextName": "SAS Job Execution compute context"
     },
     {
@@ -35,6 +35,13 @@
       "appLoc": "/Public/app/angular-seed-app",
       "deployConfig": {
         "deployServicePack": true
+      },
+      "streamConfig": {
+        "streamLogo": "assets/angular-logo.png",
+        "streamServiceName": "Angular",
+        "streamWeb": true,
+        "streamWebFolder": "webv",
+        "webSourcePath": "dist"
       },
       "serverName": "SASApp",
       "repositoryName": "Foundation"
