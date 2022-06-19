@@ -2,15 +2,14 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-This seed app provides a wrapper for `@sasjs/adapter`, a lightning fast adapter for talking to both SAS 9 and Viya.
+This seed app provides a quick start for building an Angular Web app on Viya, SAS EBI or Foundation SAS with the SASjs DevOps framework.
 
 ## Frontend Web
 
-Clone the repo, `cd` into it, and `npm install`. Then update the following in `index.html`:
+Clone the repo, `cd` into it, and `npm install`.
+
+Next, update the following attributes in `index.html`:
 
 - `appLoc` - this is the folder (eg in metadata or SAS Drive) under which the SAS services are created.
 - `serverType` - either SAS9, SASVIYA or SASJS.
@@ -27,10 +26,10 @@ If you are running locally you will either need to whitelist `localhost` on the 
 
 ## Backend Services
 
-Creating services in SAS 9, Viya or SASjs Server can be done entirely in SAS Studio using the code below.
+Normally services would be compiled and deployed using the [SASjs CLI](https://cli.sasjs.io), however for speedy setup you can simply run the following code in Studio:
 
 ```
-%let appLoc=/Public/app/angular;  /* Metadata or Viya root folder */
+%let appLoc=/Public/app/angular;  /* Root folder in Metadata or Drive */
 filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;  /* download and compile macro core library */
 filename ft15f001 temp;
@@ -41,7 +40,7 @@ parmcards4;
     %webout(OBJ,areas)
     %webout(CLOSE)
 ;;;;
-%mp_createwebservice(path=&appLoc/services/common, name=appinit)
+%mx_createwebservice(path=&appLoc/services/common, name=appinit)
 parmcards4;
     %webout(FETCH)
     proc sql;
@@ -51,10 +50,12 @@ parmcards4;
     %webout(OBJ,springs)
     %webout(CLOSE)
 ;;;;
-%mp_createwebservice(path=&appLoc/services/common, name=getdata)
+%mx_createwebservice(path=&appLoc/services/common, name=getdata)
 ```
 
-For building anything other than a seed app, we recommend the `@sasjs/cli` tool for project configuration.
+To use the CLI, first run `sasjs add` and follow the prompts to create a target.  You can then run `sasjs cbd -t yourtargetname` to compile, build, and deploy your backend.
+
+If you set `streamWeb:true` in the `streamConfig` of your `sasjs/sasjsconfig.json` file you can also run as a [streaming app](https://sasapps.io/sas-streamed-apps) (without a web server).
 
 ## Contributors ✨
 
@@ -71,20 +72,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/sabhas"><img src="https://avatars.githubusercontent.com/u/82647447?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sabir Hassan</b></sub></a><br /><a href="https://github.com/sasjs/angular-seed-app/commits?author=sabhas" title="Code">💻</a> <a href="https://github.com/sasjs/angular-seed-app/commits?author=sabhas" title="Tests">⚠️</a> <a href="https://github.com/sasjs/angular-seed-app/pulls?q=is%3Apr+reviewed-by%3Asabhas" title="Reviewed Pull Requests">👀</a> <a href="#ideas-sabhas" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/medjedovicm"><img src="https://avatars.githubusercontent.com/u/18329105?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mihajlo Medjedovic</b></sub></a><br /><a href="https://github.com/sasjs/angular-seed-app/commits?author=medjedovicm" title="Code">💻</a> <a href="https://github.com/sasjs/angular-seed-app/commits?author=medjedovicm" title="Tests">⚠️</a> <a href="https://github.com/sasjs/angular-seed-app/pulls?q=is%3Apr+reviewed-by%3Amedjedovicm" title="Reviewed Pull Requests">👀</a> <a href="#infra-medjedovicm" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="https://github.com/VladislavParhomchik"><img src="https://avatars.githubusercontent.com/u/83717836?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vladislav Parhomchik</b></sub></a><br /><a href="https://github.com/sasjs/angular-seed-app/commits?author=VladislavParhomchik" title="Tests">⚠️</a> <a href="https://github.com/sasjs/angular-seed-app/pulls?q=is%3Apr+reviewed-by%3AVladislavParhomchik" title="Reviewed Pull Requests">👀</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/VladislavParhomchik"><img src="https://avatars.githubusercontent.com/u/83717836?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vladislav Parhomchik</b></sub></a><br /><a href="https://github.com/sasjs/angular-seed-app/pulls?q=is%3Apr+reviewed-by%3AVladislavParhomchik" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/sasjs/angular-seed-app/commits?author=VladislavParhomchik" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
