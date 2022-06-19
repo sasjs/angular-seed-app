@@ -23,9 +23,6 @@
       "serverUrl": "",
       "serverType": "SASVIYA",
       "appLoc": "/Public/app/angular-seed-app",
-      "deployConfig": {
-        "deployServicePack": true
-      },
       "contextName": "SAS Job Execution compute context"
     },
     {
@@ -42,6 +39,7 @@
     {
       "name": "server",
       "serverType": "SASJS",
+      "serverUrl": "",
       "appLoc": "/Public/app/angular-seed-app",
       "deployConfig": {
         "deployServicePack": true
