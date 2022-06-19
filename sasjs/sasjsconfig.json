@@ -20,7 +20,7 @@
   "targets": [
     {
       "name": "viya",
-      "serverUrl": "https://sas.analytium.co.uk",
+      "serverUrl": "",
       "serverType": "SASVIYA",
       "appLoc": "/Public/app/angular-seed-app",
       "contextName": "SAS Job Execution compute context"
@@ -39,6 +39,7 @@
     {
       "name": "server",
       "serverType": "SASJS",
+      "serverUrl": "",
       "appLoc": "/Public/app/angular-seed-app",
       "deployConfig": {
         "deployServicePack": true
