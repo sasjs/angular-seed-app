@@ -50,6 +50,9 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "allowedCommonJsDependencies": [
+                "@sasjs/adapter"
+              ],
               "optimization": {
                 "scripts": true,
                 "styles": {
@@ -122,6 +125,5 @@
         }
       }
     }
-  },
-  "defaultProject": "angular-seed-app"
+  }
 }
