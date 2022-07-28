@@ -31,7 +31,9 @@ export class DataComponent implements OnInit {
 
   ngOnInit(): void {
     this.stateService.startupData.subscribe((data: any) => {
-      this.areas = data
+      this.areas = data.areas
+      // Example to access another table from same response:
+      // data.secondTable
     })
   }
 

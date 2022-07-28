@@ -18,7 +18,7 @@ export class SasService {
   public fetchStartupData() {
     this.request('common/appinit', null).then((response: any) => {
       console.log(response)
-      this.stateService.setStartupData(response.areas)
+      this.stateService.setStartupData(response)
     })
   }
 
