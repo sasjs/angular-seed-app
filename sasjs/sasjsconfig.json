@@ -37,7 +37,7 @@
     },
     {
       "name": "server",
-      "serverUrl": " ",
+      "serverUrl": "",
       "serverType": "SASJS",
       "appLoc": "/Public/app/angular-seed-app",
       "streamConfig": {
