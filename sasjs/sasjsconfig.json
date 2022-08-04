@@ -11,13 +11,6 @@
     ],
     "initProgram": "sasjs/services/serviceinit.sas"
   },
-  "streamConfig": {
-    "streamLogo": "assets/angular-logo.png",
-    "streamServiceName": "Angular",
-    "streamWeb": false,
-    "streamWebFolder": "web",
-    "webSourcePath": "dist"
-  },
   "defaultTarget": "viya",
   "targets": [
     {
@@ -41,8 +34,12 @@
       "serverType": "SASJS",
       "appLoc": "/Public/app/angular-seed-app",
       "streamConfig": {
-        "streamWeb": true
-      }
+        "streamLogo": "assets/angular-logo.png",
+        "streamServiceName": "Angular",
+        "streamWeb": true,
+        "streamWebFolder": "web",
+        "webSourcePath": "dist"
+      },
     }
   ]
 }
