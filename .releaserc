@@ -20,15 +20,15 @@
         "assets": [
           {
             "path": "./artefacts/server.json.zip",
-            "label": "SASjs Server (Load to App Stream)"
+            "label": "SASjs Server (upload to appStream)"
           },
           {
             "path": "./artefacts/sas9.sas",
-            "label": "SAS 9 EBI Deployment (SAS Program)"
+            "label": "SAS 9 EBI (change line 2 and run in Enterprise Guide)"
           },
           {
             "path": "./artefacts/viya.sas",
-            "label": "Viya Deployment (SAS Program)"
+            "label": "SAS Viya (run in Studio)"
           }
         ]
       }
