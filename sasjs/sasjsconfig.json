@@ -32,9 +32,6 @@
       "serverUrl": "",
       "serverType": "SAS9",
       "appLoc": "/Public/app/angular-seed-app",
-      "deployConfig": {
-        "deployServicePack": true
-      },
       "serverName": "SASApp",
       "repositoryName": "Foundation"
     },
@@ -42,7 +39,10 @@
       "name": "server",
       "serverUrl": " ",
       "serverType": "SASJS",
-      "appLoc": "/Public/app/angular-seed-app"
+      "appLoc": "/Public/app/angular-seed-app",
+      "streamConfig": {
+        "streamWeb": true
+      }
     }
   ]
 }

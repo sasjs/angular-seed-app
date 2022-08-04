@@ -1,0 +1,58 @@
+name: Push SASjs Deployment Assets
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [lts/*]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+        env:
+          CI: true
+
+      - name: Check code style
+        run: npm run lint
+
+      - name: Build Project
+        run: npm run build
+
+      - name: create SAS 9 EBI build and Add to Release
+        run: |
+          npx sasjs cb -t sas9
+          mkdir ./artefacts
+          cp ./sasjsbuild/sas9.sas ./artefacts/sas9.sas
+
+      - name: create Viya build and Add to Release
+        run: |
+          npx sasjs cb -t viya
+          cp ./sasjsbuild/viya.sas ./artefacts/viya.sas
+
+      - name: create SASjs build and Add to Release
+        run: |
+          npx sasjs cb -t server
+          cp ./sasjsbuild/server.json.zip ./artefacts/server.json.zip
+
+      - name: Install Semantic Release and plugins
+        run: |
+          npm i
+          npm i -g semantic-release
+      - name: Release
+        run: |
+          GITHUB_TOKEN=${{ secrets.GH_TOKEN }} semantic-release
