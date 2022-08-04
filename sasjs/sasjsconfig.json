@@ -39,7 +39,7 @@
         "streamWeb": true,
         "streamWebFolder": "web",
         "webSourcePath": "dist"
-      },
+      }
     }
   ]
 }
