@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms'
 import { DataComponent } from './data/data.component'
 import { HomePageComponent } from './home-page/home-page.component'
-import { ClarityModule } from '@clr/angular'
 import { UploaderComponent } from './uploader/uploader.component'
 import { NgxSasjsModule } from '@sasjs/ngx-sasjs'
 import { SasjsUiComponent } from './sasjs-ui/sasjs-ui.component'
@@ -24,8 +23,7 @@ import { SasjsUiComponent } from './sasjs-ui/sasjs-ui.component'
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgxSasjsModule,
-    ClarityModule
+    NgxSasjsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
