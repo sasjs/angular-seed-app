@@ -1,6 +1,6 @@
 <div class="sasjs-ui">
   <div class="sasjs-root">
-    <sasjs-header 
+    <sasjs-header
       [logo]="logo"
       [username]="username"
       [sasjsConfig]="sasjsConfig"
@@ -8,8 +8,17 @@
       [userDropdownItems]="userDropdownItems"
     >
     </sasjs-header>
-    
-    <sasjs-login-modal *ngIf="!isLoggedIn" [loginLoading]="loginLoading" (loginButtonClicked)="login($event)"></sasjs-login-modal>
-    <sasjs-logs [(show)]="requestModal" [sasjsConfig]="sasjsConfig" [sasjsRequests]="sasjsRequests" (showChange)="openChange($event)"></sasjs-logs>
+
+    <sasjs-login-modal
+      *ngIf="!isLoggedIn"
+      [loginLoading]="loginLoading"
+      (loginButtonClicked)="login($event)"
+    ></sasjs-login-modal>
+    <sasjs-logs
+      [(show)]="requestModal"
+      [sasjsConfig]="sasjsConfig"
+      [sasjsRequests]="sasjsRequests"
+      (showChange)="openChange($event)"
+    ></sasjs-logs>
   </div>
 </div>

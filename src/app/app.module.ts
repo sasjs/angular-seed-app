@@ -8,7 +8,7 @@ import { DataComponent } from './data/data.component'
 import { HomePageComponent } from './home-page/home-page.component'
 import { ClarityModule } from '@clr/angular'
 import { UploaderComponent } from './uploader/uploader.component'
-import { NgxSasjsModule } from '@sasjs/ngx-sasjs';
+import { NgxSasjsModule } from '@sasjs/ngx-sasjs'
 import { SasjsUiComponent } from './sasjs-ui/sasjs-ui.component'
 
 @NgModule({

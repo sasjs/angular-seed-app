@@ -9,14 +9,9 @@ import { Router } from '@angular/router'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
-  constructor(
-    private sasService: SasService
-  ) {
+  constructor(private sasService: SasService) {
     sasService.fetchStartupData()
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 }
