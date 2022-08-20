@@ -26,11 +26,10 @@
   <hr style="margin-top: 20px; width: 100%" />
   <button
     (click)="submit()"
-    [clrLoading]="uploadLoading"
     class="btn btn-primary"
-    [disabled]="uploadPath.length < 1"
+    [disabled]="uploadPath.length < 1 || uploadLoading"
   >
-    upload
+    {{ uploadLoading ? 'Uploading...' : 'upload' }}
   </button>
 </div>
 

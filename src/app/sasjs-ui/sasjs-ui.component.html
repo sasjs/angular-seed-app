@@ -1,0 +1,24 @@
+<div class="sasjs-ui">
+  <div class="sasjs-root">
+    <sasjs-header
+      [logo]="logo"
+      [username]="username"
+      [sasjsConfig]="sasjsConfig"
+      [navLinks]="navLinks"
+      [userDropdownItems]="userDropdownItems"
+    >
+    </sasjs-header>
+
+    <sasjs-login-modal
+      *ngIf="!isLoggedIn"
+      [loginLoading]="loginLoading"
+      (loginButtonClicked)="login($event)"
+    ></sasjs-login-modal>
+    <sasjs-logs
+      [(show)]="requestModal"
+      [sasjsConfig]="sasjsConfig"
+      [sasjsRequests]="sasjsRequests"
+      (showChange)="openChange($event)"
+    ></sasjs-logs>
+  </div>
+</div>

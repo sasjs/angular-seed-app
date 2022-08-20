@@ -7,12 +7,12 @@ import { StateService } from './state.service'
   providedIn: 'root'
 })
 export class SasService {
-  private sasService: any
+  private adapter: SASjs
 
   constructor(private stateService: StateService) {
     let sasjsConfigInput = (window as any).sasjsConfigInput || {}
 
-    this.sasService = new SASjs(sasjsConfigInput)
+    this.adapter = new SASjs(sasjsConfigInput)
   }
 
   public fetchStartupData() {
@@ -26,8 +26,8 @@ export class SasService {
     url = 'services/' + url
 
     return new Promise((resolve, reject) => {
-      this.sasService
-        .request(url, data, config, (loginRequired: boolean) => {
+      this.adapter
+        .request(url, data, config, () => {
           this.stateService.setIsLoggedIn(false)
         })
         .then(
@@ -59,7 +59,7 @@ export class SasService {
   }
 
   public async login(username: string, password: string) {
-    return this.sasService
+    return this.adapter
       .logIn(username, password)
       .then(
         (res: { isLoggedIn: boolean; userName: string }) => {
@@ -85,25 +85,25 @@ export class SasService {
   }
 
   public uploadFile(sasService: string, files: UploadFile[], params?: any) {
-    return this.sasService.uploadFile(sasService, files, params)
+    return this.adapter.uploadFile(sasService, files, params)
   }
 
   public logout() {
-    this.sasService.logOut().then(() => {
+    this.adapter.logOut().then(() => {
       this.stateService.setIsLoggedIn(false)
       this.stateService.username.next('')
     })
   }
 
   public getSasjsConfig() {
-    return this.sasService.getSasjsConfig()
+    return this.adapter.getSasjsConfig()
   }
 
   public getSasRequests() {
-    return this.sasService.getSasRequests()
+    return this.adapter.getSasRequests()
   }
 
   public setDebugState(state: boolean) {
-    this.sasService.setDebugState(state)
+    this.adapter.setDebugState(state)
   }
 }
