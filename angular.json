@@ -48,7 +48,8 @@
                 }
               ],
               "allowedCommonJsDependencies": [
-                "@sasjs/adapter"
+                "@sasjs/adapter",
+                "moment"
               ],
               "optimization": {
                 "scripts": true,
@@ -72,8 +73,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "700kb",
+                  "maximumError": "1mb"
                 }
               ]
             }
