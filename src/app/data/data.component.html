@@ -1,7 +1,7 @@
 <div class="data-page">
-  <span *ngIf="areas.length < 1" class="spinner spinner-md"> Loading... </span>
+  <span *ngIf="areas?.length < 1" class="spinner spinner-md"> Loading... </span>
 
-  <div *ngIf="areas.length > 0" class="areas-select-wrapper">
+  <div *ngIf="areas?.length > 0" class="areas-select-wrapper">
     <select clrSelect name="options" [(ngModel)]="selectedArea">
       <option *ngIf="selectedArea === undefined" [value]="undefined">
         Select from dropdown

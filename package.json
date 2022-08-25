@@ -33,7 +33,7 @@
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
-    "@sasjs/adapter": "^3.10.11",
+    "@sasjs/adapter": "^3.10.14",
     "@sasjs/cli": "3.17.0",
     "@sasjs/core": "^4.34.1",
     "@webcomponents/webcomponentsjs": "^2.6.0",
