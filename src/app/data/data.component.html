@@ -10,7 +10,16 @@
         {{ area['AREA'] }}
       </option>
     </select>
+    
+<!--
+Here we disable the button in 2 cases:
 
+1. Value from the dropdown is not selected
+2. Request is sent, and button disabled until it is finished
+
+To only disable button when request is running:
+  [disabled]="springsLoading"
+-->
     <button
       (click)="submitData()"
       class="btn btn-primary"
