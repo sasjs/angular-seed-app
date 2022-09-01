@@ -38,12 +38,12 @@ export class DataComponent implements OnInit {
   }
 
   public submitData() {
-    this.springsLoading = true
+    this.springsLoading = true //Request started we set variable to `true`
     let data = { areas: [{ area: this.selectedArea }] }
 
     this.sasService.request('common/getdata', data).then((res: any) => {
       this.springs = res['springs']
-      this.springsLoading = false
+      this.springsLoading = false // Request is finished, success or fail anyway we set variable to false
 
       if (!res || !res['springs'] || res['spring']?.length < 1) {
         this.noData = true
