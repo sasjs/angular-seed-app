@@ -14,7 +14,7 @@
     <button
       (click)="submitData()"
       class="btn btn-primary"
-      [disabled]="!selectedArea"
+      [disabled]="!selectedArea || springsLoading"
     >
       SUBMIT
     </button>
