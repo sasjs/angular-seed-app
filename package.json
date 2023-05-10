@@ -38,7 +38,7 @@
     "@sasjs/core": "^4.34.1",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "moment": "^2.29.3",
-    "@sasjs/ngx-sasjs": "^1.0.3",
+    "@sasjs/ngx-sasjs": "^1.0.4",
     "rxjs": "~7.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
