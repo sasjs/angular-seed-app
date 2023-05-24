@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/sasjs/angular-seed-app/compare/v1.0.0...v1.0.1) (2023-05-24)
+
+
+### Bug Fixes
+
+* button disabled while running request ([#666](https://github.com/sasjs/angular-seed-app/issues/666)) ([5984075](https://github.com/sasjs/angular-seed-app/commit/5984075ecbc88adb093cac9baf57abe6fcc1e50f))
+* vulnerabilities fix ([#675](https://github.com/sasjs/angular-seed-app/issues/675)) ([84eda5d](https://github.com/sasjs/angular-seed-app/commit/84eda5d3d8f6c85075f70c129737e916da9f42c4))
+
 # 1.0.0 (2022-08-04)
 
 
