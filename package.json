@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 3000",
+    "license-checker": "node licenseChecker.js",
     "build": "ng build --configuration production --aot && cp -R docs dist/",
     "build-dev": "ng build",
     "test": "ng test",
@@ -67,6 +68,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~10.8.1",
     "typescript": "~4.9.5",
+    "license-checker": "25.0.1",
     "watch": "^0.13.0"
   }
 }
