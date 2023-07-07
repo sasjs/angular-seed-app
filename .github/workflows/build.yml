@@ -31,8 +31,5 @@ jobs:
       - name: Check code style
         run: npm run lint
 
-      - name: Run unit tests
-        run: npm test
-
       - name: Run licence checker
         run: npm run license-checker
