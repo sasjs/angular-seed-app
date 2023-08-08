@@ -55,4 +55,4 @@ jobs:
           npm i -g semantic-release
       - name: Release
         run: |
-          GITHUB_TOKEN=${{ secrets.GH_TOKEN }} semantic-release
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} semantic-release
