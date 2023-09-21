@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "ng serve --port 3000",
     "license-checker": "node licenseChecker.js",
-    "build": "ng build --configuration production --aot && cp -R docs dist/",
+    "build": "ng build --configuration production --aot && cpr docs dist/docs",
     "build-dev": "ng build",
     "test": "ng test",
     "lint:fix": "npx prettier --write \"src/**/*.{ts,tsx,js,jsx,html,css,sass,less,json,yml,md,graphql}\"",
@@ -37,9 +37,9 @@
     "@sasjs/adapter": "^4.8.0",
     "@sasjs/cli": "^4.7.0",
     "@sasjs/core": "^4.46.6",
+    "@sasjs/ngx-sasjs": "^1.0.5",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "moment": "^2.29.3",
-    "@sasjs/ngx-sasjs": "^1.0.5",
     "rxjs": "~7.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.13.0"
@@ -57,6 +57,7 @@
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^20.1.2",
     "codelyzer": "^6.0.2",
+    "cpr": "^3.0.1",
     "jasmine-core": "~4.2.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.4.2",
@@ -64,11 +65,11 @@
     "karma-coverage-istanbul-reporter": "~3.0.3",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
+    "license-checker": "25.0.1",
     "prettier": "^2.5.1",
     "protractor": "~7.0.0",
     "ts-node": "~10.8.1",
     "typescript": "5.0.2",
-    "license-checker": "25.0.1",
     "watch": "^0.13.0"
   }
 }
