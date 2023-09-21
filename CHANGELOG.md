@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/sasjs/angular-seed-app/compare/v1.0.1...v1.0.2) (2023-09-21)
+
+
+### Bug Fixes
+
+* **scripts:** fixed build script ([87b5bec](https://github.com/sasjs/angular-seed-app/commit/87b5bec01034f2e5127009862135045d7fb64ace))
+
 ## [1.0.1](https://github.com/sasjs/angular-seed-app/compare/v1.0.0...v1.0.1) (2023-05-24)
 
 
