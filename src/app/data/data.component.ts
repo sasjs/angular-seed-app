@@ -9,7 +9,7 @@ import { SasService } from '../sas.service'
 })
 export class DataComponent implements OnInit {
   public areas: any[] = []
-  public selectedArea: any = null
+  public selectedArea: any = undefined
   public springs: any[] = []
   public springsLoading: boolean = false
   public noData: boolean = false
