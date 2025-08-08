@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/sasjs/angular-seed-app/compare/v1.0.2...v1.0.3) (2025-08-08)
+
+
+### Bug Fixes
+
+* vulnerabilities ([2fd81e6](https://github.com/sasjs/angular-seed-app/commit/2fd81e6a9d1b87f6cd9dd156c004b181abcfba99))
+
 ## [1.0.2](https://github.com/sasjs/angular-seed-app/compare/v1.0.1...v1.0.2) (2023-09-21)
 
 
