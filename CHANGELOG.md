@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/sasjs/angular-seed-app/compare/v1.0.3...v1.0.4) (2025-10-17)
+
+
+### Bug Fixes
+
+* **deps:** bump @sasjs/adapter, and @sasjs/cli ([2312609](https://github.com/sasjs/angular-seed-app/commit/2312609144d91f975a830dd89811544dab8d21bd))
+
 ## [1.0.3](https://github.com/sasjs/angular-seed-app/compare/v1.0.2...v1.0.3) (2025-08-08)
 
 
