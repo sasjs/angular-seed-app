@@ -25,14 +25,14 @@
   }
 
   .lede {
-    color: #4a4a4a;
+    color: var(--ink-2);
     font-size: 1rem;
     line-height: 1.6;
     margin: 1rem auto 0;
     max-width: 36rem;
 
     code {
-      background: #f4f1ee;
+      background: var(--code-bg);
       border-radius: 3px;
       font-size: 0.9em;
       padding: 1px 4px;
@@ -59,14 +59,14 @@
     }
 
     .label {
-      color: #888;
+      color: var(--muted-3);
       font-size: 0.7rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
     a {
-      color: #8f5500;
+      color: var(--accent-ink);
       font-family: ui-monospace, Monaco, Courier, monospace;
       font-size: 0.8rem;
       overflow-wrap: anywhere;
@@ -88,7 +88,7 @@
   }
 
   .section-note {
-    color: #666;
+    color: var(--muted-2);
     font-size: 0.85rem;
     margin: 0.35rem 0 1.5rem;
   }
@@ -101,8 +101,8 @@
 }
 
 .tile {
-  background: #fff;
-  border: 1px solid #e3e3e3;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
   border-radius: 8px;
   color: inherit;
   display: flex;
@@ -116,7 +116,7 @@
 
   /* the accent lives on the top edge, so six tiles read as one set */
   &::before {
-    background: #f79205;
+    background: var(--accent);
     border-radius: 8px 8px 0 0;
     content: '';
     height: 3px;
@@ -130,8 +130,8 @@
 
   &:hover,
   &:focus-visible {
-    border-color: #f79205;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 6px 18px var(--shadow-soft);
     outline: none;
     transform: translateY(-2px);
 
@@ -146,15 +146,15 @@
   }
 
   .tile-role {
-    /* darker than the accent: 4.5:1 on white at this size, where #f79205 is not */
-    color: #8f5500;
+    /* darker than the accent: 4.5:1 on white at this size, where var(--accent) is not */
+    color: var(--accent-ink);
     font-size: 0.72rem;
     letter-spacing: 0.03em;
     text-transform: uppercase;
   }
 
   .tile-description {
-    color: #4a4a4a;
+    color: var(--ink-2);
     font-size: 0.85rem;
     line-height: 1.5;
     margin-top: 0.2rem;

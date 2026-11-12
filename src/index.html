@@ -51,6 +51,28 @@
     <base href="./" />
 
     <!--
+      The theme is applied before the first paint: a stored choice, else what the
+      operating system prefers. Without this the page renders light and then
+      switches, which is the flash every themed site is asked about.
+    -->
+    <script>
+      ;(function () {
+        var theme = null
+        try {
+          theme = localStorage.getItem('sasjs-theme')
+        } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme =
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+        }
+        document.documentElement.setAttribute('data-theme', theme)
+      })()
+    </script>
+
+    <!--
       The adapter reads this element at start-up. It is the documented way to
       configure a SASjs app, and the sasjs CLI rewrites it per target: `sasjs
       build -t mock` turns the app into one that talks to its browser-hosted
