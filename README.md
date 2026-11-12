@@ -73,7 +73,10 @@ npm run mock:start     # serves sasjsbuild/mock on http://127.0.0.1:3001
 
 What makes that work is `sasjs/mocks/`: a JavaScript twin of each service
 (`common/appinit`, `common/getdata`, `files/upload`) answering the same `webout`
-the SAS service does. The twins read `springs.json`, which is generated from the
+the SAS service does. Each twin also reports a log - the fixture in
+`sasjs/mocks/services/common/mock-sas-log.json`, the failure-shaped one half the
+time and a clean one the rest - so the SAS Logs panel has something to show on a
+site with no SAS behind it. The twins read `springs.json`, which is generated from the
 `datalines` block in `serviceinit.sas` - so the demo shows the rows the deployed
 service would return. `npm run check:data` fails when the two drift apart, and
 `npm run test:mock` boots the built worker and asserts that each service answers.
