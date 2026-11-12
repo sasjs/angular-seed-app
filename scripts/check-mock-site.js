@@ -39,6 +39,13 @@ if (!fs.existsSync(path.join(SITE, 'sw.js'))) {
   fail(`${SITE} is not a mock build - run: npm run mock:build`)
 }
 
+/* the Documentation menu item opens docs/, which the build copies out of the
+ * repo; an empty folder there is a dead link nobody notices until a visitor
+ * clicks it */
+if (!fs.existsSync(path.join(SITE, 'docs', 'index.html'))) {
+  fail(`${SITE}/docs/index.html is missing - the documentation is not bundled`)
+}
+
 /* The worker registers its fetch listener on `self`, and imports its runtime
  * from the site. Both are stubbed here the way a browser provides them. */
 const handlers = { fetch: [], message: [], install: [], activate: [] }

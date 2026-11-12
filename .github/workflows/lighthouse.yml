@@ -27,6 +27,10 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          # docs/ is a submodule (the SASjs documentation site): without it the
+          # build copies an empty folder and the Documentation link is dead
+          submodules: true
 
       - uses: actions/setup-node@v4
         with:
