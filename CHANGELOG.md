@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/sasjs/angular-seed-app/compare/v1.0.6...v1.1.0) (2026-11-12)
+
+
+### Features
+
+* **home:** a tile per SASjs project, and a page that reads as one grid ([5586092](https://github.com/sasjs/angular-seed-app/commit/558609275f826fe4eefa6be18d2368c8b2cfdb34)), closes [#8f5500](https://github.com/sasjs/angular-seed-app/issues/8f5500) [#f79205](https://github.com/sasjs/angular-seed-app/issues/f79205)
+
 ## [1.0.6](https://github.com/sasjs/angular-seed-app/compare/v1.0.5...v1.0.6) (2026-11-12)
 
 
