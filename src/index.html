@@ -55,22 +55,7 @@
       operating system prefers. Without this the page renders light and then
       switches, which is the flash every themed site is asked about.
     -->
-    <script>
-      ;(function () {
-        var theme = null
-        try {
-          theme = localStorage.getItem('sasjs-theme')
-        } catch (e) {}
-        if (theme !== 'light' && theme !== 'dark') {
-          theme =
-            window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light'
-        }
-        document.documentElement.setAttribute('data-theme', theme)
-      })()
-    </script>
+    <script src="assets/theme-init.js"></script>
 
     <!--
       The adapter reads this element at start-up. It is the documented way to

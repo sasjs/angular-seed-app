@@ -57,7 +57,9 @@ const median = (values) =>
 
 console.log('<!-- lighthouse-scores -->')
 console.log(
-  `## Lighthouse - ${pages.size} page(s), median of ${[...pages.values()][0].length} run(s) each`
+  `## Lighthouse - ${pages.size} page(s), median of ${
+    [...pages.values()][0].length
+  } run(s) each`
 )
 console.log('')
 console.log('| Page | Perf | A11y | Best | SEO | LCP | CLS | TBT | Weight |')
@@ -66,7 +68,11 @@ console.log('| --- | --- | --- | --- | --- | --- | --- | --- | --- |')
 for (const [page, runs] of pages) {
   const first = runs[0]
   console.log(
-    `| ${page} | ${median(runs.map((r) => r.performance))} | ${median(runs.map((r) => r.accessibility))} | ${median(runs.map((r) => r.best))} | ${median(runs.map((r) => r.seo))} | ${first.lcp} | ${first.cls} | ${first.tbt} | ${first.weight} |`
+    `| ${page} | ${median(runs.map((r) => r.performance))} | ${median(
+      runs.map((r) => r.accessibility)
+    )} | ${median(runs.map((r) => r.best))} | ${median(
+      runs.map((r) => r.seo)
+    )} | ${first.lcp} | ${first.cls} | ${first.tbt} | ${first.weight} |`
   )
 }
 
