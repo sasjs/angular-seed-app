@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/sasjs/angular-seed-app/compare/v1.1.0...v1.2.0) (2026-11-12)
+
+
+### Features
+
+* **ui:** a data page worth looking at, and a SAS Logs panel that fits the log ([5f7db37](https://github.com/sasjs/angular-seed-app/commit/5f7db3711676026892c9a86b6489f7456c97a4ed))
+
 # [1.1.0](https://github.com/sasjs/angular-seed-app/compare/v1.0.6...v1.1.0) (2026-11-12)
 
 
