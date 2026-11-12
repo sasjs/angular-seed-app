@@ -1,35 +1,41 @@
 <div class="home-page">
-  <h2>Welcome to the <span class="code">SASjs</span> Seed App for Angular!</h2>
-  <div>
-    App Source Code:
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://github.com/sasjs/angular-seed-app"
-    >
-      https://github.com/sasjs/angular-seed-app
-    </a>
-  </div>
-  <br />
-  <div>
-    <span class="code">SASjs</span> Source Code:
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://github.com/sasjs/adapter"
-    >
-      https://github.com/sasjs/adapter
-    </a>
-  </div>
-  <br />
-  <div>
-    <span class="code">SASjs</span> on NPM:
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://www.npmjs.com/search?q=%40sasjs"
-    >
-      https://www.npmjs.com/search?q=%40sasjs
-    </a>
-  </div>
+  <section class="hero">
+    <h1>Welcome to the <span class="code">SASjs</span> Seed App for Angular</h1>
+
+    <p class="lede">
+      An Angular app talking to SAS through <code>&#64;sasjs/adapter</code> -
+      three services, a file upload, and a SAS logs panel that reads the log the
+      way Data Controller does.
+    </p>
+
+    <ul class="links">
+      <li *ngFor="let link of links">
+        <span class="label">{{ link.label }}</span>
+        <a [href]="link.href" target="_blank" rel="noopener noreferrer">{{
+          link.text
+        }}</a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="stack">
+    <h2>The SASjs stack</h2>
+    <p class="section-note">
+      Six projects, one framework - this app uses four of them directly.
+    </p>
+
+    <div class="tiles">
+      <a
+        class="tile"
+        *ngFor="let tool of tools"
+        [href]="tool.href"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="tile-name">{{ tool.name }}</span>
+        <span class="tile-role">{{ tool.role }}</span>
+        <span class="tile-description">{{ tool.description }}</span>
+      </a>
+    </div>
+  </section>
 </div>
