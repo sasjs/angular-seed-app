@@ -59,7 +59,7 @@
   <p class="error" role="alert" *ngIf="loginError">{{ loginError }}</p>
 </form>
 
-<!-- clicking the backdrop closes the panel; the panel itself stops the click -->
+<!-- clicking the backdrop closes the panel; the panel stops the click itself -->
 <div class="logs-backdrop" *ngIf="requestLogs" (click)="closeLogs()"></div>
 
 <aside
@@ -96,6 +96,35 @@
       <span class="when">{{ entry.when }}</span>
     </summary>
 
-    <pre>{{ entry.log }}</pre>
+    <!-- one button per message: clicking it scrolls the log to that line -->
+    <ul class="issues" *ngIf="entry.issues.length > 0">
+      <li *ngFor="let issue of entry.issues" [class]="issue.severity">
+        <button
+          type="button"
+          (click)="jumpTo(entry, issue, $event)"
+          [title]="issue.message"
+        >
+          <span class="tag">{{ issue.severity }}</span>
+          <span class="place">line {{ issue.line + 1 }}</span>
+          <span class="code" *ngIf="issue.code">({{ issue.code }})</span>
+          <span class="text">{{ issue.message }}</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="log-pane">
+      <div
+        class="line"
+        *ngFor="let line of entry.lines; let i = index"
+        [attr.data-line]="i"
+        [class.error]="entry.severityByLine[i] === 'error'"
+        [class.warning]="entry.severityByLine[i] === 'warning'"
+        [class.note]="entry.severityByLine[i] === 'note'"
+        [class.flash]="entry.flashLine === i"
+      >
+        <span class="no">{{ i + 1 }}</span
+        ><span class="text">{{ line }}</span>
+      </div>
+    </div>
   </details>
 </aside>
