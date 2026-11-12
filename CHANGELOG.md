@@ -1,3 +1,11 @@
+## [1.0.6](https://github.com/sasjs/angular-seed-app/compare/v1.0.5...v1.0.6) (2026-11-12)
+
+
+### Bug Fixes
+
+* **ci:** add the summary script the Lighthouse job posts with ([9d025b2](https://github.com/sasjs/angular-seed-app/commit/9d025b2d18be97194efe539b933a7c4ab78f7802))
+* **ci:** serve the build with a server that answers a POST ([b816371](https://github.com/sasjs/angular-seed-app/commit/b816371612f919ac052011c336ac316e2afabedf))
+
 ## [1.0.5](https://github.com/sasjs/angular-seed-app/compare/v1.0.4...v1.0.5) (2025-11-25)
 
 
