@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/sasjs/angular-seed-app/compare/v1.4.0...v1.5.0) (2026-11-12)
+
+
+### Features
+
+* **mock:** give the mocked services a SAS log, so the panel has something to show ([f5f8eaf](https://github.com/sasjs/angular-seed-app/commit/f5f8eaf8befdac48ea29d4ef9ceb4bda0ed0ee09))
+
 # [1.4.0](https://github.com/sasjs/angular-seed-app/compare/v1.3.1...v1.4.0) (2026-11-12)
 
 
