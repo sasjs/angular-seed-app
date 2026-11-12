@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/sasjs/angular-seed-app/compare/v1.2.0...v1.3.0) (2026-11-12)
+
+
+### Features
+
+* **upload,logs:** an abort dialog that links to the log, and messages you can click ([545faa9](https://github.com/sasjs/angular-seed-app/commit/545faa996916e982c42e1088ecdcde30b1912958))
+
 # [1.2.0](https://github.com/sasjs/angular-seed-app/compare/v1.1.0...v1.2.0) (2026-11-12)
 
 
