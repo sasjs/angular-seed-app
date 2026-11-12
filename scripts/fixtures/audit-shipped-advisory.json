@@ -1,0 +1,80 @@
+{
+  "prod": {
+    "auditReportVersion": 2,
+    "vulnerabilities": {
+      "left-pad": {
+        "name": "left-pad",
+        "severity": "moderate",
+        "isDirect": true,
+        "via": [
+          {
+            "title": "Prototype pollution",
+            "name": "left-pad",
+            "severity": "moderate",
+            "url": "https://github.com/advisories/GHSA-test"
+          }
+        ],
+        "nodes": [
+          "node_modules/left-pad"
+        ]
+      }
+    },
+    "metadata": {
+      "dependencies": {
+        "prod": 1,
+        "dev": 0,
+        "optional": 0,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 1
+      },
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 1,
+        "high": 0,
+        "critical": 0,
+        "total": 1
+      }
+    }
+  },
+  "all": {
+    "auditReportVersion": 2,
+    "vulnerabilities": {
+      "left-pad": {
+        "name": "left-pad",
+        "severity": "moderate",
+        "isDirect": true,
+        "via": [
+          {
+            "title": "Prototype pollution",
+            "name": "left-pad",
+            "severity": "moderate",
+            "url": "https://github.com/advisories/GHSA-test"
+          }
+        ],
+        "nodes": [
+          "node_modules/left-pad"
+        ]
+      }
+    },
+    "metadata": {
+      "dependencies": {
+        "prod": 1,
+        "dev": 0,
+        "optional": 0,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 1
+      },
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 1,
+        "high": 0,
+        "critical": 0,
+        "total": 1
+      }
+    }
+  }
+}

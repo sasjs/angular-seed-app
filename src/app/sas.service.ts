@@ -51,10 +51,11 @@ export class SasService {
               reject(false)
             }
 
-            if (
-              this.stateService.username.getValue().length < 1 &&
-              res.MF_GETUSER
-            ) {
+            // SSO (eg `loginMechanism: 'Redirected'` on SAS 9) means there is
+            // no username to begin with, and a session can change under the app.
+            // Every response that carries MF_GETUSER updates it, so the header
+            // follows the session rather than the login form.
+            if (res.MF_GETUSER) {
               this.stateService.username.next(res.MF_GETUSER)
             }
 

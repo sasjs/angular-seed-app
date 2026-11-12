@@ -1,0 +1,81 @@
+name: Audit
+
+# Advisories appear against code that has not changed, so this runs weekly as
+# well as on every push and pull request: a dependency we shipped in March is
+# still shipped in June, and nobody runs `npm audit` by hand on a schedule.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'scripts/audit-check.js'
+      - '.github/workflows/audit.yml'
+  pull_request:
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'scripts/audit-check.js'
+      - '.github/workflows/audit.yml'
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Audit dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # Fails on any advisory in the shipped dependency tree at any severity,
+      # and on any advisory in our own tree, dev included. The one tolerated
+      # class - the npm CLI that @semantic-release/npm vendors - is printed as a
+      # note; scripts/audit-check.js explains why and how to see it gated.
+      - run: npm run audit
+
+      # Proves the gate can fail. A gate nobody has seen fail is a gate that may
+      # be looking at nothing: this feeds it a fixture carrying one advisory in
+      # the shipped tree and requires exit 1.
+      - name: The gate rejects a shipped advisory
+        run: |
+          set +e
+          AUDIT_FIXTURE=scripts/fixtures/audit-shipped-advisory.json node scripts/audit-check.js
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ]; then
+            echo "the gate passed a fixture with a shipped advisory - it is not gating"
+            exit 1
+          fi
+          echo "gate exited $status, as it should"
+
+      # And the tolerance is narrow, not a blanket: with it off, every advisory
+      # counts. Skipped when there is nothing tolerated to demonstrate with.
+      - name: The tolerance is narrow
+        run: |
+          tolerated=$(node scripts/audit-check.js --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).tolerated.count))")
+          if [ "$tolerated" -eq 0 ]; then
+            echo "no tolerated advisories - nothing to demonstrate"
+            exit 0
+          fi
+          set +e
+          AUDIT_TOLERATE=none node scripts/audit-check.js > /tmp/audit-no-tolerance.log 2>&1
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ]; then
+            echo "tolerance disabled but the gate still passed - it is not gating"
+            exit 1
+          fi
+          echo "gate exited $status with tolerance disabled, as it should ($tolerated tolerated)"
