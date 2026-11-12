@@ -104,9 +104,20 @@ export class SasjsUiComponent implements OnInit {
     if (this.requestLogs) this.closeLogs()
   }
 
+  /**
+   * Opens the bundled documentation.
+   *
+   * Resolved against the document's own base rather than the pathname: the app
+   * is served from an app-stream path, a domain root and a Pages subfolder by
+   * turns, and `pathname + '/docs'` doubles the slash whenever the path already
+   * ends in one - which is every app-stream URL.
+   *
+   * It names the file, not the folder: an app stream has no directory index, so
+   * `/docs/` is a 500 there while `/docs/index.html` is the page.
+   */
   public openDocs() {
     this.menuOpen = false
-    window.location.replace(`${window.location.pathname}/docs`)
+    window.location.assign(new URL('docs/index.html', document.baseURI).href)
   }
 
   public login() {
