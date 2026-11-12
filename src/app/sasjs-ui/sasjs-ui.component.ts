@@ -9,6 +9,7 @@ import { SASjsConfig } from '@sasjs/adapter'
 import { LogEntry, LogIssueView, summariseRequests } from '../sas-logs'
 import { SasService } from '../sas.service'
 import { StateService } from '../state.service'
+import { ThemeService, Theme } from '../theme.service'
 
 interface NavLink {
   label: string
@@ -46,16 +47,21 @@ export class SasjsUiComponent implements OnInit {
     { label: 'File upload', path: '/uploader' }
   ]
 
+  public theme: Theme = 'light'
+  public readonly repoUrl = 'https://github.com/sasjs/angular-seed-app'
+
   constructor(
     private stateService: StateService,
     private sasService: SasService,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) {
     sasService.fetchStartupData()
   }
 
   ngOnInit() {
     this.sasjsConfig = this.sasService.getSasjsConfig()
+    this.theme = this.themeService.theme
 
     this.stateService.isUserLoggedIn.subscribe((isLoggedIn: boolean) => {
       this.isLoggedIn = isLoggedIn
@@ -74,6 +80,11 @@ export class SasjsUiComponent implements OnInit {
     this.menuOpen = false
     this.requestLogs = true
     this.entries = summariseRequests(this.sasService.getSasRequests() || [])
+  }
+
+  public toggleTheme() {
+    this.themeService.toggle()
+    this.theme = this.themeService.theme
   }
 
   public closeLogs() {

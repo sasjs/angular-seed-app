@@ -17,7 +17,7 @@
   }
 
   p {
-    color: #555;
+    color: var(--muted);
     font-size: 0.9rem;
     line-height: 1.55;
     margin: 0;
@@ -25,7 +25,7 @@
   }
 
   code {
-    background: #f4f1ee;
+    background: var(--code-bg);
     border-radius: 3px;
     font-size: 0.85em;
     padding: 1px 4px;
@@ -34,7 +34,7 @@
 
 .toolbar {
   align-items: flex-end;
-  border: 1px solid #e3e3e3;
+  border: 1px solid var(--line);
   border-radius: 8px;
   display: flex;
   flex-wrap: wrap;
@@ -47,7 +47,7 @@
     gap: 0.3rem;
 
     span {
-      color: #666;
+      color: var(--muted-2);
       font-size: 0.72rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -62,10 +62,10 @@
 
   /* one filled primary action, and a control the same height as the select */
   button {
-    background: #f79205;
+    background: var(--accent);
     border: 0;
     border-radius: 4px;
-    color: #fff;
+    color: var(--on-accent);
     cursor: pointer;
     font: inherit;
     font-size: 0.85rem;
@@ -81,26 +81,26 @@
   }
 
   .meta {
-    color: #666;
+    color: var(--muted-2);
     font-size: 0.85rem;
     margin-left: auto;
     /* sits on the same baseline as the select and the button */
     padding-bottom: 0.65rem;
 
     strong {
-      color: #1f1f1f;
+      color: var(--ink);
     }
   }
 }
 
 .state {
-  color: #666;
+  color: var(--muted-2);
   font-size: 0.9rem;
   padding: 1.25rem 0.25rem;
 }
 
 .table-wrap {
-  border: 1px solid #e3e3e3;
+  border: 1px solid var(--line);
   border-radius: 8px;
   margin-top: 1.5rem;
   overflow-x: auto;
@@ -112,9 +112,9 @@ table {
   width: 100%;
 
   th {
-    background: #fafafa;
-    border-bottom: 1px solid #e3e3e3;
-    color: #666;
+    background: var(--surface-soft);
+    border-bottom: 1px solid var(--line);
+    color: var(--muted-2);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.04em;
@@ -126,7 +126,7 @@ table {
   }
 
   td {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--line-soft);
     padding: 0.6rem 1rem;
   }
 
@@ -135,7 +135,7 @@ table {
   }
 
   tbody tr:hover td {
-    background: #fffaf2;
+    background: var(--row-hover);
   }
 
   .number {
@@ -149,7 +149,7 @@ table {
   }
 
   .name {
-    color: #1f1f1f;
+    color: var(--ink);
   }
 }
 

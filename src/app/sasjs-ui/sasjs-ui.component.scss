@@ -9,37 +9,65 @@
   align-items: center;
   gap: 2rem;
   padding: 0.75rem 1.5rem;
-  background: #1b1b1b;
-  color: #fff;
+  background: var(--header-bg);
+  color: var(--header-ink);
 
   .brand {
     font-weight: 600;
     font-size: 1.05rem;
-    color: #fff;
+    color: var(--header-ink);
     text-decoration: none;
     white-space: nowrap;
 
     span {
-      color: #f79205;
+      color: var(--accent);
     }
   }
 
   nav {
     display: flex;
     gap: 1.25rem;
-    flex: 1;
 
     a {
-      color: rgba(255, 255, 255, 0.75);
+      color: var(--header-ink-dim);
       text-decoration: none;
       font-size: 0.9rem;
       padding: 0.25rem 0;
 
       &:hover,
       &.active {
-        color: #fff;
-        border-bottom: 2px solid #f79205;
+        color: var(--header-ink);
+        border-bottom: 2px solid var(--accent);
       }
+    }
+  }
+
+  .tools {
+    align-items: center;
+    display: flex;
+    gap: 0.35rem;
+    margin-left: auto;
+  }
+
+  .icon {
+    align-items: center;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--header-ink-dim);
+    cursor: pointer;
+    display: flex;
+    height: 2rem;
+    justify-content: center;
+    padding: 0;
+    text-decoration: none;
+    width: 2rem;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--header-line);
+      color: var(--accent);
+      outline: none;
     }
   }
 
@@ -49,9 +77,9 @@
 
   .user {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--header-line);
     border-radius: 4px;
-    color: #fff;
+    color: var(--header-ink);
     cursor: pointer;
     font-size: 0.85rem;
     padding: 0.35rem 0.7rem;
@@ -64,10 +92,10 @@
     margin: 0;
     padding: 0.3rem 0;
     list-style: none;
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
     border-radius: 4px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 6px 20px var(--shadow);
     min-width: 11rem;
     z-index: 20;
 
@@ -83,7 +111,7 @@
       width: 100%;
 
       &:hover {
-        background: #f5f5f5;
+        background: var(--hover);
       }
     }
   }
@@ -109,17 +137,17 @@
   }
 
   input {
-    border: 1px solid #c8c8c8;
+    border: 1px solid var(--input-line);
     border-radius: 4px;
     font: inherit;
     padding: 0.5rem 0.6rem;
   }
 
   button {
-    background: #f79205;
+    background: var(--accent);
     border: 0;
     border-radius: 4px;
-    color: #fff;
+    color: var(--on-accent);
     cursor: pointer;
     font: inherit;
     font-weight: 600;
@@ -132,24 +160,24 @@
   }
 
   .error {
-    color: #b31f0e;
+    color: var(--danger);
     font-size: 0.85rem;
     margin: 0;
   }
 }
 
 .logs-backdrop {
-  background: rgba(20, 20, 20, 0.45);
+  background: var(--overlay);
   inset: 0;
   position: fixed;
   z-index: 29;
 }
 
 .logs {
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
   border-radius: 6px;
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 18px 60px var(--shadow-strong);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -185,14 +213,14 @@
   }
 
   .empty {
-    color: #666;
+    color: var(--muted-2);
     font-size: 0.875rem;
   }
 
   overflow: auto;
 
   .entry {
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--line-soft);
     padding: 0.5rem 0;
 
     &[open] {
@@ -214,7 +242,7 @@
     }
 
     .when {
-      color: #777;
+      color: var(--muted-3);
       margin-left: auto;
     }
 
@@ -224,18 +252,18 @@
       padding: 0.1rem 0.5rem;
 
       &.error {
-        background: #fdecea;
-        color: #b31f0e;
+        background: var(--danger-bg);
+        color: var(--danger);
       }
 
       &.warning {
-        background: #fff4e5;
-        color: #8a5a00;
+        background: var(--warn-bg);
+        color: var(--warn);
       }
 
       &.note {
-        background: #eef2f7;
-        color: #37506b;
+        background: var(--note-bg);
+        color: var(--note);
       }
     }
 
@@ -264,7 +292,7 @@
 
         &:hover,
         &:focus-visible {
-          background: #f6f2ec;
+          background: var(--hover-accent);
           outline: none;
         }
       }
@@ -279,44 +307,44 @@
       }
 
       .place {
-        color: #666;
+        color: var(--muted-2);
         font-family: ui-monospace, Monaco, Courier, monospace;
         font-size: 0.72rem;
         white-space: nowrap;
       }
 
       .code {
-        color: #8f5500;
+        color: var(--accent-ink);
         font-family: ui-monospace, Monaco, Courier, monospace;
         font-size: 0.72rem;
       }
 
       .text {
-        color: #333;
+        color: var(--ink-2);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
       .error .tag {
-        background: #fdecea;
-        color: #b31f0e;
+        background: var(--danger-bg);
+        color: var(--danger);
       }
 
       .warning .tag {
-        background: #fff4e5;
-        color: #8a5a00;
+        background: var(--warn-bg);
+        color: var(--warn);
       }
 
       .note .tag {
-        background: #eef2f7;
-        color: #37506b;
+        background: var(--note-bg);
+        color: var(--note);
       }
     }
 
     .log-pane {
-      background: #fafafa;
-      border: 1px solid #eee;
+      background: var(--surface-soft);
+      border: 1px solid var(--line-soft);
       border-radius: 4px;
       font-family: ui-monospace, Monaco, Courier, monospace;
       font-size: 0.78rem;
@@ -333,9 +361,9 @@
       }
 
       .no {
-        background: #f2f2f2;
-        border-right: 1px solid #e6e6e6;
-        color: #a0a0a0;
+        background: var(--surface-sunken);
+        border-right: 1px solid var(--line);
+        color: var(--muted-3);
         flex: 0 0 4rem;
         padding: 0 0.6rem 0 0;
         text-align: right;
@@ -347,35 +375,35 @@
       }
 
       .line.error {
-        background: #fdf1ef;
+        background: var(--danger-bg-soft);
 
         .no {
-          background: #fbe3e0;
-          color: #b31f0e;
+          background: var(--danger-bg-line);
+          color: var(--danger);
         }
       }
 
       .line.warning {
-        background: #fff8ec;
+        background: var(--warn-bg-soft);
 
         .no {
-          background: #fdefd5;
-          color: #8a5a00;
+          background: var(--warn-bg-line);
+          color: var(--warn);
         }
       }
 
       .line.note {
-        background: #f4f7fb;
+        background: var(--note-bg-soft);
 
         .no {
-          background: #e9eff7;
-          color: #37506b;
+          background: var(--note-bg-line);
+          color: var(--note);
         }
       }
 
       .line.flash {
-        background: #ffe9c9;
-        box-shadow: inset 3px 0 0 #f79205;
+        background: var(--flash-bg);
+        box-shadow: inset 3px 0 0 var(--accent);
       }
     }
   }
