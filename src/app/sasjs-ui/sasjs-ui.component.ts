@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
+import {
+  Component,
+  HostListener,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core'
 import { Router } from '@angular/router'
 import { SASjsConfig } from '@sasjs/adapter'
 import { LogEntry, summariseRequests } from '../sas-logs'
@@ -66,6 +71,16 @@ export class SasjsUiComponent implements OnInit {
     this.menuOpen = false
     this.requestLogs = true
     this.entries = summariseRequests(this.sasService.getSasRequests() || [])
+  }
+
+  public closeLogs() {
+    this.requestLogs = false
+  }
+
+  /** Escape closes the panel, the way a dialog is expected to behave. */
+  @HostListener('document:keydown.escape')
+  public onEscape() {
+    if (this.requestLogs) this.closeLogs()
   }
 
   public openDocs() {

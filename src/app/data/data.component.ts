@@ -39,6 +39,11 @@ export class DataComponent implements OnInit {
     })
   }
 
+  /** A value SAS left empty reads as a dash, not as a gap in the table. */
+  public shown(value: any) {
+    return value === null || value === undefined || value === '' ? '-' : value
+  }
+
   public submitData() {
     this.springsLoading = true //Request started we set variable to `true`
     let data = { areas: [{ area: this.selectedArea }] }

@@ -2,13 +2,15 @@
   <a class="brand" routerLink="/homepage">SASjs <span>Angular</span></a>
 
   <nav>
-    @for (link of navLinks; track link) {
-    <a [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
-    }
+    <a
+      *ngFor="let link of navLinks"
+      [routerLink]="link.path"
+      routerLinkActive="active"
+      >{{ link.label }}</a
+    >
   </nav>
 
-  @if (isLoggedIn) {
-  <div class="session">
+  <div class="session" *ngIf="isLoggedIn">
     <button
       class="user"
       (click)="menuOpen = !menuOpen"
@@ -17,20 +19,18 @@
       {{ username || 'Signed in' }}
       <span aria-hidden="true">&#9662;</span>
     </button>
-    @if (menuOpen) {
-    <ul class="menu">
-      <li><button (click)="openLogs()">SAS logs</button></li>
+
+    <ul class="menu" *ngIf="menuOpen">
+      <li><button (click)="openLogs()">SAS Logs</button></li>
       <li><button (click)="openDocs()">Documentation</button></li>
       <li><button (click)="logout()">Log out</button></li>
     </ul>
-    }
   </div>
-  }
 </header>
 
-@if (!isLoggedIn) {
-<form class="login" (ngSubmit)="login()">
+<form class="login" *ngIf="!isLoggedIn" (ngSubmit)="login()">
   <h2>Sign in</h2>
+
   <label>
     Username
     <input
@@ -40,6 +40,7 @@
       required
     />
   </label>
+
   <label>
     Password
     <input
@@ -50,41 +51,51 @@
       required
     />
   </label>
+
   <button type="submit" [disabled]="loginLoading">
     {{ loginLoading ? 'Signing in...' : 'Sign in' }}
   </button>
-  @if (loginError) {
-  <p class="error" role="alert">{{ loginError }}</p>
-  }
+
+  <p class="error" role="alert" *ngIf="loginError">{{ loginError }}</p>
 </form>
-} @if (requestLogs) {
-<aside class="logs" role="dialog" aria-label="SAS logs">
+
+<!-- clicking the backdrop closes the panel; the panel itself stops the click -->
+<div class="logs-backdrop" *ngIf="requestLogs" (click)="closeLogs()"></div>
+
+<aside
+  class="logs"
+  *ngIf="requestLogs"
+  role="dialog"
+  aria-label="SAS Logs"
+  aria-modal="true"
+>
   <header>
-    <h2>SAS logs</h2>
-    <button class="close" (click)="requestLogs = false" aria-label="close">
+    <h2>SAS Logs</h2>
+    <button class="close" (click)="closeLogs()" aria-label="close">
       &times;
     </button>
   </header>
-  @if (entries.length < 1) {
-  <p class="empty">
+
+  <p class="empty" *ngIf="entries.length < 1">
     No requests yet. Turn on debug in the app's SASjs config to capture logs,
     then use the app and open this panel again.
   </p>
-  } @for (entry of entries; track entry) {
-  <details class="entry">
+
+  <details class="entry" *ngFor="let entry of entries">
     <summary>
       <span class="service">{{ entry.service }}</span>
-      @if (entry.errors > 0) {
-      <span class="badge error">{{ entry.errors }} error(s)</span>
-      } @if (entry.warnings > 0) {
-      <span class="badge warning">{{ entry.warnings }} warning(s)</span>
-      } @if (entry.notes > 0) {
-      <span class="badge note">{{ entry.notes }} note(s)</span>
-      }
+      <span class="badge error" *ngIf="entry.errors > 0"
+        >{{ entry.errors }} error(s)</span
+      >
+      <span class="badge warning" *ngIf="entry.warnings > 0"
+        >{{ entry.warnings }} warning(s)</span
+      >
+      <span class="badge note" *ngIf="entry.notes > 0"
+        >{{ entry.notes }} note(s)</span
+      >
       <span class="when">{{ entry.when }}</span>
     </summary>
+
     <pre>{{ entry.log }}</pre>
   </details>
-  }
 </aside>
-}
