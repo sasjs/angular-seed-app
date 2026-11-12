@@ -1,3 +1,175 @@
-.areas-select-wrapper {
-  margin-top: 1rem;
+/* The data page: a heading, one control row, and the rows SAS sent back.
+ * The table is the content, so it gets the space and the only strong contrast
+ * on the page; everything else is quiet. */
+
+.data-page {
+  margin: 0 auto;
+  max-width: 68rem;
+  padding: 2.5rem 1.5rem 3rem;
+}
+
+.page-head {
+  margin-bottom: 1.5rem;
+
+  h1 {
+    font-size: 1.4rem;
+    margin: 0 0 0.4rem;
+  }
+
+  p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 40rem;
+  }
+
+  code {
+    background: #f4f1ee;
+    border-radius: 3px;
+    font-size: 0.85em;
+    padding: 1px 4px;
+  }
+}
+
+.toolbar {
+  align-items: flex-end;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    span {
+      color: #666;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+  }
+
+  select {
+    /* the same height as the button beside it, so the row reads as one control */
+    min-height: 2.55rem;
+    min-width: 15rem;
+  }
+
+  /* one filled primary action, and a control the same height as the select */
+  button {
+    background: #f79205;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    min-height: 2.55rem;
+    padding: 0.55rem 1.4rem;
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
+  }
+
+  .meta {
+    color: #666;
+    font-size: 0.85rem;
+    margin-left: auto;
+    /* sits on the same baseline as the select and the button */
+    padding-bottom: 0.65rem;
+
+    strong {
+      color: #1f1f1f;
+    }
+  }
+}
+
+.state {
+  color: #666;
+  font-size: 0.9rem;
+  padding: 1.25rem 0.25rem;
+}
+
+.table-wrap {
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  width: 100%;
+
+  th {
+    background: #fafafa;
+    border-bottom: 1px solid #e3e3e3;
+    color: #666;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.7rem 0.9rem;
+    position: sticky;
+    text-align: left;
+    top: 0;
+    white-space: nowrap;
+  }
+
+  td {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0.6rem 1rem;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  tbody tr:hover td {
+    background: #fffaf2;
+  }
+
+  .number {
+    font-family: ui-monospace, Monaco, Courier, monospace;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  th.number {
+    text-align: right;
+  }
+
+  .name {
+    color: #1f1f1f;
+  }
+}
+
+@media (max-width: 560px) {
+  .data-page {
+    padding: 1.75rem 1rem 2rem;
+  }
+
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+
+    select {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .meta {
+      margin-left: 0;
+      padding-bottom: 0;
+    }
+  }
 }
