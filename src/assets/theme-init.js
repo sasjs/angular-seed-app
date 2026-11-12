@@ -13,7 +13,8 @@
   } catch (e) {}
   if (theme !== 'light' && theme !== 'dark') {
     theme =
-      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
         : 'light'
   }

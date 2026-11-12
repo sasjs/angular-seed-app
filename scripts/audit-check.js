@@ -112,7 +112,10 @@ const report = {
 }
 
 if (MACHINE) {
+  // only the report on stdout: callers parse this with jq, and a trailing
+  // "audit passed" line is a second document it refuses
   console.log(JSON.stringify(report, null, 2))
+  process.exit(prodFindings.length || ours.length ? 1 : 0)
 } else {
   console.log(
     `shipped dependencies: ${prod.metadata.dependencies.prod} packages, ${prodFindings.length} advisories`

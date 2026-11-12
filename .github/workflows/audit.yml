@@ -65,7 +65,7 @@ jobs:
       # counts. Skipped when there is nothing tolerated to demonstrate with.
       - name: The tolerance is narrow
         run: |
-          tolerated=$(node scripts/audit-check.js --json | jq -r '.tolerated.count')
+          tolerated=$(node scripts/audit-check.js --json | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>console.log(JSON.parse(s).tolerated.count))")
           if [ "$tolerated" -eq 0 ]; then
             echo "no tolerated advisories - nothing to demonstrate"
             exit 0
