@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/sasjs/angular-seed-app/compare/v1.3.1...v1.4.0) (2026-11-12)
+
+
+### Features
+
+* **ui:** light and dark themes, and a GitHub link in the header ([bf558ad](https://github.com/sasjs/angular-seed-app/commit/bf558ade51634876ebbf04caca0eaad2fde82fbb)), closes [#fff](https://github.com/sasjs/angular-seed-app/issues/fff) [#16181c](https://github.com/sasjs/angular-seed-app/issues/16181c) [#1e2126](https://github.com/sasjs/angular-seed-app/issues/1e2126) [#1e2126](https://github.com/sasjs/angular-seed-app/issues/1e2126)
+
 ## [1.3.1](https://github.com/sasjs/angular-seed-app/compare/v1.3.0...v1.3.1) (2026-11-12)
 
 
