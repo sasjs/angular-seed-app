@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { UploadFile } from '@sasjs/adapter'
 import { SasService } from '../sas.service'
 
 @Component({
   selector: 'app-uploader',
   templateUrl: './uploader.component.html',
-  styleUrls: ['./uploader.component.scss']
+  styleUrls: ['./uploader.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false
 })
 export class UploaderComponent implements OnInit {
   public selectedFiles: any[] = []

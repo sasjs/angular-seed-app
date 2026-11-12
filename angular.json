@@ -18,30 +18,21 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist",
+            "outputPath": {
+              "base": "dist"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": [
-              "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",
-              "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"
-            ],
-            "polyfills": [
-              "src/polyfills.ts",
-              "zone.js"
-            ],
-            "vendorChunk": true,
+            "styles": ["src/styles.scss"],
+            "polyfills": ["src/polyfills.ts", "zone.js"],
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -51,10 +42,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "allowedCommonJsDependencies": [
-                "@sasjs/adapter",
-                "moment"
-              ],
+              "allowedCommonJsDependencies": ["@sasjs/adapter", "moment"],
               "optimization": {
                 "scripts": true,
                 "styles": {
@@ -67,8 +55,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -81,43 +67,67 @@
                   "maximumError": "1mb"
                 }
               ]
+            },
+            "testing": {
+              "aot": false,
+              "scripts": [],
+              "polyfills": ["src/polyfills.ts", "zone.js", "zone.js/testing"]
             }
           },
           "defaultConfiguration": ""
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
-            "browserTarget": "angular-seed-app:build"
+            "buildTarget": "angular-seed-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-seed-app:build:production"
+              "buildTarget": "angular-seed-app:build:production"
             }
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
-            "browserTarget": "angular-seed-app:build"
+            "buildTarget": "angular-seed-app:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "polyfills": [
-              "src/polyfills.ts",
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
-            "scripts": []
+            "buildTarget": ":build:testing",
+            "runner": "vitest"
           }
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }

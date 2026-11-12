@@ -1,38 +1,34 @@
 <div class="data-page">
-  <span *ngIf="areas?.length < 1" class="spinner spinner-md"> Loading... </span>
-
-  <div *ngIf="areas?.length > 0" class="areas-select-wrapper">
-    <select clrSelect name="options" [(ngModel)]="selectedArea">
-      <option *ngIf="selectedArea === undefined" [value]="undefined">
-        Select from dropdown
-      </option>
-      <option *ngFor="let area of areas" [value]="area['AREA']">
+  @if (areas?.length < 1) {
+  <p class="loading">Loading...</p>
+  } @if (areas?.length > 0) {
+  <div class="areas-select-wrapper">
+    <select name="options" [(ngModel)]="selectedArea">
+      @if (selectedArea === undefined) {
+      <option [value]="undefined">Select from dropdown</option>
+      } @for (area of areas; track area) {
+      <option [value]="area['AREA']">
         {{ area['AREA'] }}
       </option>
+      }
     </select>
-
     <!--
-Here we disable the button in 2 cases:
-
-1. Value from the dropdown is not selected
-2. Request is sent, and button disabled until it is finished
-
-To only disable button when request is running:
-  [disabled]="springsLoading"
--->
-    <button
-      (click)="submitData()"
-      class="btn btn-primary"
-      [disabled]="!selectedArea || springsLoading"
-    >
+      Here we disable the button in 2 cases:
+      1. Value from the dropdown is not selected
+      2. Request is sent, and button disabled until it is finished
+      To only disable button when request is running:
+      [disabled]="springsLoading"
+      -->
+    <button (click)="submitData()" [disabled]="!selectedArea || springsLoading">
       SUBMIT
     </button>
   </div>
-
-  <span *ngIf="springsLoading" class="spinner spinner-md"> Loading... </span>
-  <p *ngIf="noData">No Data in Response</p>
-
-  <table *ngIf="springs?.length > 0 && !springsLoading" class="table">
+  } @if (springsLoading) {
+  <p class="loading">Loading...</p>
+  } @if (noData) {
+  <p>No Data in Response</p>
+  } @if (springs?.length > 0 && !springsLoading) {
+  <table class="table">
     <thead>
       <tr>
         <th>LATITUDE</th>
@@ -45,7 +41,8 @@ To only disable button when request is running:
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let spring of springs">
+      @for (spring of springs; track spring) {
+      <tr>
         <td>{{ spring.LATITUDE }}</td>
         <td>{{ spring.LONGITUDE }}</td>
         <td>{{ spring.NAME }}</td>
@@ -54,6 +51,8 @@ To only disable button when request is running:
         <td>{{ spring.FARENHEIT }}</td>
         <td>{{ spring.CELSIUS }}</td>
       </tr>
+      }
     </tbody>
   </table>
+  }
 </div>

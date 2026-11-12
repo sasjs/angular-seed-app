@@ -7,17 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-    <script type="text/javascript">
-      window.sasjsConfigInput = {
-        appLoc: '/Public/app/angular-seed-app',
-        serverType: 'SASJS',
-        debug: true,
-        useComputeApi: true,
-        contextName: 'SAS Job Execution compute context'
-      }
-    </script>
+    <!--
+      The adapter reads this element at start-up. It is the documented way to
+      configure a SASjs app, and the sasjs CLI rewrites it per target: `sasjs
+      build -t mock` turns the app into one that talks to its browser-hosted
+      backend, which is what makes the published demo work without a server.
+    -->
+    <sasjs
+      serverType="SASJS"
+      appLoc="/Public/app/angular-seed-app"
+      debug="true"
+    ></sasjs>
   </head>
-  <body class="mat-typography">
+  <body>
     <app-root></app-root>
   </body>
 </html>

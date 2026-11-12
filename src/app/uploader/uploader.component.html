@@ -6,20 +6,19 @@
     <input (change)="onFileChange($event)" type="file" id="fileToUpload" />
   </div>
 
-  <div class="clr-form-control">
-    <label for="example" class="clr-control-label">Upload path</label>
-    <div class="clr-control-container">
-      <div class="clr-input-wrapper">
+  <div class="form-control">
+    <label for="upload-path" class="control-label">Upload path</label>
+    <div class="control-container">
+      <div class="input-wrapper">
         <input
           [(ngModel)]="uploadPath"
           style="width: 230px"
           type="text"
-          id="example"
+          id="upload-path"
           placeholder="Enter path"
-          class="clr-input"
         />
       </div>
-      <span class="clr-subtext">Required</span>
+      <span class="subtext">Required</span>
     </div>
   </div>
 
@@ -33,33 +32,33 @@
   </button>
 </div>
 
-<ng-container *ngIf="responseModalMessage !== null">
-  <div class="modal">
-    <div class="modal-dialog" role="dialog" aria-hidden="true">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title">File upload response</h3>
-        </div>
-        <div class="modal-body">
-          <p>
-            {{
-              typeof(responseModalMessage) === 'object'
-                ? (responseModalMessage | json)
-                : responseModalMessage
-            }}
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button
-            (click)="responseModalMessage = null"
-            class="btn btn-primary"
-            type="button"
-          >
-            Ok
-          </button>
-        </div>
+@if (responseModalMessage !== null) {
+<div class="modal">
+  <div class="modal-dialog" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">File upload response</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          {{
+            typeof(responseModalMessage) === 'object'
+              ? (responseModalMessage | json)
+              : responseModalMessage
+          }}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          (click)="responseModalMessage = null"
+          class="btn btn-primary"
+          type="button"
+        >
+          Ok
+        </button>
       </div>
     </div>
   </div>
-  <div class="modal-backdrop" aria-hidden="true"></div>
-</ng-container>
+</div>
+<div class="modal-backdrop" aria-hidden="true"></div>
+}

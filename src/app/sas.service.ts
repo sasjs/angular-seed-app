@@ -10,9 +10,22 @@ export class SasService {
   private adapter: SASjs
 
   constructor(private stateService: StateService) {
-    let sasjsConfigInput = (window as any).sasjsConfigInput || {}
+    /* The configuration lives in the `<sasjs>` element in index.html - the tag
+     * `sasjs build -t <target>` rewrites, which is how one repo serves a Viya,
+     * a SAS 9, a SASjs Server and a browser-hosted mock build. Reading it here
+     * is what makes the deployed app agree with the target it was built for. */
+    const element = document.querySelector('sasjs')
+    const attribute = (name: string) => element?.getAttribute(name) || undefined
 
-    this.adapter = new SASjs(sasjsConfigInput)
+    this.adapter = new SASjs({
+      appLoc: attribute('appLoc'),
+      serverType: attribute('serverType') as any,
+      serverUrl: attribute('serverUrl'),
+      loginMechanism: attribute('loginMechanism') as any,
+      debug: attribute('debug') === 'true',
+      useComputeApi: attribute('useComputeApi') === 'true',
+      contextName: attribute('contextName')
+    })
   }
 
   public fetchStartupData() {

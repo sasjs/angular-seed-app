@@ -1,12 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles: enough for a page to look deliberate without a component
+ * library. Anything a page needs beyond this belongs in that page's own
+ * stylesheet. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    sans-serif;
+  font-size: 16px;
+  color: #1f1f1f;
+  background: #fff;
 }
 
 .code {
@@ -18,36 +31,89 @@ body {
   color: #f79205;
 }
 
-.menu-divider {
-  margin: 0 10px !important;
+a {
+  color: #b56a00;
 }
 
-.data-page {
-  width: 100%;
+h2 {
+  font-weight: 600;
+}
+
+/* buttons: one filled primary action per state */
+button.primary,
+.data-page button,
+.wrapper button {
+  background: #f79205;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+}
+
+button.primary:disabled,
+.data-page button:disabled,
+.wrapper button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.loading {
+  color: #666;
+  font-size: 0.875rem;
+  padding: 1rem 0;
+}
+
+/* form controls, plain */
+.form-control {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
+  gap: 0.25rem;
+  margin-top: 1rem;
+}
 
-  .areas-select-wrapper {
-      display: flex;
-      align-items: center;
-      
-      ::ng-deep clr-select-container {
-          margin: 0;
-          
-          select {
-              min-width: 200px;
-          }
-      }
+.control-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
 
-      button {
-          margin-left: 10px;
-      }
+.input-wrapper input,
+.form-control input {
+  border: 1px solid #c8c8c8;
+  border-radius: 4px;
+  font: inherit;
+  padding: 0.45rem 0.6rem;
+  width: 100%;
+}
+
+.subtext {
+  color: #777;
+  font-size: 0.75rem;
+}
+
+select {
+  border: 1px solid #c8c8c8;
+  border-radius: 4px;
+  font: inherit;
+  padding: 0.45rem 0.6rem;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  width: 100%;
+
+  th,
+  td {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0.4rem 0.6rem;
+    text-align: left;
   }
 
-  table {
-      width: 80%;
-      margin-top: 40px;
+  th {
+    background: #fafafa;
+    font-weight: 600;
   }
 }
