@@ -42,6 +42,22 @@ describe('summariseRequests', () => {
     expect(entry.log).toBe('')
   })
 
+  it('reports where each message is, so a click can scroll to it', () => {
+    const [entry] = summariseRequests([
+      { serviceLink: 'services/files/upload', logFile: LOG }
+    ])
+    const lines = LOG.split('\n')
+    const error = entry.issues.find((issue) => issue.severity === 'error')
+
+    expect(error).toBeTruthy()
+    // the index points at the line the reader should be shown
+    expect(lines[error!.line]).toContain('ERROR')
+    expect(entry.severityByLine[error!.line]).toBe('error')
+    expect(entry.lines.length).toBe(lines.length)
+    // the message is carried, not just counted
+    expect(error!.message.length).toBeGreaterThan(0)
+  })
+
   it('answers an empty history with an empty list', () => {
     expect(summariseRequests([])).toEqual([])
   })

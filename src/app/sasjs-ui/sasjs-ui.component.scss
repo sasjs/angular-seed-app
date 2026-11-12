@@ -195,6 +195,10 @@
     border-top: 1px solid #eee;
     padding: 0.5rem 0;
 
+    &[open] {
+      padding-bottom: 0.75rem;
+    }
+
     summary {
       align-items: center;
       cursor: pointer;
@@ -235,18 +239,144 @@
       }
     }
 
-    pre {
+    .issues {
+      list-style: none;
+      margin: 0.5rem 0 0.6rem;
+      padding: 0;
+
+      li {
+        margin: 0.15rem 0;
+      }
+
+      button {
+        align-items: baseline;
+        background: none;
+        border: 0;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        font: inherit;
+        font-size: 0.8rem;
+        gap: 0.5rem;
+        padding: 0.25rem 0.4rem;
+        text-align: left;
+        width: 100%;
+
+        &:hover,
+        &:focus-visible {
+          background: #f6f2ec;
+          outline: none;
+        }
+      }
+
+      .tag {
+        border-radius: 9px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        padding: 0.1rem 0.45rem;
+        text-transform: uppercase;
+      }
+
+      .place {
+        color: #666;
+        font-family: ui-monospace, Monaco, Courier, monospace;
+        font-size: 0.72rem;
+        white-space: nowrap;
+      }
+
+      .code {
+        color: #8f5500;
+        font-family: ui-monospace, Monaco, Courier, monospace;
+        font-size: 0.72rem;
+      }
+
+      .text {
+        color: #333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .error .tag {
+        background: #fdecea;
+        color: #b31f0e;
+      }
+
+      .warning .tag {
+        background: #fff4e5;
+        color: #8a5a00;
+      }
+
+      .note .tag {
+        background: #eef2f7;
+        color: #37506b;
+      }
+    }
+
+    .log-pane {
       background: #fafafa;
       border: 1px solid #eee;
+      border-radius: 4px;
       font-family: ui-monospace, Monaco, Courier, monospace;
       font-size: 0.78rem;
       line-height: 1.45;
-      margin: 0.6rem 0 0;
+      margin-top: 0.4rem;
+      max-height: 60vh;
       overflow: auto;
-      padding: 0.75rem;
-      /* the log's own line breaks and columns are the content: wrapping them
-       * makes a SAS log harder to read, not easier */
-      white-space: pre;
+
+      .line {
+        display: flex;
+        /* the log's own line breaks and columns are the content: wrapping them
+         * makes a SAS log harder to read, not easier */
+        white-space: pre;
+      }
+
+      .no {
+        background: #f2f2f2;
+        border-right: 1px solid #e6e6e6;
+        color: #a0a0a0;
+        flex: 0 0 4rem;
+        padding: 0 0.6rem 0 0;
+        text-align: right;
+        user-select: none;
+      }
+
+      .text {
+        padding-left: 0.75rem;
+      }
+
+      .line.error {
+        background: #fdf1ef;
+
+        .no {
+          background: #fbe3e0;
+          color: #b31f0e;
+        }
+      }
+
+      .line.warning {
+        background: #fff8ec;
+
+        .no {
+          background: #fdefd5;
+          color: #8a5a00;
+        }
+      }
+
+      .line.note {
+        background: #f4f7fb;
+
+        .no {
+          background: #e9eff7;
+          color: #37506b;
+        }
+      }
+
+      .line.flash {
+        background: #ffe9c9;
+        box-shadow: inset 3px 0 0 #f79205;
+      }
     }
   }
 }
