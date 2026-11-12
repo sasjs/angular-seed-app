@@ -6,7 +6,7 @@ import {
 } from '@angular/core'
 import { Router } from '@angular/router'
 import { SASjsConfig } from '@sasjs/adapter'
-import { LogEntry, summariseRequests } from '../sas-logs'
+import { LogEntry, LogIssueView, summariseRequests } from '../sas-logs'
 import { SasService } from '../sas.service'
 import { StateService } from '../state.service'
 
@@ -64,6 +64,9 @@ export class SasjsUiComponent implements OnInit {
     this.stateService.username.subscribe((username: string) => {
       this.username = username
     })
+
+    /* a page that just failed a request can ask for the log */
+    this.stateService.openSasLogs.subscribe(() => this.openLogs())
   }
 
   /** Read once on open, so the panel shows what was captured up to that point. */
@@ -75,6 +78,24 @@ export class SasjsUiComponent implements OnInit {
 
   public closeLogs() {
     this.requestLogs = false
+  }
+
+  /**
+   * Scrolls the log to the line a message points at, and flashes it.
+   *
+   * The message carries the line index `parseLog` reported, and the log is
+   * rendered one element per line, so this is a lookup rather than a search of
+   * the text - a log with the same message twice still lands on the right one.
+   */
+  public jumpTo(entry: LogEntry, issue: LogIssueView, event: Event) {
+    const entryElement = (event.target as HTMLElement).closest('.entry')
+    const pane = entryElement?.querySelector('.log-pane')
+    const line = pane?.querySelector(`[data-line="${issue.line}"]`)
+
+    if (line) line.scrollIntoView({ block: 'center' })
+
+    entry.flashLine = issue.line
+    window.setTimeout(() => (entry.flashLine = undefined), 1600)
   }
 
   /** Escape closes the panel, the way a dialog is expected to behave. */

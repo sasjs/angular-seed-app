@@ -1,64 +1,90 @@
-<div class="wrapper">
-  <p style="margin-top: 20px; text-align: center">
-    Choose file to be uploaded to SAS
-  </p>
-  <div class="uploader">
-    <input (change)="onFileChange($event)" type="file" id="fileToUpload" />
-  </div>
+<div class="uploader-page">
+  <header class="page-head">
+    <h1>File upload</h1>
+    <p>
+      Posts a file to a folder on the server - one request to
+      <code>services/files/upload</code> with the file and the folder as
+      parameters. The service answers with a directory listing, or aborts with
+      the reason it could not write.
+    </p>
+  </header>
 
-  <div class="form-control">
-    <label for="upload-path" class="control-label">Upload path</label>
-    <div class="control-container">
-      <div class="input-wrapper">
-        <input
-          [(ngModel)]="uploadPath"
-          style="width: 230px"
-          type="text"
-          id="upload-path"
-          placeholder="Enter path"
-        />
-      </div>
-      <span class="subtext">Required</span>
-    </div>
-  </div>
+  <form class="upload-card" (ngSubmit)="submit()">
+    <label class="field">
+      <span>File</span>
+      <input type="file" id="fileToUpload" (change)="onFileChange($event)" />
+      <small *ngIf="selectedName">{{ selectedName }}</small>
+    </label>
 
-  <hr style="margin-top: 20px; width: 100%" />
-  <button
-    (click)="submit()"
-    class="btn btn-primary"
-    [disabled]="uploadPath.length < 1 || uploadLoading"
-  >
-    {{ uploadLoading ? 'Uploading...' : 'upload' }}
-  </button>
+    <label class="field">
+      <span>Upload path</span>
+      <input
+        name="uploadPath"
+        id="upload-path"
+        type="text"
+        [(ngModel)]="uploadPath"
+        placeholder="/Public/uploads"
+      />
+      <small
+        >An existing folder on the server, e.g.
+        <code>/Public/uploads</code></small
+      >
+    </label>
+
+    <button
+      type="submit"
+      [disabled]="!selectedName || uploadPath.length < 1 || uploadLoading"
+    >
+      {{ uploadLoading ? 'Uploading...' : 'Upload' }}
+    </button>
+  </form>
+
+  <section class="outcome success" *ngIf="uploaded" role="status">
+    <h2>Uploaded</h2>
+    <p>{{ uploaded.files.length }} file(s) in {{ uploaded.path }}</p>
+
+    <ul class="files">
+      <li *ngFor="let file of uploaded.files">{{ file }}</li>
+    </ul>
+  </section>
 </div>
 
-@if (responseModalMessage !== null) {
-<div class="modal">
-  <div class="modal-dialog" role="dialog" aria-hidden="true">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">File upload response</h3>
-      </div>
-      <div class="modal-body">
-        <p>
-          {{
-            typeof(responseModalMessage) === 'object'
-              ? (responseModalMessage | json)
-              : responseModalMessage
-          }}
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button
-          (click)="responseModalMessage = null"
-          class="btn btn-primary"
-          type="button"
-        >
-          Ok
-        </button>
-      </div>
-    </div>
-  </div>
+<!-- the abort, shown the way a refusal deserves to be shown -->
+<div class="abort-backdrop" *ngIf="abort" (click)="dismissAbort()"></div>
+
+<div
+  class="abort-modal"
+  *ngIf="abort"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="abort-title"
+>
+  <header>
+    <h2 id="abort-title">The upload was aborted</h2>
+    <button class="close" (click)="dismissAbort()" aria-label="close">
+      &times;
+    </button>
+  </header>
+
+  <p class="message">{{ abort.message }}</p>
+
+  <dl class="detail" *ngIf="abort.macro || abort.detail">
+    <ng-container *ngIf="abort.macro">
+      <dt>Raised by</dt>
+      <dd>{{ abort.macro }}</dd>
+    </ng-container>
+    <ng-container *ngIf="abort.detail">
+      <dt>SAS</dt>
+      <dd>{{ abort.detail }}</dd>
+    </ng-container>
+  </dl>
+
+  <footer>
+    <button type="button" class="primary" (click)="showLogs()">
+      View SAS Logs
+    </button>
+    <button type="button" class="secondary" (click)="dismissAbort()">
+      Close
+    </button>
+  </footer>
 </div>
-<div class="modal-backdrop" aria-hidden="true"></div>
-}
