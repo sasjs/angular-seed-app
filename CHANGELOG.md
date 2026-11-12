@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/sasjs/angular-seed-app/compare/v1.5.0...v1.6.0) (2026-11-12)
+
+
+### Bug Fixes
+
+* **ci:** format the new script, and keep --json output to one document ([68829bb](https://github.com/sasjs/angular-seed-app/commit/68829bbdaa1e30534380f6d1fb0ce4f2e1f74381))
+
+
+### Features
+
+* **ci:** a gating npm audit check, no inline scripts, username from every response ([e3cdccb](https://github.com/sasjs/angular-seed-app/commit/e3cdccbe7768808ddb481856112c9d3de5d3134b)), closes [#642](https://github.com/sasjs/angular-seed-app/issues/642) [#643](https://github.com/sasjs/angular-seed-app/issues/643)
+
 # [1.5.0](https://github.com/sasjs/angular-seed-app/compare/v1.4.0...v1.5.0) (2026-11-12)
 
 
