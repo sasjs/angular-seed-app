@@ -3,6 +3,7 @@
   "macroFolders": [
     "sasjs/macros"
   ],
+  "syncFolder": "sasjs/mocks",
   "programFolders": [],
   "serviceConfig": {
     "serviceFolders": [
@@ -38,7 +39,19 @@
         "streamServiceName": "Angular",
         "streamWeb": true,
         "streamWebFolder": "web",
-        "webSourcePath": "dist"
+        "webSourcePath": "dist/browser"
+      }
+    },
+    {
+      "name": "mock",
+      "serverUrl": "",
+      "serverType": "SASJS",
+      "appLoc": "/Public/app/angular-seed-app",
+      "streamConfig": {
+        "mockWeb": true,
+        "mockWebFolder": "sasjsbuild/mock",
+        "streamWeb": false,
+        "webSourcePath": "dist/browser"
       }
     }
   ]

@@ -1,19 +1,19 @@
 .wrapper {
-    margin: 0 auto;
-    width: 330px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin: 2rem auto;
+  width: 22rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  button {
+    width: 100%;
+  }
 }
 
 .uploader {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    margin-top: 10px;
-
-    input {
-        width: 230px;
-    }
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.6rem;
 }

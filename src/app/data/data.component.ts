@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { StateService } from '../state.service'
 import { SasService } from '../sas.service'
 
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
-  styleUrls: ['./data.component.scss']
+  styleUrls: ['./data.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false
 })
 export class DataComponent implements OnInit {
   public areas: any[] = []

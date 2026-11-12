@@ -1,6 +1,9 @@
 # Overview
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This seed app provides a quick start for building an Angular Web app on Viya, SAS EBI or Foundation SAS with the SASjs DevOps framework.
@@ -53,13 +56,47 @@ parmcards4;
 %mx_createwebservice(path=&appLoc/services/common, name=getdata)
 ```
 
-To use the CLI, first run `sasjs add` and follow the prompts to create a target.  You can then run `sasjs cbd -t yourtargetname` to compile, build, and deploy your backend.
+To use the CLI, first run `sasjs add` and follow the prompts to create a target. You can then run `sasjs cbd -t yourtargetname` to compile, build, and deploy your backend.
 
 If you set `streamWeb:true` in the `streamConfig` of your `sasjs/sasjsconfig.json` file you can also run as a [streaming app](https://sasapps.io/sas-streamed-apps) (without a web server).
+
+## Running without a SAS server
+
+The app also builds as a **mock site**: the same frontend, with a browser-hosted
+backend standing in for SAS, so it can be opened with no licence, no server and no
+deployment.
+
+```
+npm run mock:build     # frontend + services + the browser host
+npm run mock:start     # serves sasjsbuild/mock on http://127.0.0.1:3001
+```
+
+What makes that work is `sasjs/mocks/`: a JavaScript twin of each service
+(`common/appinit`, `common/getdata`, `files/upload`) answering the same `webout`
+the SAS service does. The twins read `springs.json`, which is generated from the
+`datalines` block in `serviceinit.sas` - so the demo shows the rows the deployed
+service would return. `npm run check:data` fails when the two drift apart, and
+`npm run test:mock` boots the built worker and asserts that each service answers.
+
+This is also what `https://sasjs.github.io/angular-seed-app/` serves.
+
+## What to know before you start
+
+- The app reads its configuration from the `<sasjs>` element in `src/index.html`.
+  Every target in `sasjs/sasjsconfig.json` rewrites that element, which is how one
+  codebase serves Viya, SAS 9, a SASjs Server and the mock build.
+- There is no UI component library. The shell - header, sign-in, SAS logs panel -
+  is plain Angular and a small stylesheet, so the only thing to keep up to date
+  with Angular is Angular.
+- The SAS logs panel counts errors, warnings and notable notes with `parseLog`
+  from `@sasjs/utils`, the parser Data Controller uses, so the counts agree with
+  that app's.
+- `npm test` runs Vitest through the Angular CLI. `npm run lint` is Prettier.
 
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->

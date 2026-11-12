@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms'
 import { DataComponent } from './data/data.component'
 import { HomePageComponent } from './home-page/home-page.component'
 import { UploaderComponent } from './uploader/uploader.component'
-import { NgxSasjsModule } from '@sasjs/ngx-sasjs'
 import { SasjsUiComponent } from './sasjs-ui/sasjs-ui.component'
 
 @NgModule({
@@ -22,8 +21,7 @@ import { SasjsUiComponent } from './sasjs-ui/sasjs-ui.component'
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
-    NgxSasjsModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

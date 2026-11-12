@@ -11,19 +11,19 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [lts/*]
+        node-version: [24]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         env:
           CI: true
 
@@ -50,9 +50,7 @@ jobs:
           cp ./sasjsbuild/server.json.zip ./artefacts/server.json.zip
 
       - name: Install Semantic Release and plugins
-        run: |
-          npm i
-          npm i -g semantic-release
+        run: npm i
       - name: Release
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} semantic-release
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} npx semantic-release
