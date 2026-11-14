@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/sasjs/angular-seed-app/compare/v1.6.0...v1.6.1) (2026-11-14)
+
+
+### Bug Fixes
+
+* **docs:** bump the docs submodule for the embedded documentation ([28b7305](https://github.com/sasjs/angular-seed-app/commit/28b73053b99b2e98887654cb437f1fc62488d4c9))
+
 # [1.6.0](https://github.com/sasjs/angular-seed-app/compare/v1.5.0...v1.6.0) (2026-11-12)
 
 
