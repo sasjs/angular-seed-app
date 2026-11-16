@@ -19,7 +19,8 @@
       "serverUrl": "",
       "serverType": "SASVIYA",
       "appLoc": "/Public/app/angular-seed-app",
-      "contextName": "SAS Job Execution compute context"
+      "contextName": "SAS Job Execution compute context",
+      "sasjsBuildFolder": "sasjsbuild/viya"
     },
     {
       "name": "sas9",
@@ -27,7 +28,8 @@
       "serverType": "SAS9",
       "appLoc": "/Public/app/angular-seed-app",
       "serverName": "SASApp",
-      "repositoryName": "Foundation"
+      "repositoryName": "Foundation",
+      "sasjsBuildFolder": "sasjsbuild/sas9"
     },
     {
       "name": "server",
@@ -40,7 +42,8 @@
         "streamWeb": true,
         "streamWebFolder": "web",
         "webSourcePath": "dist/browser"
-      }
+      },
+      "sasjsBuildFolder": "sasjsbuild/server"
     },
     {
       "name": "mock",
@@ -54,5 +57,21 @@
         "webSourcePath": "dist/browser"
       }
     }
-  ]
+  ],
+  "release": {
+    "assets": [
+      {
+        "path": "sasjsbuild/server/server.json.zip",
+        "label": "SASjs Streamed App (Zip File)"
+      },
+      {
+        "path": "sasjsbuild/sas9/sas9.sas",
+        "label": "SAS 9 EBI Deployment (SAS Program)"
+      },
+      {
+        "path": "sasjsbuild/viya/viya.sas",
+        "label": "Viya Deployment (SAS Program)"
+      }
+    ]
+  }
 }
