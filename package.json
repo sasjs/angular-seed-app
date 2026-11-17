@@ -39,7 +39,7 @@
     "@angular/platform-browser-dynamic": "^22.2.6",
     "@angular/router": "^22.2.6",
     "@sasjs/adapter": "^6.1.0",
-    "@sasjs/utils": "^4.11.0",
+    "@sasjs/utils": "4.13.0",
     "rxjs": "~7.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.15.1"
