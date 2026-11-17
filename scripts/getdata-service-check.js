@@ -64,7 +64,15 @@ function runService(browser, csv, springs = seed) {
     })
     const context = {
       tables:
-        csv === undefined
+        csv === null
+          ? [
+              {
+                name: 'unrelated',
+                filename: 'other.csv',
+                csv: 'area:$char40.\r\nundefined'
+              }
+            ]
+          : csv === undefined
           ? []
           : [
               {
@@ -119,6 +127,19 @@ for (const browser of [false, true]) {
   })
   test(`${host}: missing areas returns no springs`, () => {
     assert.deepEqual(runService(browser, undefined).springs, [])
+  })
+  test(`${host}: unrelated table alone does not select springs`, () => {
+    assert.deepEqual(
+      runService(browser, null, [{ AREA: 'undefined' }]).springs,
+      []
+    )
+  })
+  test(`${host}: rows without an AREA column do not select undefined`, () => {
+    const springs = [{ AREA: 'undefined' }]
+    assert.deepEqual(
+      runService(browser, 'other:$char40.\r\nanything', springs).springs,
+      []
+    )
   })
   test(`${host}: area column names remain case insensitive`, () => {
     const area = seed[0].AREA
