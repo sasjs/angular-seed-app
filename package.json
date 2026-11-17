@@ -49,7 +49,7 @@
     "@angular/cli": "^22.2.7",
     "@angular/compiler-cli": "^22.2.6",
     "@angular/language-service": "^22.2.6",
-    "@sasjs/cli": "^6.28.0",
+    "@sasjs/cli": "7.4.0",
     "@sasjs/core": "^7.1.14",
     "@sasjs/release": "0.11.1",
     "@types/node": "^20.1.2",
