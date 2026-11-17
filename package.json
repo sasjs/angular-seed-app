@@ -19,6 +19,7 @@
     "mock:build": "npm run build && sasjs compile -t mock && sasjs build -t mock",
     "mock:start": "npx http-server ./sasjsbuild/mock -p 3001",
     "test:mock": "node scripts/check-mock-site.js",
+    "test:getdata": "node --test scripts/getdata-service-check.js",
     "release": "sasjs-release"
   },
   "private": true,
