@@ -19,7 +19,7 @@
     "mock:build": "npm run build && sasjs compile -t mock && sasjs build -t mock",
     "mock:start": "npx http-server ./sasjsbuild/mock -p 3001",
     "test:mock": "node scripts/check-mock-site.js",
-    "test:mock:browser": "node scripts/check-mock-browser.js",
+    "test:mock:browser": "node --test scripts/check-mock-browser-startup-test.js && node scripts/check-mock-browser.js",
     "test:getdata": "node --test scripts/getdata-service-check.js scripts/upload-service-check.js",
     "release": "sasjs-release"
   },

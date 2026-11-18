@@ -99,12 +99,14 @@ async function main() {
         `--user-data-dir=${dir}`,
         'about:blank'
       ],
-      { stdio: 'ignore' }
+      { stdio: ['ignore', 'ignore', 'inherit'] }
     )
     let port
     for (let i = 0; i < 200 && !port; i++) {
-      if (chrome.exitCode !== null)
-        throw new Error(`Chromium exited ${chrome.exitCode}`)
+      if (chrome.exitCode !== null || chrome.signalCode !== null)
+        throw new Error(
+          `Chromium exited ${chrome.signalCode || chrome.exitCode}`
+        )
       try {
         port = Number(
           fs
@@ -214,7 +216,7 @@ async function main() {
     }
   } finally {
     if (ws) ws.close()
-    if (chrome && chrome.exitCode === null) {
+    if (chrome && chrome.exitCode === null && chrome.signalCode === null) {
       const closed = once(chrome, 'close')
       chrome.kill()
       await closed
