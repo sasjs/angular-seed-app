@@ -93,7 +93,6 @@ async function main() {
           : 'chromium'),
       [
         '--headless=new',
-        '--no-sandbox',
         '--disable-gpu',
         '--disable-dev-shm-usage',
         '--remote-debugging-port=0',
