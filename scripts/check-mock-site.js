@@ -171,6 +171,19 @@ const main = async () => {
     )
   }
 
+  /* A terminating CRLF must not produce a spurious row (utils #329).
+   * This runs through the generated worker, not the app's utils dependency. */
+  const terminated = await call(`${APP}/common/getdata`, [
+    {
+      name: 'areas',
+      filename: 'areas.csv',
+      csv: `area:$char${area.length}. extra:$char1.\r\n${area},x\r\n`
+    }
+  ])
+  if (JSON.stringify(terminated.springs) !== JSON.stringify(seeded)) {
+    fail('getdata with a trailing CRLF returned incorrect rows')
+  }
+
   const columns = [
     'LATITUDE',
     'LONGITUDE',

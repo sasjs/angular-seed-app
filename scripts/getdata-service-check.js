@@ -195,6 +195,19 @@ for (const browser of [false, true]) {
       { NUM: 0, TEXT: 'null' }
     ])
   })
+  test(`${host}: FETCH ignores the terminal CRLF without adding a row`, () => {
+    const capture =
+      "const rows = webout('FETCH').areas; webout('OPEN'); webout('OBJ', 'rows', rows); webout('CLOSE');"
+    assert.deepEqual(
+      runService(
+        browser,
+        'AREA:$char40. OTHER:$char40.\r\nA,B\r\n',
+        seed,
+        capture
+      ).rows,
+      [{ AREA: 'A', OTHER: 'B' }]
+    )
+  })
   test(`${host}: rejects an unterminated quoted value`, () => {
     assert.throws(
       () => runService(browser, 'area:$char40.\r\n"unfinished'),
