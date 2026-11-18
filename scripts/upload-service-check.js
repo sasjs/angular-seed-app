@@ -7,7 +7,7 @@ const vm = require('node:vm')
 
 const source = fs.readFileSync('sasjs/mocks/services/files/upload.js', 'utf8')
 
-function run(upload) {
+function run(options = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'seed-upload-'))
   try {
     const drive = path.join(root, 'drive/files')
@@ -17,46 +17,130 @@ function run(upload) {
     )
     fs.mkdirSync(path.dirname(log), { recursive: true })
     fs.writeFileSync(log, JSON.stringify({ clean: [], noisy: [] }))
-    const folder = path.join(root, 'uploads')
+    fs.mkdirSync(path.join(drive, 'Public/uploads'), { recursive: true })
     const staged = path.join(root, 'staged.bin')
-    if (upload) fs.writeFileSync(staged, upload)
+    if (options.bytes !== undefined) fs.writeFileSync(staged, options.bytes)
+    const outside = path.join(root, 'outside')
+    fs.mkdirSync(outside)
+    if (options.symlink)
+      fs.symlinkSync(outside, path.join(drive, 'Public/link'))
+    if (options.fileSymlink)
+      fs.symlinkSync(
+        path.join(outside, 'victim'),
+        path.join(drive, 'Public/uploads/payload.bin')
+      )
+    const mockFs = options.failMethod
+      ? new Proxy(fs, {
+          get(target, key) {
+            if (key === options.failMethod)
+              return () => {
+                throw new Error('injected I/O failure')
+              }
+            return target[key]
+          }
+        })
+      : fs
     const output = {}
     const context = {
-      fs,
+      fs: mockFs,
       require,
       console,
       weboutPath: path.join(root, 'sessions/id/webout'),
       _program: '/Public/app/seed/services/files/upload',
-      path: folder,
-      _WEBIN_FILE_COUNT: upload ? 1 : 0,
-      _WEBIN_FILENAME1: upload ? 'payload.bin' : '',
-      _WEBIN_FILEREF1: upload ? staged : '',
+      path: options.escapeRoot
+        ? path.join(root, 'new-folder')
+        : options.folder || '/Public/uploads',
+      _WEBIN_FILE_COUNT: options.noUpload ? 0 : 1,
+      _WEBIN_FILENAME1: options.noUpload
+        ? ''
+        : options.filename || 'payload.bin',
+      _WEBIN_FILEREF1: staged,
       webout: (action, name, value) => {
         if (action === 'OBJ') output[name] = value
       }
     }
     vm.runInNewContext(source, context)
     return {
-      contents: upload && fs.readFileSync(path.join(folder, 'payload.bin')),
-      paths: Array.from(output.dirlist, (row) => row.FILEPATH),
-      folder
+      output,
+      saved: fs.existsSync(path.join(drive, 'Public/uploads/payload.bin'))
+        ? fs.readFileSync(path.join(drive, 'Public/uploads/payload.bin'))
+        : undefined,
+      outside: fs.readdirSync(outside),
+      created: fs.existsSync(path.join(drive, 'Public/new')),
+      escaped: fs.existsSync(path.join(root, 'new-folder/payload.bin'))
     }
   } finally {
     fs.rmSync(root, { recursive: true, force: true })
   }
 }
 
-test('copies exact staged bytes and lists the uploaded file', () => {
+test('copies exact staged bytes and lists the uploaded file inside the drive', () => {
   const bytes = Buffer.from([0xef, 0xbb, 0xbf, 0x41, 0, 0xff, 0xfe])
-  const result = run(bytes)
-  assert.deepEqual(result.contents, bytes)
-  assert.deepEqual(result.paths, [result.folder + '/payload.bin'])
+  const result = run({ bytes })
+  assert.deepEqual(result.saved, bytes)
+  assert.equal(result.output.dirlist[0].FILEPATH, '/Public/uploads/payload.bin')
 })
 
 test('lists the empty folder without an upload', () => {
-  assert.deepEqual(run(null).paths, [])
+  assert.equal(run({ noUpload: true }).output.dirlist.length, 0)
 })
 
 test('copies an empty uploaded file', () => {
-  assert.deepEqual(run(Buffer.alloc(0)).contents, Buffer.alloc(0))
+  assert.deepEqual(run({ bytes: Buffer.alloc(0) }).saved, Buffer.alloc(0))
+})
+
+test('rejects a host absolute path outside the drive', () => {
+  const result = run({ bytes: Buffer.from('x'), escapeRoot: true })
+  assert.ok(result.output.sasjsAbort)
+  assert.equal(result.escaped, false)
+})
+
+test('rejects traversal in path and filename without writing outside the drive', () => {
+  for (const options of [
+    { folder: '/../../outside' },
+    { folder: '/Public/../../outside' },
+    { filename: '../../outside/victim' },
+    { filename: '..\\outside\\victim' }
+  ]) {
+    const result = run({ bytes: Buffer.from('x'), ...options })
+    assert.ok(result.output.sasjsAbort)
+    assert.deepEqual(result.outside, [])
+  }
+})
+
+test('rejects an existing symlink to outside the drive', () => {
+  const result = run({
+    bytes: Buffer.from('x'),
+    folder: '/Public/link',
+    symlink: true
+  })
+  assert.ok(result.output.sasjsAbort)
+  assert.deepEqual(result.outside, [])
+})
+
+test('rejects a destination symlink', () => {
+  const result = run({ bytes: Buffer.from('x'), fileSymlink: true })
+  assert.ok(result.output.sasjsAbort)
+  assert.deepEqual(result.outside, [])
+})
+
+test('reports write and listing failures as sasjsAbort', () => {
+  for (const [failMethod, message] of [
+    ['writeFileSync', /Unable to write uploaded file/],
+    ['readdirSync', /Unable to list directory/]
+  ]) {
+    const result = run({ bytes: Buffer.from('x'), failMethod })
+    assert.match(result.output.sasjsAbort[0].MSG, message)
+  }
+})
+
+test('reports missing staged file as sasjsAbort', () => {
+  const result = run()
+  assert.match(result.output.sasjsAbort[0].MSG, /Unable to read staged file/)
+})
+
+test('creates a missing single-level folder under the drive', () => {
+  const result = run({ noUpload: true, folder: '/Public/new' })
+  assert.equal(result.created, true)
+  assert.equal(result.output.dirlist.length, 0)
 })

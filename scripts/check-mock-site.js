@@ -218,6 +218,20 @@ const main = async () => {
     fail(`upload did not list ${folder}/check.txt: ${JSON.stringify(dirlist)}`)
   }
 
+  for (const attack of [
+    { path: '/Public/../../outside', filename: 'attack.txt' },
+    { path: folder, filename: '../../outside/attack.txt' },
+    { path: '/sasjs/drive/files/Public/../../outside', filename: 'attack.txt' }
+  ]) {
+    const result = await call(
+      `${APP}/files/upload`,
+      [{ name: 'file', filename: attack.filename, csv: 'attack' }],
+      { path: attack.path }
+    )
+    if (!result.sasjsAbort)
+      fail(`upload accepted unsafe path: ${JSON.stringify(attack)}`)
+  }
+
   console.log(
     `mock site answers: ${areas.length} areas, ` +
       `${springs.length} spring(s) for ${area}, upload listed ${dirlist.length} file(s)`

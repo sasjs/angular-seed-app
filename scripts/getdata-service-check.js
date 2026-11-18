@@ -25,7 +25,13 @@ const preludeModule = realModule
   : require('@sasjs/utils')
 const program = '/Public/app/demo/services/common/getdata'
 
-function runService(browser, csv, springs = seed, service = source) {
+function runService(
+  browser,
+  csv,
+  springs = seed,
+  service = source,
+  oldHost = false
+) {
   fs.mkdirSync(scratch, { recursive: true })
   const dir = fs.mkdtempSync(path.join(scratch, 'getdata-'))
   try {
@@ -95,7 +101,11 @@ function runService(browser, csv, springs = seed, service = source) {
       'globalThis',
       'console',
       '_sasjs_fetch_context',
-      `let _webout = '';\n${setup}\nconst webout = globalThis.webout;\n${service}`
+      `let _webout = '';\n${setup}\nconst webout = ${
+        oldHost
+          ? "(...args) => args[0] === 'FETCH' ? undefined : globalThis.webout(...args)"
+          : 'globalThis.webout'
+      };\n${service}`
     )
     const requireHost = browser
       ? (name) => {
@@ -113,6 +123,10 @@ function runService(browser, csv, springs = seed, service = source) {
 
 for (const browser of [false, true]) {
   const host = `${browser ? 'browser' : 'server'} (shared prelude)`
+  test(`${host}: unavailable FETCH returns a compatibility abort`, () => {
+    const result = runService(browser, undefined, seed, source, true)
+    assert.match(result.sasjsAbort[0].MSG, /FETCH.*CLI.*Server/)
+  })
   test(`${host}: FETCH selects seeded rows in dataset order`, () => {
     const first = seed[0].AREA
     const second = seed.find((row) => row.AREA !== first).AREA
