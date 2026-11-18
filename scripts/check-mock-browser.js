@@ -40,7 +40,9 @@ const script = `window.addEventListener('load', () => {
       area
     )}}], extra: [{X: 'force; file'}]}), await request({unrelated: [{AREA: ${JSON.stringify(
   area
-)}}]}), await request({areas: [{OTHER: 'undefined'}]})];
+)}}]}), await request({areas: [{OTHER: 'undefined'}]}), await request({areas: [{AREA: '', EXTRA: ''}, {AREA: ${JSON.stringify(
+  area
+)}, EXTRA: 'x'}, {AREA: '', EXTRA: ''}], extra: [{X: 'force; file'}]})];
     return {responses, upload, saved, folder, filename};
   };
   window.result = Promise.all([run(false), run(true)]).catch(error => { throw Error(String(error && (error.stack || error.message || error))); });
@@ -204,6 +206,7 @@ async function main() {
           `${visit}: unrelated table only`
         )
         assert.deepEqual(responses[2].springs, [], `${visit}: missing AREA`)
+        assert.deepEqual(responses[3].springs, expected, `${visit}: blank rows`)
       }
       assert.deepEqual(network, [], `${visit}: no API network fallthrough`)
       console.log(
