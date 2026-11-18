@@ -12,6 +12,8 @@ This seed app provides a quick start for building an Angular Web app on Viya, SA
 
 Clone the repo, `cd` into it, and `npm install`.
 
+For opt-in staged secret scanning, install [pre-commit](https://pre-commit.com/#installation), then run `pre-commit install`. The pinned Gitleaks hook needs network access on first use and is bypassable; it is not a CI secret-scan guarantee. If Git uses a custom `core.hooksPath`, preserve the existing hooks and integrate pre-commit there rather than overwriting them.
+
 Next, update the following attributes in `index.html`:
 
 - `appLoc` - this is the folder (eg in metadata or SAS Drive) under which the SAS services are created.

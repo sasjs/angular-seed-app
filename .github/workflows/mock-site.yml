@@ -56,7 +56,14 @@ jobs:
 
       - run: npm run test:mock
 
+      # ubuntu-latest's hosted image supplies Google Chrome; fail clearly if the
+      # image changes instead of relying on an implicit PATH fallback.
+      - name: Verify browser for mock integration test
+        run: /usr/bin/google-chrome --version
+
       - run: npm run test:mock:browser
+        env:
+          CHROMIUM_PATH: /usr/bin/google-chrome
 
       - name: Add .nojekyll
         run: touch sasjsbuild/mock/.nojekyll
