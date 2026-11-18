@@ -22,7 +22,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: mock-site
+  # Keep production publishes serialized without letting an obsolete PR run
+  # block a newer head's checks. Re-runs of the same PR head still serialize.
+  group: mock-site-${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'publish' }}
   cancel-in-progress: false
 
 jobs:
