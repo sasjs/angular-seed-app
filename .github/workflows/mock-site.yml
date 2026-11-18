@@ -68,9 +68,28 @@ jobs:
         with:
           chrome-version: 158.0.8127.36
 
+      # Ubuntu 26.04 restricts unprivileged user namespaces (AppArmor), so the
+      # downloaded Chrome cannot use its default userns sandbox and aborts with
+      # "No usable sandbox!". Chromium's documented secure fallback for this
+      # case is the SUID sandbox helper via CHROME_DEVEL_SANDBOX. The CfT
+      # package ships it as chrome_sandbox; install it root-owned with the
+      # setuid bit, as the Chrome .deb does. Sandbox stays fully enabled.
+      - name: Install Chrome SUID sandbox helper
+        run: |
+          dir="$(dirname "$CHROME_PATH")"
+          helper="$dir/chrome_sandbox"
+          test -f "$helper"
+          sudo cp "$helper" /usr/local/sbin/chrome-sandbox
+          sudo chown root:root /usr/local/sbin/chrome-sandbox
+          sudo chmod 4755 /usr/local/sbin/chrome-sandbox
+          test "$(stat -c '%u:%g:%a' /usr/local/sbin/chrome-sandbox)" = '0:0:4755'
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+
       - run: npm run test:mock:browser
         env:
           CHROMIUM_PATH: ${{ steps.chrome.outputs.chrome-path }}
+          CHROME_DEVEL_SANDBOX: /usr/local/sbin/chrome-sandbox
 
       - name: Add .nojekyll
         run: touch sasjsbuild/mock/.nojekyll
