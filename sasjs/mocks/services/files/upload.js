@@ -5,11 +5,8 @@
  * directory is a folder in the browser's drive, which is the only filesystem a
  * mock build has.
  *
- * The file arrives the way the adapter sends it: one _WEBIN_ entry whose
- * filename is the client's file name and whose contents are the file's text.
- * A file the browser cannot decode as UTF-8 is not round-tripped byte for byte
- * - that is the one thing this twin cannot do, and the reason the SAS service
- * exists. `path` is a request parameter, so the host binds it as a const.
+ * The first _WEBIN_ entry names a staged file; read it without an encoding to
+ * preserve its bytes. `path` is a request parameter bound by the host.
  */
 
 const pathNode = require('path')
@@ -25,6 +22,21 @@ const DRIVE_FILES = pathNode.resolve(
 const APP_LOC = String(_program).replace(/\/(services|jobs|tests)\/.*$/, '')
 
 const folder = String(path || '/').replace(/\/+$/, '') || '/'
+// Browser uploads use the virtual drive's absolute prefix; Server callers use
+// drive-relative paths. Both must resolve beneath the mock drive root.
+const virtualPrefix = '/sasjs/drive/files'
+const drivePath =
+  folder === virtualPrefix || folder.startsWith(virtualPrefix + '/')
+    ? folder.slice(virtualPrefix.length) || '/'
+    : folder
+const mounted = pathNode.resolve(DRIVE_FILES, '.' + drivePath)
+const insideDrive = (value) =>
+  value === DRIVE_FILES || value.startsWith(DRIVE_FILES + pathNode.sep)
+const invalidPath =
+  !folder.startsWith('/') ||
+  /[\\\0]/.test(folder) ||
+  folder.split('/').some((part) => part === '..') ||
+  !insideDrive(mounted)
 
 /* the _WEBIN_ vars are module-scope consts of the generated program, not
  * properties of globalThis, so they are read by eval with the index inlined */
@@ -35,7 +47,26 @@ const filename =
   typeof _WEBIN_FILE_COUNT === 'undefined'
     ? ''
     : String(webin('_WEBIN_FILENAME'))
-const contents = filename ? String(webin('_WEBIN_FILEREF')) : ''
+const invalidFilename =
+  filename === '.' || filename === '..' || /[/\\\0]/.test(filename)
+
+// Browser mock fs has no symlinks. On Node, refuse existing symlinks at each
+// component and destination; this check is not atomic against local races.
+const hasSymlink = (target) => {
+  if (typeof fs.lstatSync !== 'function') return false
+  const relative = pathNode.relative(DRIVE_FILES, target)
+  let current = DRIVE_FILES
+  for (const part of ['', ...relative.split(pathNode.sep).filter(Boolean)]) {
+    if (part) current = pathNode.join(current, part)
+    try {
+      if (fs.lstatSync(current).isSymbolicLink()) return true
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error
+      break
+    }
+  }
+  return false
+}
 
 /* A mocked run reports a log, because the SAS Logs panel is part of what this
  * seed demonstrates and a JavaScript twin that wrote nothing leaves it empty.
@@ -60,16 +91,55 @@ const reportMockLog = () => {
 
 reportMockLog()
 
-fs.mkdirSync(folder)
-
-if (filename) fs.writeFileSync(`${folder}/${filename}`, contents)
-
-/* mp_dirlist(..., outds=dirlist) - one row per entry, FILEPATH being the column
- * the uploader renders */
-const dirlist = fs
-  .readdirSync(folder)
-  .map((name) => ({ FILEPATH: `${folder}/${name}` }))
-
+let failure
+let dirlist
+try {
+  if (
+    invalidPath ||
+    invalidFilename ||
+    hasSymlink(mounted) ||
+    (filename && hasSymlink(pathNode.join(mounted, filename)))
+  ) {
+    failure = 'Invalid upload path or filename'
+  }
+} catch (error) {
+  failure = 'Unable to validate upload path'
+}
+if (!failure && filename) {
+  let contents
+  try {
+    contents = fs.readFileSync(webin('_WEBIN_FILEREF'))
+  } catch (error) {
+    failure =
+      'Unable to read staged file; check the upload and use a compatible CLI mock host or SASjs Server'
+  }
+  if (!failure) {
+    try {
+      // recursive: an upload into a new multi-level folder must create every
+      // level, not fail as a write error on the first missing parent.
+      if (!fs.existsSync(mounted)) fs.mkdirSync(mounted, { recursive: true })
+      fs.writeFileSync(pathNode.join(mounted, filename), contents)
+    } catch (error) {
+      failure = 'Unable to write uploaded file'
+    }
+  }
+} else if (!failure) {
+  try {
+    if (!fs.existsSync(mounted)) fs.mkdirSync(mounted, { recursive: true })
+  } catch (error) {
+    failure = 'Unable to create upload directory'
+  }
+}
+if (!failure) {
+  try {
+    dirlist = fs.readdirSync(mounted).map((name) => ({
+      FILEPATH: `${folder === '/' ? '' : folder}/${name}`
+    }))
+  } catch (error) {
+    failure = 'Unable to list directory'
+  }
+}
 webout('OPEN')
-webout('OBJ', 'dirlist', dirlist)
+if (failure) webout('OBJ', 'sasjsAbort', [{ MSG: failure, MAC: _program }])
+else webout('OBJ', 'dirlist', dirlist)
 webout('CLOSE')

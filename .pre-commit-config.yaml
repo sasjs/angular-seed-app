@@ -1,0 +1,6 @@
+# Opt-in local staged secret scanning; see README for installation.
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks

@@ -18,99 +18,55 @@ const SPRINGS_FILE = path.join(
   'springs.json'
 )
 
-/* An uploaded table, by name. The host binds one set of _WEBIN_ vars per file:
- * _WEBIN_NAME<n> is the table name, _WEBIN_FILEREF<n> its contents - so both
- * are read by eval, because they are module-scope consts of the generated
- * program rather than properties of globalThis. */
-const getTable = (name) => {
-  if (typeof _WEBIN_FILE_COUNT === 'undefined') return ''
-
-  for (let i = 1; i <= _WEBIN_FILE_COUNT; i++) {
-    const tableName = eval(
-      `typeof _WEBIN_NAME${i} === 'undefined' ? '' : _WEBIN_NAME${i}`
-    )
-    if (tableName !== name) continue
-
-    return String(eval(`_WEBIN_FILEREF${i}`))
+/* FETCH preserves column spelling; SAS column names are case-insensitive.
+ * AREA is character in the seed dataset. Compare character values with SAS
+ * blank-padding semantics: trailing spaces are insignificant, leading are not.
+ * FETCH returns special numeric missings as strings without type metadata, so
+ * a numeric .A cannot be distinguished from the character value '.A'. Numeric
+ * AREA is a SAS SQL type mismatch; this mock cannot reproduce that error. */
+const unpad = (value) => value.replace(/ +$/, '')
+/* A host prelude without FETCH support may either return undefined or throw
+ * (an old dispatcher rejects the unknown action). Both mean the same thing
+ * here: the compatibility abort below must answer. A prelude that DOES
+ * implement FETCH throws its own data-validation errors, all prefixed
+ * "webout('FETCH'):" - those describe the uploaded CSV, not the host, and
+ * must keep propagating. */
+const fetchOrUndefined = () => {
+  try {
+    return webout('FETCH')
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("webout('FETCH')"))
+      throw error
+    return undefined
   }
-
-  return ''
 }
-
-/* The adapter's table CSV: a header of `name:format.` entries separated by
- * spaces, then one comma separated record per row, values quoted only when
- * they contain a separator or a quote. A quoted value may hold a line break,
- * so a record ends at a line break that arrives OUTSIDE quotes. */
-const parseCsv = (csv) => {
-  const records = []
-  let values = []
-  let value = ''
-  let quoted = false
-
-  const endRecord = () => {
-    values.push(value)
-    records.push(values)
-    values = []
-    value = ''
-  }
-
-  const text = String(csv || '')
-
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i]
-
-    if (quoted) {
-      if (char === '"' && text[i + 1] === '"') {
-        value += '"'
-        i++
-      } else if (char === '"') {
-        quoted = false
-      } else {
-        value += char
-      }
-    } else if (char === '"') {
-      quoted = true
-    } else if (char === ',') {
-      values.push(value)
-      value = ''
-    } else if (char === '\r' || char === '\n') {
-      if (char === '\r' && text[i + 1] === '\n') i++
-      if (values.length || value !== '') endRecord()
-    } else {
-      value += char
-    }
-  }
-
-  if (values.length || value !== '') endRecord()
-
-  if (records.length < 2) return []
-
-  const columns = records[0]
-    .join(' ')
-    .trim()
-    .split(/\s+/)
-    .map((header) => header.replace(/:.*$/, '').toUpperCase())
-
-  return records.slice(1).map((record) => {
-    const row = {}
-
-    columns.forEach((column, index) => {
-      row[column] = record[index] === undefined ? '' : record[index]
-    })
-
-    return row
-  })
-}
-
+const fetched = fetchOrUndefined()
+const validFetch =
+  fetched &&
+  typeof fetched === 'object' &&
+  !Array.isArray(fetched) &&
+  (fetched.areas === undefined ||
+    (Array.isArray(fetched.areas) &&
+      fetched.areas.every(
+        (row) => row && typeof row === 'object' && !Array.isArray(row)
+      )))
+const areas = validFetch && fetched.areas !== undefined ? fetched.areas : []
 const wanted = new Set(
-  parseCsv(getTable('areas')).map((row) => String(row.AREA).trim())
+  areas.flatMap((row) => {
+    const key = Object.keys(row).find((name) => name.toUpperCase() === 'AREA')
+    return key === undefined || typeof row[key] !== 'string'
+      ? []
+      : [unpad(row[key])]
+  })
 )
 
 const springs = JSON.parse(fs.readFileSync(SPRINGS_FILE, 'utf-8'))
 
 /* proc sql; create table springs as select * from mydb.springs
  *   where area in (select area from work.areas); - dataset order, no sort. */
-const rows = springs.filter((row) => wanted.has(row.AREA))
+const rows = springs.filter(
+  (row) => typeof row.AREA === 'string' && wanted.has(unpad(row.AREA))
+)
 
 /* A mocked run reports a log, because the SAS Logs panel is part of what this
  * seed demonstrates and a JavaScript twin that wrote nothing leaves it empty.
@@ -136,5 +92,14 @@ const reportMockLog = () => {
 reportMockLog()
 
 webout('OPEN')
-webout('OBJ', 'springs', rows)
+if (!validFetch) {
+  webout('OBJ', 'sasjsAbort', [
+    {
+      MSG: 'FETCH is unavailable: upgrade the CLI mock host or SASjs Server to a compatible version',
+      MAC: _program
+    }
+  ])
+} else {
+  webout('OBJ', 'springs', rows)
+}
 webout('CLOSE')

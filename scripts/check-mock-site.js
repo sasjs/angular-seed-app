@@ -171,6 +171,19 @@ const main = async () => {
     )
   }
 
+  /* A terminating CRLF must not produce a spurious row (utils #329).
+   * This runs through the generated worker, not the app's utils dependency. */
+  const terminated = await call(`${APP}/common/getdata`, [
+    {
+      name: 'areas',
+      filename: 'areas.csv',
+      csv: `area:$char${area.length}. extra:$char1.\r\n\r\n${area},x\r\n`
+    }
+  ])
+  if (JSON.stringify(terminated.springs) !== JSON.stringify(seeded)) {
+    fail('getdata with a trailing CRLF returned incorrect rows')
+  }
+
   const columns = [
     'LATITUDE',
     'LONGITUDE',
@@ -203,6 +216,20 @@ const main = async () => {
 
   if (!dirlist.some((row) => row.FILEPATH === `${folder}/check.txt`)) {
     fail(`upload did not list ${folder}/check.txt: ${JSON.stringify(dirlist)}`)
+  }
+
+  for (const attack of [
+    { path: '/Public/../../outside', filename: 'attack.txt' },
+    { path: folder, filename: '../../outside/attack.txt' },
+    { path: '/sasjs/drive/files/Public/../../outside', filename: 'attack.txt' }
+  ]) {
+    const result = await call(
+      `${APP}/files/upload`,
+      [{ name: 'file', filename: attack.filename, csv: 'attack' }],
+      { path: attack.path }
+    )
+    if (!result.sasjsAbort)
+      fail(`upload accepted unsafe path: ${JSON.stringify(attack)}`)
   }
 
   console.log(
