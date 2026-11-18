@@ -115,7 +115,9 @@ if (!failure && filename) {
   }
   if (!failure) {
     try {
-      if (!fs.existsSync(mounted)) fs.mkdirSync(mounted)
+      // recursive: an upload into a new multi-level folder must create every
+      // level, not fail as a write error on the first missing parent.
+      if (!fs.existsSync(mounted)) fs.mkdirSync(mounted, { recursive: true })
       fs.writeFileSync(pathNode.join(mounted, filename), contents)
     } catch (error) {
       failure = 'Unable to write uploaded file'
@@ -123,7 +125,7 @@ if (!failure && filename) {
   }
 } else if (!failure) {
   try {
-    if (!fs.existsSync(mounted)) fs.mkdirSync(mounted)
+    if (!fs.existsSync(mounted)) fs.mkdirSync(mounted, { recursive: true })
   } catch (error) {
     failure = 'Unable to create upload directory'
   }

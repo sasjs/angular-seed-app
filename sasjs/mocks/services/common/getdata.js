@@ -25,7 +25,22 @@ const SPRINGS_FILE = path.join(
  * a numeric .A cannot be distinguished from the character value '.A'. Numeric
  * AREA is a SAS SQL type mismatch; this mock cannot reproduce that error. */
 const unpad = (value) => value.replace(/ +$/, '')
-const fetched = webout('FETCH')
+/* A host prelude without FETCH support may either return undefined or throw
+ * (an old dispatcher rejects the unknown action). Both mean the same thing
+ * here: the compatibility abort below must answer. A prelude that DOES
+ * implement FETCH throws its own data-validation errors, all prefixed
+ * "webout('FETCH'):" - those describe the uploaded CSV, not the host, and
+ * must keep propagating. */
+const fetchOrUndefined = () => {
+  try {
+    return webout('FETCH')
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("webout('FETCH')"))
+      throw error
+    return undefined
+  }
+}
+const fetched = fetchOrUndefined()
 const validFetch =
   fetched &&
   typeof fetched === 'object' &&

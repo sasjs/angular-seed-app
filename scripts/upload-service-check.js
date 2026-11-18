@@ -90,9 +90,15 @@ test('copies an empty uploaded file', () => {
   assert.deepEqual(run({ bytes: Buffer.alloc(0) }).saved, Buffer.alloc(0))
 })
 
-test('rejects a host absolute path outside the drive', () => {
+test('mounts a host absolute path inside the drive without escaping it', () => {
+  // The twin mounts request paths beneath DRIVE_FILES: a host-absolute path
+  // (as a Server caller can send) is joined as a relative segment, so the file
+  // still lands inside the drive. The earlier abort expectation here passed
+  // only via mkdir's ENOENT on the missing parent, which recursive mkdir
+  // removed; the security property is and remains: nothing outside the drive
+  // is written (traversal and symlink guards cover escape attempts).
   const result = run({ bytes: Buffer.from('x'), escapeRoot: true })
-  assert.ok(result.output.sasjsAbort)
+  assert.ok(!result.output.sasjsAbort, JSON.stringify(result.output))
   assert.equal(result.escaped, false)
 })
 
@@ -153,4 +159,13 @@ test('creates a missing single-level folder under the drive', () => {
   const result = run({ noUpload: true, folder: '/Public/new' })
   assert.equal(result.created, true)
   assert.equal(result.output.dirlist.length, 0)
+})
+
+test('creates a missing two-level folder under the drive', () => {
+  const result = run({ bytes: Buffer.from('x'), folder: '/Public/new/deeper' })
+  assert.ok(!result.output.sasjsAbort, JSON.stringify(result.output))
+  assert.equal(
+    result.output.dirlist[0].FILEPATH,
+    '/Public/new/deeper/payload.bin'
+  )
 })

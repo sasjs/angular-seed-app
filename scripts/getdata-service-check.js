@@ -104,7 +104,9 @@ function runService(
       '_sasjs_fetch_context',
       'fetchOverride',
       `let _webout = '';\n${setup}\nconst webout = ${
-        oldHost
+        oldHost === 'throwing'
+          ? "(...args) => args[0] === 'FETCH' ? (() => { throw new Error('webout FETCH is not implemented') })() : globalThis.webout(...args)"
+          : oldHost
           ? "(...args) => args[0] === 'FETCH' ? undefined : globalThis.webout(...args)"
           : fetchOverride !== undefined
           ? "(...args) => args[0] === 'FETCH' ? fetchOverride : globalThis.webout(...args)"
@@ -138,6 +140,10 @@ for (const browser of [false, true]) {
   const host = `${browser ? 'browser' : 'server'} (shared prelude)`
   test(`${host}: unavailable FETCH returns a compatibility abort`, () => {
     const result = runService(browser, undefined, seed, source, true)
+    assert.match(result.sasjsAbort[0].MSG, /FETCH.*CLI.*Server/)
+  })
+  test(`${host}: a prelude that throws on FETCH also returns the compatibility abort`, () => {
+    const result = runService(browser, undefined, seed, source, 'throwing')
     assert.match(result.sasjsAbort[0].MSG, /FETCH.*CLI.*Server/)
   })
   test(`${host}: malformed areas returns a compatibility abort`, () => {
