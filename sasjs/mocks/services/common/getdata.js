@@ -26,7 +26,16 @@ const SPRINGS_FILE = path.join(
  * AREA is a SAS SQL type mismatch; this mock cannot reproduce that error. */
 const unpad = (value) => value.replace(/ +$/, '')
 const fetched = webout('FETCH')
-const areas = (fetched && fetched.areas) || []
+const validFetch =
+  fetched &&
+  typeof fetched === 'object' &&
+  !Array.isArray(fetched) &&
+  (fetched.areas === undefined ||
+    (Array.isArray(fetched.areas) &&
+      fetched.areas.every(
+        (row) => row && typeof row === 'object' && !Array.isArray(row)
+      )))
+const areas = validFetch && fetched.areas !== undefined ? fetched.areas : []
 const wanted = new Set(
   areas.flatMap((row) => {
     const key = Object.keys(row).find((name) => name.toUpperCase() === 'AREA')
@@ -68,7 +77,7 @@ const reportMockLog = () => {
 reportMockLog()
 
 webout('OPEN')
-if (!fetched || typeof fetched !== 'object' || Array.isArray(fetched)) {
+if (!validFetch) {
   webout('OBJ', 'sasjsAbort', [
     {
       MSG: 'FETCH is unavailable: upgrade the CLI mock host or SASjs Server to a compatible version',

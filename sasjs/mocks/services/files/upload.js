@@ -110,7 +110,8 @@ if (!failure && filename) {
   try {
     contents = fs.readFileSync(webin('_WEBIN_FILEREF'))
   } catch (error) {
-    failure = 'Unable to read staged file'
+    failure =
+      'Unable to read staged file; check the upload and use a compatible CLI mock host or SASjs Server'
   }
   if (!failure) {
     try {

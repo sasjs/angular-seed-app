@@ -54,7 +54,8 @@ function run(options = {}) {
       _WEBIN_FILENAME1: options.noUpload
         ? ''
         : options.filename || 'payload.bin',
-      _WEBIN_FILEREF1: staged,
+      _WEBIN_FILEREF1:
+        options.legacyText === undefined ? staged : options.legacyText,
       webout: (action, name, value) => {
         if (action === 'OBJ') output[name] = value
       }
@@ -132,6 +133,15 @@ test('reports write and listing failures as sasjsAbort', () => {
     const result = run({ bytes: Buffer.from('x'), failMethod })
     assert.match(result.output.sasjsAbort[0].MSG, message)
   }
+})
+
+test('legacy inline file content receives a safe compatibility hint', () => {
+  const secret = 'private legacy content that is not a path'
+  const result = run({ legacyText: secret })
+  const message = result.output.sasjsAbort[0].MSG
+  assert.match(message, /Unable to read staged file.*CLI.*Server/)
+  assert.doesNotMatch(message, /private legacy/)
+  assert.equal(result.saved, undefined)
 })
 
 test('reports missing staged file as sasjsAbort', () => {

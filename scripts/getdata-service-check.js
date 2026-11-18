@@ -30,7 +30,8 @@ function runService(
   csv,
   springs = seed,
   service = source,
-  oldHost = false
+  oldHost = false,
+  fetchOverride
 ) {
   fs.mkdirSync(scratch, { recursive: true })
   const dir = fs.mkdtempSync(path.join(scratch, 'getdata-'))
@@ -101,9 +102,12 @@ function runService(
       'globalThis',
       'console',
       '_sasjs_fetch_context',
+      'fetchOverride',
       `let _webout = '';\n${setup}\nconst webout = ${
         oldHost
           ? "(...args) => args[0] === 'FETCH' ? undefined : globalThis.webout(...args)"
+          : fetchOverride !== undefined
+          ? "(...args) => args[0] === 'FETCH' ? fetchOverride : globalThis.webout(...args)"
           : 'globalThis.webout'
       };\n${service}`
     )
@@ -114,7 +118,16 @@ function runService(
         }
       : require
     const quiet = { log() {}, warn() {}, error() {} }
-    programFn(requireHost, fs, weboutPath, program, isolated, quiet, context)
+    programFn(
+      requireHost,
+      fs,
+      weboutPath,
+      program,
+      isolated,
+      quiet,
+      context,
+      fetchOverride
+    )
     return JSON.parse(fs.readFileSync(weboutPath, 'utf8'))
   } finally {
     fs.rmSync(dir, { recursive: true, force: true })
@@ -126,6 +139,14 @@ for (const browser of [false, true]) {
   test(`${host}: unavailable FETCH returns a compatibility abort`, () => {
     const result = runService(browser, undefined, seed, source, true)
     assert.match(result.sasjsAbort[0].MSG, /FETCH.*CLI.*Server/)
+  })
+  test(`${host}: malformed areas returns a compatibility abort`, () => {
+    for (const areas of [{}, 'invalid', null, 0, [null]]) {
+      const result = runService(browser, undefined, seed, source, false, {
+        areas
+      })
+      assert.match(result.sasjsAbort[0].MSG, /FETCH.*CLI.*Server/)
+    }
   })
   test(`${host}: FETCH selects seeded rows in dataset order`, () => {
     const first = seed[0].AREA
